@@ -1,19 +1,34 @@
 package dsv.inte2017g11.roguelib;
 
 public class GameMap {
-    private final int sizeX;
-    private final int sizeY;
+    //the size x*x of the man
+    private final int SIZE;
+    private Tile[][] field;
 
-    public GameMap(int x, int y) {
-        this.sizeX = x;
-        this.sizeY = y;
+    public GameMap(int size) {
+        if (size > 0) {
+            SIZE = size;
+            fillMapField(size);
+        } else throw new IndexOutOfBoundsException();
     }
 
-    public boolean isFree(int x, int y) {
-        return true;
+    private void fillMapField(int s) {
+        field = new Tile[s][s];
+        for (int i = 0; i < s; i++) {
+            for (int j = 0; j < s; j++) {
+                field[i][j] = new Tile(i, j);
+            }
+        }
     }
 
-    public boolean isLegal(int x, int y) {
-        return x > 0 && x <= sizeX && y > 0 && y <= sizeY;
+    public Tile getPosition(int x, int y) {
+        if (x < 0 || y < 0 || x > SIZE || y > SIZE)
+            throw new IndexOutOfBoundsException();
+        else
+            return field[x][y];
+    }
+
+    public int getSize() {
+        return SIZE;
     }
 }
