@@ -2,29 +2,33 @@ package dsv.inte2017g11.roguelib;
 
 public class Tile {
    
+	private int terrain;
 
 
-    public Tile() {
-        
+    public Tile(int terrain) {
+    	if(terrain <0)
+    		throw new IndexOutOfBoundsException("Felaktig terräng");
+    	this.terrain = terrain;
     }
-
-    public int getX() {
-        return x;
+    public int getTerrain(){
+    	return terrain;
     }
-
-    public int getY() {
-        return y;
+    
+    public void setTerrain(int terrain){
+    	if(terrain <0)
+    		throw new IndexOutOfBoundsException("Felaktig terräng");
+    	this.terrain = terrain;
     }
-
+    
     @Override
     public int hashCode() {
-        return 1500;
+        return terrain*59;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o instanceof Tile) {
-           return true;
+           return this.terrain == ((Tile)o).terrain;
         }
         return false;
     }
