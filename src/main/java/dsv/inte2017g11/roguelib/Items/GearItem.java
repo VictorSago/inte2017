@@ -17,15 +17,17 @@ public class GearItem extends Item {
 
     public GearItem(String name, int weight, int gearHP, Effect e) {
         super(name);
-        if (weight >= 0)
+        if (weight >= 0) {
             this.weight = weight;
-        else
+        } else {
             this.weight = 0;
+        }
         if (gearHP >= 0 && e != null) {
             this.gearHP = gearHP;
             this.effect = e;
-        }else
+        } else {
             throw new IllegalArgumentException();
+        }
     }
 
     public int getWeight() {
@@ -36,6 +38,7 @@ public class GearItem extends Item {
         return gearHP;
     }
 
+    @Override
     public Effect getEffect(){
         return effect;
     }

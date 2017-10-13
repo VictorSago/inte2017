@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({GearItemTest.class, PotionItemTest.class})
+@Suite.SuiteClasses({ItemTest.class, GearItemTest.class, PotionItemTest.class})
 public class ItemTestSuite {
 
 }

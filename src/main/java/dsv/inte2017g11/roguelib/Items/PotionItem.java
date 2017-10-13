@@ -14,16 +14,18 @@ public class PotionItem extends Item {
     public PotionItem(String name, int power, Effect effect) {
         super(name);
         this.power = power;
-        if(effect!=null)
-        this.effect = effect;
-        else
-            throw new IllegalArgumentException("effect can't be null");
+        if(effect!=null) {
+            this.effect = effect;
+        } else {
+            throw new IllegalArgumentException("Effect can't be null");
+        }
     }
 
     public int getPower(){
         return power;
     }
 
+    @Override
     public Effect getEffect(){
         return effect;
     }
