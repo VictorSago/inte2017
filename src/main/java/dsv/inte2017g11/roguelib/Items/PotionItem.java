@@ -5,13 +5,14 @@ public class PotionItem extends Item {
     private int power;
     private Effect effect;
 
+
     public PotionItem(String name, int power, Effect effect) {
         super(name);
         this.power = power;
         if(effect!=null)
         this.effect = effect;
         else
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("effect can't be null");
     }
 
     public int getPower(){

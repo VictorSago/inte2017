@@ -10,19 +10,19 @@ public class GearItemTest {
     @Test
     public void testCreateNormalGearWithWeigth(){
         GearItem gi = new GearItem("helmet", 3, 12, HEALTH);
-        assertEquals(3, gi.getWeigth());
+        assertEquals(3, gi.getWeight());
     }
 
     @Test
     public void testGearItemWeigth(){
         GearItem gi = new GearItem("Helmet", 3, 12, HEALTH);
-        assertEquals(3, gi.getWeigth());
+        assertEquals(3, gi.getWeight());
     }
 
     @Test
     public void testGearItemNegativeWeigth(){
         GearItem gi = new GearItem("Helmet", -3, 12, HEALTH);
-        assertEquals(0, gi.getWeigth());
+        assertEquals(0, gi.getWeight());
     }
 
     @Test

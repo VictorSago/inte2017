@@ -4,8 +4,16 @@ import org.junit.Test;
 import static dsv.inte2017g11.roguelib.Items.Effect.*;
 import static org.junit.Assert.assertEquals;
 
-public class PotionItemTester {
+public class PotionItemTest {
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateWithNoNamePotion(){
+        PotionItem p = new PotionItem("", 0, HEALTH);
+    }
+    @Test(expected = NullPointerException.class)
+    public void testCreateWithNullNamePotion(){
+        PotionItem p = new PotionItem(null, 0, HEALTH);
+    }
 
     @Test
     public void testCreatePotionItem(){
