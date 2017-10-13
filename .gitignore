@@ -25,10 +25,13 @@
 # User-specific stuff:
 
 
-## File-based project format:
+## File-based project format
 *.iws
 
-## Plugin-specific files:
+## Directory-based project format
+*.iml
+
+## Plugin-specific files
 
 # IntelliJ
 out/
@@ -39,6 +42,8 @@ out/
 .recommenders
 bin/
 .settings/
+*.eml
+*.userlibraries
 
 # Code Recommenders
 .recommenders/

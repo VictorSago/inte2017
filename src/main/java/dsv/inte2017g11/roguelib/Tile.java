@@ -1,36 +1,39 @@
 package dsv.inte2017g11.roguelib;
 
 public class Tile {
-    private int x;
-    private int y;
 
+    static protected long idCounter = 0;
 
-    public Tile(int x, int y) {
-        if (x >= 0 && y >= 0) {
-            this.x = x;
-            this.y = y;
-        } else throw new IndexOutOfBoundsException("Invalid cord");
+    private long id;
+
+    protected boolean occupied;
+    private GameMap owner;
+
+    public Tile(GameMap map) {
+        id = idCounter++;
+        owner = map;
+        occupied = false;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
+    public long getId() {
+        return id;
     }
 
     @Override
     public int hashCode() {
-        return (x * 31) + (y * 17);
+        return ((int) id * 31) + (owner.hashCode() * 17);
     }
 
     @Override
     public boolean equals(Object o) {
         if (o instanceof Tile) {
             Tile p = (Tile) o;
-            return this.x == p.x && this.y == p.y;
+            return this.id == p.id && this.owner == p.owner;
         }
         return false;
+    }
+
+    public static long getNextId() {
+        return idCounter;
     }
 }
