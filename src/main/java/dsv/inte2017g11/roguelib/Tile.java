@@ -1,39 +1,35 @@
 package dsv.inte2017g11.roguelib;
 
 public class Tile {
+   
+	private int terrain;
 
-    static protected long idCounter = 0;
 
-    private long id;
-
-    protected boolean occupied;
-    private GameMap owner;
-
-    public Tile(GameMap map) {
-        id = idCounter++;
-        owner = map;
-        occupied = false;
+    public Tile(int terrain) {
+    	if(terrain <0)
+    		throw new IndexOutOfBoundsException("Felaktig terräng");
+    	this.terrain = terrain;
     }
-
-    public long getId() {
-        return id;
+    public int getTerrain(){
+    	return terrain;
     }
-
+    
+    public void setTerrain(int terrain){
+    	if(terrain <0)
+    		throw new IndexOutOfBoundsException("Felaktig terräng");
+    	this.terrain = terrain;
+    }
+    
     @Override
     public int hashCode() {
-        return ((int) id * 31) + (owner.hashCode() * 17);
+        return terrain*59;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o instanceof Tile) {
-            Tile p = (Tile) o;
-            return this.id == p.id && this.owner == p.owner;
+           return this.terrain == ((Tile)o).terrain;
         }
         return false;
-    }
-
-    public static long getNextId() {
-        return idCounter;
     }
 }

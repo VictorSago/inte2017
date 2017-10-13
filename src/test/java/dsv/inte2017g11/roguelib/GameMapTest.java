@@ -5,62 +5,94 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class GameMapTest {
-
-    private final int SIZE_X = 15;
-    private final int SIZE_Y = 10;
-
+	
     @Test
-    public void mapCreationTest() {
-        GameMap m = new GameMap(SIZE_X, SIZE_Y);
-        assertEquals(SIZE_X * SIZE_Y, m.getSize());
+    public void testMapCreateWithSize(){
+        GameMap m = new GameMap(8,9);
+        assertEquals(8, m.getWidth());
     }
-
-    @SuppressWarnings("unused")
-    @Test(expected = IllegalArgumentException.class)
-    public void invalidSizeXCreation() {
-		GameMap m = new GameMap(-1, SIZE_Y);
-    }
-
-    @SuppressWarnings("unused")
-    @Test(expected = IllegalArgumentException.class)
-    public void invalidSizeYCreation() {
-        GameMap m = new GameMap(SIZE_X, -1);
-    }
-
-    @SuppressWarnings("unused")
-    @Test(expected = IllegalArgumentException.class)
-    public void creationWithZeroValueX() {
-        GameMap m = new GameMap(0, SIZE_Y);
-    }
-
-    @SuppressWarnings("unused")
-    @Test(expected = IllegalArgumentException.class)
-    public void creationWithZeroValueY() {
-        GameMap m = new GameMap(SIZE_X, 0);
-    }
-
-    /*
+    
     @Test
-    public void testGameMapBasicPosition() {
-        GameMap m = new GameMap(4);
-        Tile q = new Tile(2,2);
-        assertEquals(true, q.equals(m.getTile(2,2)));
+    public void testMapCreateWithSize2(){
+        GameMap m = new GameMap(4,5);
+        assertEquals(5, m.getHeight());
     }
-    */
 
-    /*
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testGameMapInvalidPositionOverIndex() {
-        GameMap m = new GameMap(4);
-        m.getTile(8,2);
+    public void testGameMapInvalidSize(){
+        GameMap m = new GameMap(-1,20);
     }
-    */
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGameMapInvalidSize2(){
+        GameMap m = new GameMap(30,-2);
+    }
 
-    /*
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testGameMapInvalidPositionUnderIndex() {
-        GameMap m = new GameMap(4);
-        m.getTile(-1,8);
+    public void testGameMapCreateWithZeroValue(){
+        GameMap m = new GameMap(0,15);
     }
-    */
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGameMapCreateWithZeroValue2(){
+        GameMap m = new GameMap(80,0);
+    }
+
+   @Test
+    public void testGameMapBasicPosition(){
+        GameMap m = new GameMap(4,20);
+        assertNotNull(m.getPosition(2,2));
+    }
+   
+   @Test
+   public void testGameMapEndPosition(){
+       GameMap m = new GameMap(4,20);
+       assertNotNull(m.getPosition(4,20));
+   }
+   
+   @Test
+   public void testTerrainDiversity(){
+	   int x = 100;
+	   int y = 100;
+	   GameMap m = new GameMap(x,y);
+	   int i = 0;
+	   int j = 0;
+	   int lastTerrain = m.getPosition(i, j).getTerrain();
+	   while(m.getPosition(i, j).getTerrain() == lastTerrain){
+		   lastTerrain = m.getPosition(i, j).getTerrain();
+		   if(i<x)
+			   	i++;
+		   else if(j<y){
+			   	j++;
+		   		i = 0;
+		   }
+		   else
+			   fail();
+	   }   
+   }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGameMapGetPositionOverIndex(){
+        GameMap m = new GameMap(4,5);
+        m.getPosition(8,2);
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGameMapGetPositionOverIndex2(){
+        GameMap m = new GameMap(4,5);
+        m.getPosition(2,8);
+    }
+
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGameMapGetPositionUnderIndex(){
+        GameMap m = new GameMap(4,10);
+        m.getPosition(-1,8);
+    }
+    
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGameMapGetPositionUnderIndex2(){
+        GameMap m = new GameMap(4,10);
+        m.getPosition(8,-1);
+    }
 }
