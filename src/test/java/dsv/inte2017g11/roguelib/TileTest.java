@@ -7,32 +7,32 @@ import static org.junit.Assert.*;
 public class TileTest {
 
     @Test
-    public void testTileCreate(){
+    public void tileCreationTest() {
         Tile p = new Tile(2);
         assertNotNull(p);
     }
     
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testTileInvalid(){
+    @Test(expected = IllegalArgumentException.class)
+    public void invalidTerrainTest() {
         Tile p = new Tile(-1);
     }
     
     @Test
-    public void testGetTerrain(){
+    public void getTerrainTest() {
     	Tile p = new Tile(2);
-    	assertEquals(2,p.getTerrain());
+    	assertEquals(2, p.getTerrain());
     }
     
     
     @Test
-    public void testSetTerrain(){
+    public void setTerrainTest() {
     	Tile p = new Tile(2);
     	p.setTerrain(3);
-    	assertEquals(3,p.getTerrain());
+    	assertEquals(3, p.getTerrain());
     }
     
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testSetTerrainFail(){
+    public void setInvalidTerrainTest() {
     	Tile p = new Tile(2);
     	p.setTerrain(-2);
     }
@@ -65,38 +65,38 @@ public class TileTest {
     }*/
 
     @Test
-    public void testTileHashCode(){
+    public void sameHashCodeTest() {
         Tile p = new Tile(1);
         Tile q = new Tile(1);
-        assertEquals(true, p.hashCode()==q.hashCode());
+        assertTrue(p.hashCode() == q.hashCode());
     }
 
     @Test
-    public void testTileHashCodeFail(){
+    public void differentHashCodeTest() {
         Tile p = new Tile(4);
         Tile q = new Tile(2);
-        assertEquals(false, p.hashCode()==q.hashCode());
+        assertFalse(p.hashCode() == q.hashCode());
     }
 
     @Test
-    public void testTileEqualsMethod(){
+    public void equalTilesTest() {
         Tile p = new Tile(3);
         Tile q = new Tile(3);
-        assertEquals(true, p.equals(q));
+        assertTrue(p.equals(q));
     }
 
     @Test
-    public void testTileFalseEqualsMethod(){
+    public void nonEqualTilesTest() {
         Tile p = new Tile(2);
         Tile q = new Tile(4);
-        assertEquals(false, p.equals(q));
+        assertFalse(p.equals(q));
     }
 
     @Test
-    public void testTileEqualsAnotherObject(){
+    public void nonEqualAnotherObjectTest() {
         Tile p = new Tile(4);
         String s = "teststring";
-        assertEquals(false, p.equals(s));
+        assertFalse(p.equals(s));
     }
 
 }

@@ -3,25 +3,27 @@ package dsv.inte2017g11.roguelib;
 import java.util.Random;
 
 public class GameMap {
-    //the size x*x of the man
-    private final int WIDTH;
-    private final int HEIGHT;
-    private Tile[][] field;
+
+    private final int width;
+    private final int height;
+    private Tile[][] tiles;
+
     private Random rand = new Random();
 
-    public GameMap(int width,int height) {
-        if (width <= 0 || height <= 0)
-        	throw new IndexOutOfBoundsException();
-        this.WIDTH = width;
-        this.HEIGHT = height;
+    public GameMap(int width, int height) {
+        if (width <= 0 || height <= 0) {
+            throw new IllegalArgumentException();
+        }
+        this.width = width;
+        this.height = height;
         fillMapField(width,height);
     }
 
-    private void fillMapField(int x,int y) {
-        field = new Tile[x+1][y+1];
-        for (int i = 0; i <= x; i++) {
-            for (int j = 0; j <= y; j++) {	
-                field[i][j] = new Tile(randomTerrain());
+    private void fillMapField(int sX, int sY) {
+        tiles = new Tile[sX][sY];
+        for (int i = 0; i < sX; i++) {
+            for (int j = 0; j < sY; j++) {
+                tiles[i][j] = new Tile(randomTerrain());
             }
         }
     }
@@ -31,18 +33,19 @@ public class GameMap {
     }
 
     public Tile getPosition(int x, int y) {
-        if (x < 0 || y < 0 || x > WIDTH || y > HEIGHT)
+        if (x < 0 || y < 0 || x > width || y > height) {
             throw new IndexOutOfBoundsException();
-        else
-            return field[x][y];
+        } else {
+            return tiles[x][y];
+        }
     }
 
     public int getWidth() {
-        return WIDTH;
+        return width;
     }
     
     public int getHeight() {
-        return HEIGHT;
+        return height;
     }
 
     public boolean isFreePosition(int x, int y) {
@@ -50,13 +53,14 @@ public class GameMap {
     }
 
     public boolean isValidPosition(int x, int y) {
-        return (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT);
+        return (x >= 0 && x < width && y >= 0 && y < height);
     }
 
     public Tile getTile(int x, int y) {
-        if (x < 0 || y < 0 || x > WIDTH || y > HEIGHT)
-            throw new IndexOutOfBoundsException();
-        else
-            return field[x][y];
+        if (x < 0 || y < 0 || x >= width || y >= height) {
+            return null;
+        } else {
+            return tiles[x][y];
+        }
     }
 }

@@ -4,25 +4,26 @@ public class Tile {
    
 	private int terrain;
 
-
     public Tile(int terrain) {
-    	if(terrain <0)
-    		throw new IndexOutOfBoundsException("Felaktig terräng");
-    	this.terrain = terrain;
+    	if(terrain < 0) {
+            throw new IllegalArgumentException("Wrong terrain");
+        }
+        this.terrain = terrain;
     }
-    public int getTerrain(){
+    public int getTerrain() {
     	return terrain;
     }
     
-    public void setTerrain(int terrain){
-    	if(terrain <0)
-    		throw new IndexOutOfBoundsException("Felaktig terräng");
-    	this.terrain = terrain;
+    public void setTerrain(int terrain) {
+    	if(terrain < 0) {
+            throw new IndexOutOfBoundsException("Wrong terrain");
+        }
+        this.terrain = terrain;
     }
     
     @Override
     public int hashCode() {
-        return terrain*59;
+        return terrain * 59;
     }
 
     @Override
