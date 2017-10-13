@@ -44,4 +44,19 @@ public class GameMap {
     public int getHeight() {
         return HEIGHT;
     }
+
+    public boolean isFreePosition(int x, int y) {
+        return true;
+    }
+
+    public boolean isValidPosition(int x, int y) {
+        return (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT);
+    }
+
+    public Tile getTile(int x, int y) {
+        if (x < 0 || y < 0 || x > WIDTH || y > HEIGHT)
+            throw new IndexOutOfBoundsException();
+        else
+            return field[x][y];
+    }
 }
