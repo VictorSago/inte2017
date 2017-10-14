@@ -3,7 +3,7 @@ package dsv.inte2017g11.roguelib.Characters;
 import dsv.inte2017g11.roguelib.Directions;
 import dsv.inte2017g11.roguelib.GameMap;
 
-public class GameCharacter {
+abstract public class AbstractCharacter {
 	
 	static final int DEFAULT_MAX_HEALTH = 100;
 	static final int DEFAULT_SPEED = 10;
@@ -20,7 +20,7 @@ public class GameCharacter {
     private int posX;
     private int posY;
 
-    public GameCharacter(String name, int health, int speed) {
+    public AbstractCharacter(String name, int health, int speed) {
         this.name = name;
         this.maxHealth = health;
         this.currentHealth = maxHealth;
@@ -28,11 +28,11 @@ public class GameCharacter {
         this.stepsLeft = this.speed;
     }
     
-    public GameCharacter(String name, int health) {
+    public AbstractCharacter(String name, int health) {
         this(name, health, DEFAULT_SPEED);
     }
     
-    public GameCharacter(String name) {
+    public AbstractCharacter(String name) {
         this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED);
     }
 

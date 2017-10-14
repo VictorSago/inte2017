@@ -1,6 +1,6 @@
 package dsv.inte2017g11.roguelib;
 
-import dsv.inte2017g11.roguelib.Characters.GameCharacter;
+import dsv.inte2017g11.roguelib.Characters.AbstractCharacter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,12 +13,12 @@ public class CharacterMapIntegrationTest {
     private final int SIZE_X = 20;
     private final int SIZE_Y = 15;
 
-    private GameCharacter player;
+    private AbstractCharacter player;
     private GameMap map;
 
     @Before
     public void setUp() {
-        player = new GameCharacter("Jane Doe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED);
+        player = new AbstractCharacter("Jane Doe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
         map = new GameMap(SIZE_X, SIZE_Y);
     }
 

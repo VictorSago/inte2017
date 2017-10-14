@@ -6,6 +6,6 @@ import org.junit.runners.Suite;
 
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({GameCharacterTest.class, CharacterMapIntegrationTest.class})
+@Suite.SuiteClasses({AbstractCharacterTest.class, CharacterMapIntegrationTest.class})
 public class TestSuiteRunner {
 }

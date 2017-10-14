@@ -5,16 +5,16 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class GameCharacterTest {
+public class AbstractCharacterTest {
 
     private final int DEFAULT_TEST_HEALTH = 200;
     private final int DEFAULT_TEST_SPEED = 20;
 
-    private GameCharacter player;
+    private AbstractCharacter player;
 
     @Before
     public void setUp() {
-        player = new GameCharacter("John Doe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED);
+        player = new AbstractCharacter("John Doe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
     }
 
 
@@ -26,24 +26,24 @@ public class GameCharacterTest {
 
     @Test
     public void creationWithDefaultSpeed() {
-        GameCharacter playerJohn = new GameCharacter("John Doe", DEFAULT_TEST_HEALTH);
+        AbstractCharacter playerJohn = new AbstractCharacter("John Doe", DEFAULT_TEST_HEALTH) {};
         assertEquals(DEFAULT_TEST_HEALTH, playerJohn.getMaxHealth());
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
-        assertEquals(GameCharacter.DEFAULT_SPEED, playerJohn.getSpeed());
+        assertEquals(AbstractCharacter.DEFAULT_SPEED, playerJohn.getSpeed());
     }
 
     @Test
     public void creationWithDefaultParameters() {
-        GameCharacter playerJohn = new GameCharacter("John Doe");
-        assertEquals(GameCharacter.DEFAULT_MAX_HEALTH, playerJohn.getMaxHealth());
+        AbstractCharacter playerJohn = new AbstractCharacter("John Doe") {};
+        assertEquals(AbstractCharacter.DEFAULT_MAX_HEALTH, playerJohn.getMaxHealth());
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
-        assertEquals(GameCharacter.DEFAULT_SPEED, playerJohn.getSpeed());
+        assertEquals(AbstractCharacter.DEFAULT_SPEED, playerJohn.getSpeed());
     }
 
     @Test
     public void nameTest() {
-        GameCharacter playerJane = new GameCharacter("janedoe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED);
-        GameCharacter playerJohn = new GameCharacter("John Doe");
+        AbstractCharacter playerJane = new AbstractCharacter("janedoe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
+        AbstractCharacter playerJohn = new AbstractCharacter("John Doe") {};
         assertEquals("janedoe", playerJane.getName());
         assertEquals("John Doe", playerJohn.getName());
     }
