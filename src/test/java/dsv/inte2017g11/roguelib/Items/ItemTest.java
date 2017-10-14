@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class ItemTest {
 
     private final String ITEM_NAME = "Some abstract Item";
-
+/*
     private Item item;
 
 
@@ -31,5 +31,5 @@ public class ItemTest {
             }
         };
     }
-
+*/
 }

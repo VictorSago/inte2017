@@ -11,17 +11,11 @@ effect is going to be implemented to not only give addition to the
 
 public class GearItem extends Item {
 
-    private int weight;
     private int gearHP;
     private Effect effect;
 
     public GearItem(String name, int weight, int gearHP, Effect e) {
-        super(name);
-        if (weight >= 0) {
-            this.weight = weight;
-        } else {
-            this.weight = 0;
-        }
+        super(name, weight);
         if (gearHP >= 0 && e != null) {
             this.gearHP = gearHP;
             this.effect = e;
@@ -30,9 +24,6 @@ public class GearItem extends Item {
         }
     }
 
-    public int getWeight() {
-        return weight;
-    }
 
     public int getGearHP() {
         return gearHP;
