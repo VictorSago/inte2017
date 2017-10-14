@@ -1,7 +1,7 @@
 package dsv.inte2017g11.roguelib.Characters;
 
-import dsv.inte2017g11.roguelib.Directions;
-import dsv.inte2017g11.roguelib.GameMap;
+import dsv.inte2017g11.roguelib.Maps.Directions;
+import dsv.inte2017g11.roguelib.Maps.GameMap;
 
 abstract public class AbstractCharacter {
 	

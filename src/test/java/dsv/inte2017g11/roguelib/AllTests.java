@@ -7,6 +7,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ItemTestSuite.class, MapTestSuite.class, TestSuiteRunner.class})
+@Suite.SuiteClasses({ItemTestSuite.class, MapTestSuite.class, CharacterTestSuite.class})
 public class AllTests {
 }

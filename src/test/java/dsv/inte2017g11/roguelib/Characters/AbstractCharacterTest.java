@@ -13,7 +13,7 @@ public class AbstractCharacterTest {
     private AbstractCharacter player;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         player = new AbstractCharacter("John Doe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
     }
 
@@ -56,28 +56,34 @@ public class AbstractCharacterTest {
 
     @Test
     public void addHealthTest() {
-        player.hurtCharacter(22);
-        assertEquals(DEFAULT_TEST_HEALTH-22, player.getCurrentHealth());
-        player.healCharacter(10);
-        assertEquals(DEFAULT_TEST_HEALTH-12, player.getCurrentHealth());
+        int damage = 22;
+        int heal = 10;
+        player.hurtCharacter(damage);
+        assertEquals(DEFAULT_TEST_HEALTH - damage, player.getCurrentHealth());
+        assertEquals(DEFAULT_TEST_HEALTH, player.getMaxHealth());
+        player.healCharacter(heal);
+        assertEquals(DEFAULT_TEST_HEALTH - (damage - heal), player.getCurrentHealth());
         assertEquals(DEFAULT_TEST_HEALTH, player.getMaxHealth());
     }
 
     @Test
     public void additionalHealthAddedOverMaxTest() {
-        player.healCharacter(120);
+        int heal = 120;
+        player.healCharacter(heal);
         assertEquals(DEFAULT_TEST_HEALTH, player.getCurrentHealth());
     }
 
     @Test
     public void removeHealthTest() {
-        player.hurtCharacter(12);
-        assertEquals(DEFAULT_TEST_HEALTH-12, player.getCurrentHealth());
+        int damage = 12;
+        player.hurtCharacter(damage);
+        assertEquals(DEFAULT_TEST_HEALTH - damage, player.getCurrentHealth());
     }
 
     @Test
     public void characterGameOverTest() {
-        player.hurtCharacter((DEFAULT_TEST_HEALTH+20));
+        int damage = DEFAULT_TEST_HEALTH + 20;
+        player.hurtCharacter(damage);
         assertEquals(-1, player.getCurrentHealth());
     }
 
@@ -89,9 +95,10 @@ public class AbstractCharacterTest {
 
     @Test
     public void setNewSpeedTest() {
-        player.setSpeed(5);
-        assertEquals(5, player.getSpeed());
-        assertEquals(5, player.getStepsLeft());
+        int testSpeed = 5;
+        player.setSpeed(testSpeed);
+        assertEquals(testSpeed, player.getSpeed());
+        assertEquals(testSpeed, player.getStepsLeft());
     }
 
     @Test
@@ -103,7 +110,8 @@ public class AbstractCharacterTest {
 
     @Test
     public void setNegativeSpeedTest() {
-        player.setSpeed(-5);
+        int negativeSpeed = -5;
+        player.setSpeed(negativeSpeed);
         assertEquals(0, player.getSpeed());
         assertEquals(0, player.getStepsLeft());
     }
