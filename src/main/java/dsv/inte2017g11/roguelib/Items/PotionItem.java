@@ -23,28 +23,17 @@ public class PotionItem extends Item {
     }
 
     public PotionItem(String name, int power, Effect effect, String desc) {
-        super(name, 0);
+        super(name, 0, desc);
         this.power = power;
         if (effect != null) {
             this.effect = effect;
         } else {
             throw new IllegalArgumentException("Effect can't be null");
         }
-        if (desc == null || desc.equals("") || desc.isEmpty())
-            this.desc = "no description available";
-        else
-            this.desc = desc;
     }
 
     public int getPower() {
         return power;
-    }
-
-    public String getDescription() {
-        if (desc.isEmpty())
-            return "no description available";
-        else
-            return desc;
     }
 
     @Override
