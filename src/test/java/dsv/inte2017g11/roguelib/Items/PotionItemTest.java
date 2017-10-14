@@ -67,4 +67,9 @@ public class PotionItemTest {
         PotionItem p = new PotionItem("poison", 10, null);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidDescribedPotionWithoutEffect() {
+        PotionItem p = new PotionItem("poison", 10, null, "bad potion construction");
+    }
+
 }

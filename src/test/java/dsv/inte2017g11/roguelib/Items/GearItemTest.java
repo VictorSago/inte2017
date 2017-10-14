@@ -61,6 +61,12 @@ public class GearItemTest {
         GearItem gi = new GearItem("Helmet", 3, 12, null);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateGearWDescWithoutEffects() {
+        GearItem gi = new GearItem("Helmet", 3, 12, null, "bad gear construction");
+    }
+
+
     @Test
     public void testCreateWithoutDescription() {
         GearItem gi = new GearItem("Helmet", 3, 12, MAGIC);

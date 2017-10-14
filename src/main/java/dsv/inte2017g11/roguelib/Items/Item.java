@@ -5,7 +5,6 @@ public abstract class Item {
     private String name;
     private int weight;
     private String description ="";
-    protected Effect effect;
 
 
     public Item(String name, int weight) {

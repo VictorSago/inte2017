@@ -15,6 +15,14 @@ public class WeaponItem extends Item {
             throw new IllegalArgumentException();
     }
 
+    public WeaponItem(String name, int weight, int power, String desc){
+        super(name, weight, desc);
+        if(power>0)
+            this.power=power;
+        else
+            throw new IllegalArgumentException();
+    }
+
     public int getPower(){
         return power;
     }

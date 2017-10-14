@@ -25,13 +25,29 @@ public class WeaponItemTest {
         WeaponItem w = new WeaponItem("Axe",5,-1);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateWeaponWDescInvalidPowerValue(){
+        WeaponItem w = new WeaponItem("Sword", 5, -1, "bad weapon construction");
+        assertEquals("no description available", w.getDescription());
+    }
+
     @Test
     public void getWeaponEffect(){
         WeaponItem w = new WeaponItem("Axe", 5, 14);
         assertEquals(DAMAGE, w.getEffect());
     }
 
+    @Test
+    public void testCreateWeaponItemWithDescription(){
+        WeaponItem w = new WeaponItem("Sword", 5, 25, "Magic silver sword");
+        assertEquals("Magic silver sword", w.getDescription());
+    }
+
+    @Test
+    public void testCreateWeaponItemWithoutDescription(){
+        WeaponItem w = new WeaponItem("Sword", 5, 25, null);
+        assertEquals("no description available", w.getDescription());
+    }
 
 
 }
-
