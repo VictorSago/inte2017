@@ -32,6 +32,8 @@ public class GameMap {
     	return rand.nextInt(10);
     }
 
+/*
+
     public Tile getPosition(int x, int y) {
         if (x < 0 || y < 0 || x > width || y > height) {
             throw new IndexOutOfBoundsException();
@@ -39,6 +41,7 @@ public class GameMap {
             return tiles[x][y];
         }
     }
+*/
 
     public int getWidth() {
         return width;

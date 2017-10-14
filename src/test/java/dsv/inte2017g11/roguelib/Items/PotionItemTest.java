@@ -6,11 +6,13 @@ import static org.junit.Assert.assertEquals;
 
 public class PotionItemTest {
 
+	@SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testCreateWithNoNamePotion() {
         PotionItem p = new PotionItem("", 0, HEALTH);
     }
 
+	@SuppressWarnings("unused")
     @Test(expected = NullPointerException.class)
     public void testCreateWithNullNamePotion() {
         PotionItem p = new PotionItem(null, 0, HEALTH);
@@ -40,6 +42,7 @@ public class PotionItemTest {
         assertEquals(HEALTH, p.getEffect());
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidPotionWithoutEffect() {
         PotionItem p = new PotionItem("poison", 10, null);

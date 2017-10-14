@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 
 public class GameMapTest {
 
-    private final int SIZE_X = 15;
-    private final int SIZE_Y = 10;
+    private final int SIZE_X = 20;
+    private final int SIZE_Y = 15;
 	
     @Test
     public void mapCreationTest() {
@@ -41,15 +41,15 @@ public class GameMapTest {
     }
 
    @Test
-    public void gameMapBasicPositionTest() {
+    public void gameMapBasicTilePositionTest() {
         GameMap m = new GameMap(SIZE_X, SIZE_Y);
-        assertNotNull(m.getPosition(2,2));
+        assertNotNull(m.getTile(2, 2));
     }
    
    @Test
-   public void gameMapEndPositionTest(){
+   public void gameMapEndTilePositionTest(){
        GameMap m = new GameMap(SIZE_X, SIZE_Y);
-       assertNotNull(m.getPosition(SIZE_X-1,SIZE_Y-1));
+       assertNotNull(m.getTile(SIZE_X-1, SIZE_Y-1));
    }
    
    @Test
@@ -59,9 +59,9 @@ public class GameMapTest {
 	   GameMap m = new GameMap(x,y);
 	   int i = 0;
 	   int j = 0;
-	   int lastTerrain = m.getPosition(i, j).getTerrain();
-	   while(m.getPosition(i, j).getTerrain() == lastTerrain){
-		   lastTerrain = m.getPosition(i, j).getTerrain();
+	   int lastTerrain = m.getTile(i, j).getTerrain();
+	   while(m.getTile(i, j).getTerrain() == lastTerrain){
+		   lastTerrain = m.getTile(i, j).getTerrain();
 		   if(i < x) {
                i++;
            } else if(j < y) {
@@ -73,28 +73,34 @@ public class GameMapTest {
        }
    }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    /*@Test(expected = IndexOutOfBoundsException.class)
     public void getPositionOverXIndexTest(){
         GameMap m = new GameMap(SIZE_X, SIZE_Y);
-        m.getPosition(SIZE_X*2,SIZE_Y/2);
+        m.getPosition(SIZE_X*2, SIZE_Y/2);
+    }*/
+
+    @Test
+    public void getPositionOverXIndexTest(){
+        GameMap m = new GameMap(SIZE_X, SIZE_Y);
+        assertNull(m.getTile(SIZE_X*2, SIZE_Y/2));
     }
     
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void getPositionOverYIndexTest(){
         GameMap m = new GameMap(SIZE_X, SIZE_Y);
-        m.getPosition(SIZE_X-1, SIZE_Y*2);
+        assertNull(m.getTile(SIZE_X-1, SIZE_Y*2));
     }
 
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void getPositionUnderXIndexTest(){
         GameMap m = new GameMap(SIZE_X, SIZE_Y);
-        m.getPosition(-1,SIZE_Y-1);
+        assertNull(m.getTile(-1,SIZE_Y-1));
     }
     
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void getPositionUnderYIndexTest(){
         GameMap m = new GameMap(SIZE_X, SIZE_Y);
-        m.getPosition(SIZE_X/2,-1);
+        assertNull(m.getTile(SIZE_X/2,-1));
     }
 }
