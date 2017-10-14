@@ -4,6 +4,7 @@ public abstract class Item {
 
     private String name;
     private int weight;
+    private String description ="";
     protected Effect effect;
 
 
@@ -18,12 +19,27 @@ public abstract class Item {
         }
     }
 
+    public Item(String name, int weight, String desc) {
+        this(name, weight);
+        if (desc == null || desc.equals("") || desc.isEmpty())
+            this.description = "no description available";
+        else
+            this.description = desc;
+    }
+
     public String getName(){
         return name;
     }
 
     public int getWeight() {
         return weight;
+    }
+
+    public String getDescription() {
+        if (description.isEmpty())
+            return "no description available";
+        else
+            return description;
     }
 
     abstract public Effect getEffect();
