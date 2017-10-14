@@ -8,19 +8,19 @@ import static org.junit.Assert.assertEquals;
 public class GearItemTest {
 
     @Test
-    public void testCreateNormalGearWithWeigth(){
+    public void testCreateNormalGearWithWeight(){
         GearItem gi = new GearItem("helmet", 3, 12, HEALTH);
         assertEquals(3, gi.getWeight());
     }
 
     @Test
-    public void testGearItemWeigth(){
+    public void testGearItemWeight(){
         GearItem gi = new GearItem("Helmet", 3, 12, HEALTH);
         assertEquals(3, gi.getWeight());
     }
 
     @Test
-    public void testGearItemNegativeWeigth(){
+    public void testGearItemNegativeWeight(){
         GearItem gi = new GearItem("Helmet", -3, 12, HEALTH);
         assertEquals(0, gi.getWeight());
     }

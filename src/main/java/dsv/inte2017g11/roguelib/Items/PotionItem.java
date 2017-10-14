@@ -12,7 +12,7 @@ public class PotionItem extends Item {
 
 
     public PotionItem(String name, int power, Effect effect) {
-        super(name);
+        super(name, 0);
         this.power = power;
         if(effect!=null) {
             this.effect = effect;
