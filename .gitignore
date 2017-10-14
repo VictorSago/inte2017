@@ -44,6 +44,8 @@ bin/
 .settings/
 *.eml
 *.userlibraries
+.project
+.classpath
 
 # Code Recommenders
 .recommenders/
