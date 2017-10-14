@@ -12,7 +12,9 @@ effect is going to be implemented to not only give addition to the
 public class GearItem extends Item {
 
     private int gearHP;
+    private String desc = "";
     private Effect effect;
+
 
     public GearItem(String name, int weight, int gearHP, Effect e) {
         super(name, weight);
@@ -24,7 +26,28 @@ public class GearItem extends Item {
         }
     }
 
+    public GearItem(String name, int weight, int gearHP, Effect e, String desc) {
+        super(name, weight);
+        if (gearHP >= 0 && e != null) {
+            this.gearHP = gearHP;
+            this.effect = e;
+        } else {
+            throw new IllegalArgumentException();
+        }
 
+        if (desc == null || desc.equals("") || desc.isEmpty())
+            this.desc = "no description available";
+        else
+            this.desc = desc;
+    }
+
+
+    public String getDescription() {
+        if (desc.isEmpty())
+            return "no description available";
+        else
+            return desc;
+    }
     public int getGearHP() {
         return gearHP;
     }

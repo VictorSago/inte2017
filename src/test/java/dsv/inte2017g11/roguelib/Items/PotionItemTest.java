@@ -1,6 +1,7 @@
 package dsv.inte2017g11.roguelib.Items;
 
 import org.junit.Test;
+
 import static dsv.inte2017g11.roguelib.Items.Effect.*;
 import static org.junit.Assert.assertEquals;
 
@@ -22,6 +23,24 @@ public class PotionItemTest {
     public void testCreatePotionItem() {
         PotionItem p = new PotionItem("poison", 0, HEALTH);
         assertEquals("poison", p.getName());
+    }
+
+    @Test
+    public void testCreatePotionWithDescription() {
+        PotionItem p = new PotionItem("poison", 0, HEALTH, "a black bubbling mud-like fluid");
+        assertEquals("a black bubbling mud-like fluid", p.getDescription());
+    }
+
+    @Test
+    public void testCreateWithoutDescriptionGetInfo() {
+        PotionItem p = new PotionItem("poison", 0, HEALTH);
+        assertEquals("no description available", p.getDescription());
+    }
+
+    @Test
+    public void testCreatePotionWithNullDescription() {
+        PotionItem p = new PotionItem("poison", 0, HEALTH, null);
+        assertEquals("no description available", p.getDescription());
     }
 
     @Test
