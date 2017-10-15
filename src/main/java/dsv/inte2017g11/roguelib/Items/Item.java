@@ -43,4 +43,8 @@ public abstract class Item {
 
     abstract public Effect getEffect();
 
+    @Override
+    abstract public boolean equals(Object o);
+
+
 }

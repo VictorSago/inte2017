@@ -7,23 +7,23 @@ public class WeaponItem extends Item {
     private int power;
     private Effect effect = DAMAGE;
 
-    public WeaponItem(String name, int weight, int power){
+    public WeaponItem(String name, int weight, int power) {
         super(name, weight);
-        if(power>0)
-            this.power=power;
+        if (power > 0)
+            this.power = power;
         else
             throw new IllegalArgumentException();
     }
 
-    public WeaponItem(String name, int weight, int power, String desc){
+    public WeaponItem(String name, int weight, int power, String desc) {
         super(name, weight, desc);
-        if(power>0)
-            this.power=power;
+        if (power > 0)
+            this.power = power;
         else
             throw new IllegalArgumentException();
     }
 
-    public int getPower(){
+    public int getPower() {
         return power;
     }
 
@@ -31,5 +31,17 @@ public class WeaponItem extends Item {
     public Effect getEffect() {
         return effect;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof WeaponItem) {
+            return (((PotionItem) o).getName().equals(this.getName()) &&
+                    ((PotionItem) o).getWeight() == this.getWeight() &&
+                    ((PotionItem) o).getPower() == this.getPower() &&
+                    ((PotionItem) o).getDescription().equals(this.getDescription()));
+        }
+        return false;
+    }
+
 
 }

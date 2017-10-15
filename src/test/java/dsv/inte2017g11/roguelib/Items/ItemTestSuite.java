@@ -1,5 +1,4 @@
 package dsv.inte2017g11.roguelib.Items;
-
 /*
 test suit used for testing of all the
 so far implemented item subclasses
