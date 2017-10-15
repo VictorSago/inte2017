@@ -49,5 +49,11 @@ public class WeaponItemTest {
         assertEquals("no description available", w.getDescription());
     }
 
+    @Test
+    public void testWeaponItemEqualsMethodValid(){
+        WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
+        WeaponItem v = w;
+        assertEquals(true, w.equals(v));
+    }
 
 }

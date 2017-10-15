@@ -86,4 +86,33 @@ public class GearItemTest {
 
     }
 
+    @Test
+    public void testGearItemEqualsMethod(){
+        GearItem g = new GearItem("Helmet", 3, 12, MAGIC, "a sparkeling rainbow-feather covered helmet with amazing defence powers");
+        GearItem p = g;
+        assertEquals(true, g.equals(p));
+    }
+
+    @Test
+    public void testGearItemInvalidEqualsMethodName(){
+        GearItem g = new GearItem("Helmet", 3, 12, MAGIC, "this is described");
+        GearItem p = new GearItem("wrongname", 3, 12, MAGIC, "this is described");
+        assertEquals(false, g.equals(p));
+    }
+
+    @Test
+    public void testGearItemInvalidEqualsMethodWeigth(){
+        GearItem g = new GearItem("Helmet", 3, 12, MAGIC, "this is described");
+        GearItem p = new GearItem("Helmet", 5, 12, MAGIC, "this is described");
+        assertEquals(false, g.equals(p));
+    }
+
+    @Test
+    public void testGearItemInvalidEqualsMethodGearHp(){
+        GearItem g = new GearItem("Helmet", 3, 12, MAGIC, "this is described");
+        GearItem p = new GearItem("Helmet", 3, 19, MAGIC, "this is described");
+
+        assertEquals(false, g.equals(p));
+    }
 }
+

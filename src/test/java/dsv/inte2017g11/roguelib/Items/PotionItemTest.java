@@ -72,4 +72,32 @@ public class PotionItemTest {
         PotionItem p = new PotionItem("poison", 10, null, "bad potion construction");
     }
 
+    @Test
+    public void testPotionItemEqualsMethodValid(){
+	    PotionItem p = new PotionItem("poison", 10, HEALTH, "bad potion construction");
+        PotionItem q = p;
+        assertEquals(true, p.equals(q));
+    }
+
+    @Test
+    public void testPotionItemEqualsMethodInvalidName(){
+        PotionItem p = new PotionItem("poison", 10, HEALTH, "bad potion construction");
+        PotionItem q = new PotionItem("felix felicis", 10, HEALTH, "bad potion construction");
+        assertEquals(false, p.equals(q));
+    }
+
+    @Test
+    public void testPotionItemEqualsMethodInvalidPower(){
+        PotionItem p = new PotionItem("felix felicis", -10, HEALTH, "bad potion construction");
+        PotionItem q = new PotionItem("felix felicis", 10, HEALTH, "bad potion construction");
+        assertEquals(false, p.equals(q));
+    }
+
+    @Test
+    public void testPotionItemEqualsMethodInvalidEffect(){
+        PotionItem p = new PotionItem("felix felicis", 10, MAGIC, "bad potion construction");
+        PotionItem q = new PotionItem("felix felicis", 10, HEALTH, "bad potion construction");
+        assertEquals(false, p.equals(q));
+    }
+
 }

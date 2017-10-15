@@ -43,10 +43,10 @@ public class PotionItem extends Item {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof PotionItem)
+        if (o instanceof PotionItem){
             return (((PotionItem) o).getName().equals(this.getName()) &&
                     (((PotionItem) o).power == this.power) &&
-                    (((PotionItem) o).effect == this.effect));
+                    (((PotionItem) o).effect == this.effect));}
         return false;
     }
 }

@@ -35,10 +35,10 @@ public class WeaponItem extends Item {
     @Override
     public boolean equals(Object o) {
         if (o instanceof WeaponItem) {
-            return (((PotionItem) o).getName().equals(this.getName()) &&
-                    ((PotionItem) o).getWeight() == this.getWeight() &&
-                    ((PotionItem) o).getPower() == this.getPower() &&
-                    ((PotionItem) o).getDescription().equals(this.getDescription()));
+            return (((WeaponItem) o).getName().equals(this.getName()) &&
+                    ((WeaponItem) o).getWeight() == this.getWeight() &&
+                    ((WeaponItem) o).getPower() == this.getPower() &&
+                    ((WeaponItem) o).getDescription().equals(this.getDescription()));
         }
         return false;
     }
