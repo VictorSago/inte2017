@@ -9,7 +9,6 @@ effect is going to be implemented to not only give addition to the
   ability(more magic, slows down, lowers strength etc)
  */
 
-import dsv.inte2017g11.roguelib.GameMap;
 
 public class GearItem extends Item {
 

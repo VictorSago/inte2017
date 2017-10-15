@@ -27,4 +27,21 @@ public class GamePlayer extends AbstractCharacter {
     public void addToInventory(Item item) {
         inventory.add(item);
     }
+
+    public int getAmountOfItems(){
+        return inventory.size();
+    }
+
+    /*
+    NOTE : maybe this should throw a custom exception when no items
+    matches the one to fetch, or return something different
+    TODO handle return statement when item is non-existing
+     */
+    public Item getFromInventory(String itemName){
+        for(Item i : inventory){
+            if(i.getName().equalsIgnoreCase(itemName))
+                return i;
+        }
+        throw new IllegalArgumentException();
+    }
 }
