@@ -43,5 +43,4 @@ public class WeaponItem extends Item {
         return false;
     }
 
-
 }

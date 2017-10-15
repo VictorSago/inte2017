@@ -47,4 +47,6 @@ public abstract class Item {
     abstract public boolean equals(Object o);
 
 
+    //TODO implement hashCode() method
+    //abstract public int hashCode(){}
 }
