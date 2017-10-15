@@ -100,4 +100,11 @@ public class PotionItemTest {
         assertEquals(false, p.equals(q));
     }
 
+    @Test
+    public void testPotionItemEqualsMethodInvalidClass(){
+        PotionItem p = new PotionItem("felix felicis", 10, MAGIC, "bad potion construction");
+        WeaponItem w = new WeaponItem("sword", 3, 15);
+        assertEquals(false, p.equals(w));
+    }
+
 }

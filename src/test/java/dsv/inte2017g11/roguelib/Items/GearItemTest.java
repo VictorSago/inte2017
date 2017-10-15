@@ -114,5 +114,12 @@ public class GearItemTest {
 
         assertEquals(false, g.equals(p));
     }
+
+    @Test
+    public void testGearItemEqualsMethodInvalidClass(){
+       GearItem g = new GearItem("Helmet", 3, 15, MAGIC);
+        WeaponItem w = new WeaponItem("sword", 3, 15);
+        assertEquals(false, g.equals(w));
+    }
 }
 
