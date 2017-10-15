@@ -3,6 +3,7 @@ package dsv.inte2017g11.roguelib.Characters;
 import dsv.inte2017g11.roguelib.Items.Effect;
 import dsv.inte2017g11.roguelib.Items.GearItem;
 import dsv.inte2017g11.roguelib.Items.Item;
+import dsv.inte2017g11.roguelib.Items.PotionItem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,7 +55,28 @@ public class GamePlayerTest {
     @Test
     public void addToInventoryTest() {
         Item item1 = new GearItem("Plain Helm", 2, 10, Effect.HEALTH);
+        Item item2 = new PotionItem("Felix felicis", 15, Effect.HEALTH);
         player.addToInventory(item1);
+        player.addToInventory(item2);
+        assertEquals(2, player.getAmountOfItems());
     }
 
+    @Test
+    public void getItemFromInventory() {
+        Item item1 = new GearItem("Plain Helm", 2, 10, Effect.HEALTH);
+        Item item2 = new PotionItem("Felix felicis", 15, Effect.HEALTH);
+        player.addToInventory(item1);
+        player.addToInventory(item2);
+        Item item3= item2;
+        assertEquals(item3, player.getFromInventory("felix felicis"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getNonExistingItemFromInventory() {
+        Item item1 = new GearItem("Plain Helm", 2, 10, Effect.HEALTH);
+        Item item2 = new PotionItem("Felix felicis", 15, Effect.HEALTH);
+        player.addToInventory(item1);
+        Item item3= item2;
+        assertEquals(item2, player.getFromInventory("felix felicis"));
+    }
 }
