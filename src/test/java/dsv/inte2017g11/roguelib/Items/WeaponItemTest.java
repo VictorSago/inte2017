@@ -3,6 +3,7 @@ package dsv.inte2017g11.roguelib.Items;
 import org.junit.Test;
 
 import static dsv.inte2017g11.roguelib.Items.Effect.DAMAGE;
+import static dsv.inte2017g11.roguelib.Items.Effect.MAGIC;
 import static org.junit.Assert.assertEquals;
 
 public class WeaponItemTest {
@@ -54,6 +55,35 @@ public class WeaponItemTest {
         WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
         WeaponItem v = w;
         assertEquals(true, w.equals(v));
+    }
+
+    @Test
+    public void testWeaponItemEqualsMethodInvalidClass(){
+        WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
+        PotionItem p = new PotionItem("Wolfsbane", 33, MAGIC);
+        assertEquals(false, w.equals(p));
+    }
+
+    @Test
+    public void testWeaponItemEqualsMethodInvalidName(){
+        WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
+        WeaponItem v = new WeaponItem("SilverSword", 5, 25, "shiny!");
+        assertEquals(false, w.equals(v));
+    }
+
+
+    @Test
+    public void testWeaponItemEqualsMethodInvalidWeigth(){
+        WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
+        WeaponItem v = new WeaponItem("Sword", 4, 25, "shiny!");
+        assertEquals(false, w.equals(v));
+    }
+
+    @Test
+    public void testWeaponItemEqualsMethodInvalidPower(){
+        WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
+        WeaponItem v = new WeaponItem("Sword", 5, 15, "shiny!");
+        assertEquals(false, w.equals(v));
     }
 
 }
