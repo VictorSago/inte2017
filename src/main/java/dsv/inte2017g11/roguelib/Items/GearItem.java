@@ -9,6 +9,8 @@ effect is going to be implemented to not only give addition to the
   ability(more magic, slows down, lowers strength etc)
  */
 
+import dsv.inte2017g11.roguelib.GameMap;
+
 public class GearItem extends Item {
 
     private int gearHP;
@@ -40,8 +42,19 @@ public class GearItem extends Item {
     }
 
     @Override
-    public Effect getEffect(){
+    public Effect getEffect() {
         return effect;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof GearItem) {
+            return (((GearItem) o).getName().equals(this.getName()) &&
+                    (((GearItem) o).gearHP == this.gearHP) &&
+                    (((GearItem) o).getEffect() == this.getEffect()) &&
+                    (((GearItem) o).getWeight() == this.getWeight()));
+        }
+        return false;
     }
 
 }
