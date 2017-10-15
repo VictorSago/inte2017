@@ -135,4 +135,5 @@ public class AbstractCharacterTest {
         assertTrue(player.getPosition() < 0);
     }
 
+
 }

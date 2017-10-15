@@ -2,6 +2,7 @@ package dsv.inte2017g11.roguelib.Characters;
 
 import dsv.inte2017g11.roguelib.Maps.Directions;
 import dsv.inte2017g11.roguelib.Maps.GameMap;
+import dsv.inte2017g11.roguelib.Maps.MapPath;
 
 abstract public class AbstractCharacter {
 	
@@ -130,7 +131,6 @@ abstract public class AbstractCharacter {
         }
     }
 
-    /* @FIXME NullPointerException when there is no map */
     public void moveRight() {
         if (stepsLeft > 0 && validateNewPosition(posX + 1, posY)) {
             posX++;
@@ -138,7 +138,6 @@ abstract public class AbstractCharacter {
         }
     }
 
-    /* @FIXME NullPointerException when there is no map */
     public void moveLeft() {
         if (stepsLeft > 0 && validateNewPosition(posX - 1, posY)) {
             posX--;
@@ -146,7 +145,6 @@ abstract public class AbstractCharacter {
         }
     }
 
-    /* @FIXME NullPointerException when there is no map */
     public void moveDown() {
         if (stepsLeft > 0 && validateNewPosition(posX, posY + 1)) {
             posY++;
@@ -154,7 +152,6 @@ abstract public class AbstractCharacter {
         }
     }
 
-    /* @FIXME NullPointerException when there is no map */
     public void moveUp() {
         if (stepsLeft > 0 && validateNewPosition(posX, posY - 1)) {
             posY--;
@@ -162,24 +159,41 @@ abstract public class AbstractCharacter {
         }
     }
 
-    /* @FIXME NullPointerException when there is no map */
-    public void move(Directions... dirs) {
-        for (Directions d : dirs) {
-            switch (d) {
-                case RIGHT:
-                    moveRight();
-                    break;
-                case LEFT:
-                    moveLeft();
-                    break;
-                case DOWN:
-                    moveDown();
-                    break;
-                case UP:
-                    moveUp();
-                    break;
-            }
+    public void moveStep(Directions dir) {
+        switch (dir) {
+            case RIGHT:
+                moveRight();
+                break;
+            case LEFT:
+                moveLeft();
+                break;
+            case DOWN:
+                moveDown();
+                break;
+            case UP:
+                moveUp();
+                break;
         }
+    }
+
+    public void move(Directions... dirs) {
+        if (map == null) {
+            return;
+        }
+        for (Directions d : dirs) {
+            moveStep(d);
+        }
+    }
+
+    public MapPath move(MapPath path) {
+        if (map == null) {
+            return path;
+        }
+        while (!path.isEmpty()) {
+            Directions nextStep = path.getNextStep();
+            moveStep(nextStep);
+            }
+        return path;
     }
 
 

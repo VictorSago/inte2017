@@ -1,7 +1,9 @@
 package dsv.inte2017g11.roguelib;
 
 
-import dsv.inte2017g11.roguelib.Items.*;
+import dsv.inte2017g11.roguelib.Characters.CharacterTestSuite;
+import dsv.inte2017g11.roguelib.Items.ItemTestSuite;
+import dsv.inte2017g11.roguelib.Maps.MapTestSuite;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

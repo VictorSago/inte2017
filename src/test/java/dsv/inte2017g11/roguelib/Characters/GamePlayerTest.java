@@ -1,5 +1,8 @@
 package dsv.inte2017g11.roguelib.Characters;
 
+import dsv.inte2017g11.roguelib.Items.Effect;
+import dsv.inte2017g11.roguelib.Items.GearItem;
+import dsv.inte2017g11.roguelib.Items.Item;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,6 +48,13 @@ public class GamePlayerTest {
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
         assertEquals(AbstractCharacter.DEFAULT_SPEED, playerJohn.getSpeed());
         assertTrue(playerJohn.getStepsLeft() == playerJohn.getSpeed());
+    }
+
+    //@TODO Finish the test
+    @Test
+    public void addToInventoryTest() {
+        Item item1 = new GearItem("Plain Helm", 2, 10, Effect.HEALTH);
+        player.addToInventory(item1);
     }
 
 }
