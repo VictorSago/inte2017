@@ -12,6 +12,7 @@ public class TileTest {
         assertNotNull(p);
     }
     
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void invalidTerrainTest() {
         Tile p = new Tile(-1);

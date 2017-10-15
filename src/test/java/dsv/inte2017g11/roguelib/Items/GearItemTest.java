@@ -31,6 +31,7 @@ public class GearItemTest {
         assertEquals(12, gi.getGearHP());
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testGearItemNegativeHP() {
         GearItem gi = new GearItem("Helmet", 3, -12, HEALTH);
@@ -54,6 +55,7 @@ public class GearItemTest {
         assertEquals(MAGIC, gi.getEffect());
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testCreateGearWithoutEffects() {
         GearItem gi = new GearItem("Helmet", 3, 12, null);
