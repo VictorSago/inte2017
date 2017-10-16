@@ -9,19 +9,18 @@ import static org.junit.Assert.*;
 public class PetsTest {
 
     private final int DEFAULT_TEST_HEALTH = 150;
-    private final int DEFAULT_TEST_SPEED = 40;
-
+    private final int DEFAULT_TEST_DAMAGE = 40;
     private Pets pet;
 
     @Before
     public void setUp() {
-        pet = new Pets("Mushuu", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
+        pet = new Pets("Mushuu", DEFAULT_TEST_HEALTH, DEFAULT_TEST_DAMAGE) {};
     }
 
     @Test
     public void creationTest() {
         assertEquals(DEFAULT_TEST_HEALTH, pet.getCurrentHealth());
-        assertEquals(DEFAULT_TEST_SPEED, pet.getCurrentSpeed());
+        assertEquals(DEFAULT_TEST_DAMAGE, pet.getCurrentDamage());
     }
 
     @Test
@@ -37,7 +36,7 @@ public class PetsTest {
 
     @Test
     public void twoPetsTest(){
-        Pets pet2 = new Pets("Kilgarrah", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED);
+        Pets pet2 = new Pets("Kilgarrah", DEFAULT_TEST_HEALTH, DEFAULT_TEST_DAMAGE);
         assertEquals("Kilgarrah", pet2.getName());
         assertEquals("Mushuu", pet.getName());
     }
@@ -107,6 +106,7 @@ public class PetsTest {
         pet.levelUp();
         assertEquals(DEFAULT_TEST_HEALTH+10,pet.getMaxHealth());
         assertEquals(2,pet.getLevel());
+        assertEquals(DEFAULT_TEST_DAMAGE+5,pet.getCurrentDamage());
     }
 
 }

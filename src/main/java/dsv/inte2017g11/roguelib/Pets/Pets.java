@@ -3,16 +3,16 @@ package dsv.inte2017g11.roguelib.Pets;
 public class Pets {
     private String name;
     private int currentHealth;
-    private int currentSpeed;
+    private int currentDamage;
     private int maxHealth;
     private int level;
     private boolean available;
 
-    public Pets(String name, int health, int speed) {
+    public Pets(String name, int health, int damage) {
         this.name = name;
         this.currentHealth = health;
         this.maxHealth = currentHealth;
-        this.currentSpeed = speed;
+        this.currentDamage = damage;
         this.level = 1;
         this.available = true;
     }
@@ -21,8 +21,8 @@ public class Pets {
         return currentHealth;
     }
 
-    public int getCurrentSpeed() {
-        return currentSpeed;
+    public int getCurrentDamage() {
+        return currentDamage;
     }
 
     public String getName() {
@@ -33,8 +33,8 @@ public class Pets {
         this.name = newName;
     }
 
-    public void takeDamage(int damage) {
-        currentHealth -=damage;
+    public void takeDamage(int enemyDamage) {
+        currentHealth -= enemyDamage;
         if (currentHealth<0){
             currentHealth = 0;
         }
@@ -64,10 +64,11 @@ public class Pets {
         return level;
     }
 
-    //TODO kan speed öka? fylla upp currentHealth vid levelup?
+    //TODO fylla upp currentHealth vid levelup?
     public void levelUp() {
         level+=1;
         maxHealth+=10;
+        currentDamage+=5;
     }
 
     public boolean isAvailable() {
