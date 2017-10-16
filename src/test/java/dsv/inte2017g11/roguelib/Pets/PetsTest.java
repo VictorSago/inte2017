@@ -24,6 +24,4 @@ public class PetsTest {
         assertEquals(DEFAULT_TEST_HEALTH, pet.getCurrentHealth());
         assertEquals(DEFAULT_TEST_SPEED, pet.getCurrentSpeed());
     }
-
-
 }
