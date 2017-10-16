@@ -1,4 +1,4 @@
-package dsv.inte2017g11.roguelib;
+package dsv.inte2017g11.roguelib.Maps;
 
 import java.util.Random;
 
