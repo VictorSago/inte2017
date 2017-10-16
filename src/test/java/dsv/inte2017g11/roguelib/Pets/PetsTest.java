@@ -108,4 +108,5 @@ public class PetsTest {
         assertEquals(DEFAULT_TEST_HEALTH+10,pet.getMaxHealth());
         assertEquals(2,pet.getLevel());
     }
+
 }
