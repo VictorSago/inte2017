@@ -18,7 +18,6 @@ public class PetsTest {
         pet = new Pets("Mushuu", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
     }
 
-
     @Test
     public void creationTest() {
         assertEquals(DEFAULT_TEST_HEALTH, pet.getCurrentHealth());
