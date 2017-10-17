@@ -1,6 +1,5 @@
 package dsv.inte2017g11.roguelib.Pets;
 
-import dsv.inte2017g11.roguelib.Pets.Pets;
 import org.junit.Before;
 import org.junit.Test;
 
