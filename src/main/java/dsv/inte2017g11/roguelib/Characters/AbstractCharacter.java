@@ -1,8 +1,17 @@
 package dsv.inte2017g11.roguelib.Characters;
 
-import dsv.inte2017g11.roguelib.Directions;
-import dsv.inte2017g11.roguelib.GameMap;
+import dsv.inte2017g11.roguelib.Maps.Directions;
+import dsv.inte2017g11.roguelib.Maps.GameMap;
+import dsv.inte2017g11.roguelib.Maps.MapPath;
 
+/**
+ * @author zeron
+ *
+ */
+/**
+ * @author zeron
+ *
+ */
 abstract public class AbstractCharacter {
 
     static final int DEFAULT_MAX_HEALTH = 100;
@@ -93,8 +102,19 @@ abstract public class AbstractCharacter {
         return map;
     }
 
-    public boolean setPosition(GameMap map, int x, int y) {
+    /*public boolean setPosition(GameMap map, int x, int y) {
         if (map != null && map.isValidPosition(x, y) && map.isFreePosition(x, y)) {
+            this.map = map;
+            this.posX = x;
+            this.posY = y;
+            return true;
+        } else {
+            return false;
+        }
+    }*/
+
+    public boolean setPosition(GameMap map, int x, int y) {
+        if (isValidPosition(map, x, y)) {
             this.map = map;
             this.posX = x;
             this.posY = y;
@@ -105,13 +125,7 @@ abstract public class AbstractCharacter {
     }
 
     public boolean setPosition(int x, int y) {
-        if (this.map != null && map.isValidPosition(x, y) && map.isFreePosition(x, y)) {
-            this.posX = x;
-            this.posY = y;
-            return true;
-        } else {
-            return false;
-        }
+        return this.setPosition(this.map, x, y);
     }
 
     public int getPosX() {
@@ -122,6 +136,15 @@ abstract public class AbstractCharacter {
         return posY;
     }
 
+    
+    /**
+     * Return the position as a single number, counting from 
+     * the upper left corner down to the character's position, 
+     * going from left to right and from up to down.
+     * @return The number of steps from the upper left corner 
+     * of the map to the current position on the map. <br>
+     * If there is no map present then <code>-1</code> is returned.
+     */
     public int getPosition() {
         if (map != null) {
             return posY * map.getWidth() + posX;
@@ -130,42 +153,37 @@ abstract public class AbstractCharacter {
         }
     }
 
-    /* @FIXME NullPointerException when there is no map */
-    public void moveRight() {
-        if (stepsLeft > 0 && validateNewPosition(posX + 1, posY)) {
+    protected void moveRight() {
+        if (isValidPosition(posX + 1, posY)) {
             posX++;
             stepsLeft--;
         }
     }
 
-    /* @FIXME NullPointerException when there is no map */
-    public void moveLeft() {
-        if (stepsLeft > 0 && validateNewPosition(posX - 1, posY)) {
+    protected void moveLeft() {
+        if (isValidPosition(posX - 1, posY)) {
             posX--;
             stepsLeft--;
         }
     }
 
-    /* @FIXME NullPointerException when there is no map */
-    public void moveDown() {
-        if (stepsLeft > 0 && validateNewPosition(posX, posY + 1)) {
+    protected void moveDown() {
+        if (isValidPosition(posX, posY + 1)) {
             posY++;
             stepsLeft--;
         }
     }
 
-    /* @FIXME NullPointerException when there is no map */
-    public void moveUp() {
-        if (stepsLeft > 0 && validateNewPosition(posX, posY - 1)) {
+    protected void moveUp() {
+        if (isValidPosition(posX, posY - 1)) {
             posY--;
             stepsLeft--;
         }
     }
 
-    /* @FIXME NullPointerException when there is no map */
-    public void move(Directions... dirs) {
-        for (Directions d : dirs) {
-            switch (d) {
+    protected void moveStep(Directions dir) {
+        if (stepsLeft > 0) {
+            switch (dir) {
                 case RIGHT:
                     moveRight();
                     break;
@@ -182,19 +200,48 @@ abstract public class AbstractCharacter {
         }
     }
 
+    public void move(Directions... dirs) {
+        if (map == null) {
+            return;
+        }
+        for (Directions d : dirs) {
+            moveStep(d);
+        }
+    }
+
+    public MapPath move(MapPath path) {
+        if (map == null) {
+            return path;
+        }
+        while (!path.isEmpty()) {
+            Directions nextStep = path.getNextStep();
+            moveStep(nextStep);
+            }
+        return path;
+    }
+
+    protected boolean isValidPosition(int x, int y) {
+        return isValidPosition(this.map, x, y);
+    }
 
     /**
-     * If the entered direction together with speed is a
-     * valid value for the player to move towards this may
-     * be computed
+     *  Test whether the parameters point to a valid position
+     *  If the enterred direction together with speed is a
+     *  valid value for the player to move towards this may
+     *  be computed
      *
-     * @param x x-coordinate of the new position
-     * @param y y-coordinate of the new position
-     * @return <code>true</code> if the new position is a valid one,
-     * <code>false</code> otherwise
+     *  @param map the map whose position is being tested
+     *  @param x x-coordinate of the new position
+     *  @param y y-coordinate of the new position
+     *  @return <code>true</code> if and only if the map exists and the
+     *  new position is a valid one, <code>false</code> in all other cases
      */
-    private boolean validateNewPosition(int x, int y) {
-        return (map.getTile(x, y) != null);
+    protected boolean isValidPosition(GameMap map, int x, int y) {
+        if (map != null) {
+            return (map.getTile(x, y) != null && map.isValidPosition(x, y) && map.isFreePosition(x, y));
+        } else {
+            return false;
+        }
     }
 
 }
