@@ -1,6 +1,8 @@
 package dsv.inte2017g11.roguelib.Maps;
 
 import java.util.Random;
+import java.util.ArrayList;
+
 
 public class GameMap {
 
@@ -23,7 +25,7 @@ public class GameMap {
         tiles = new Tile[sX][sY];
         for (int i = 0; i < sX; i++) {
             for (int j = 0; j < sY; j++) {
-                tiles[i][j] = new Tile(randomTerrain());
+                tiles[i][j] = new Tile(randomTerrain(), new ArrayList<>());
             }
         }
     }

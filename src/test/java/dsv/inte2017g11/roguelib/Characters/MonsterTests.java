@@ -1,7 +1,10 @@
 package dsv.inte2017g11.roguelib.Characters;
+import dsv.inte2017g11.roguelib.Maps.Tile;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -38,7 +41,11 @@ public class MonsterTests {
 
     @Test
     public void attackTest() {
-        m.attack(m2);
+        ArrayList<AbstractCharacter> characters = new ArrayList<AbstractCharacter>();
+        characters.add(m);characters.add(m2);
+        Tile t = new Tile(1, characters);
+
+        m.attack(t);
         assertEquals(180, m2.getCurrentHealth());
     }
 
