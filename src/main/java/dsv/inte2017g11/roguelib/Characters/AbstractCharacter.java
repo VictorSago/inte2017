@@ -13,9 +13,9 @@ import dsv.inte2017g11.roguelib.Maps.MapPath;
  *
  */
 abstract public class AbstractCharacter {
-	
-	static final int DEFAULT_MAX_HEALTH = 100;
-	static final int DEFAULT_SPEED = 10;
+
+    static final int DEFAULT_MAX_HEALTH = 100;
+    static final int DEFAULT_SPEED = 10;
 
     private final String name;
 
@@ -36,11 +36,11 @@ abstract public class AbstractCharacter {
         this.speed = speed;
         this.stepsLeft = this.speed;
     }
-    
+
     public AbstractCharacter(String name, int health) {
         this(name, health, DEFAULT_SPEED);
     }
-    
+
     public AbstractCharacter(String name) {
         this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED);
     }
@@ -226,6 +226,10 @@ abstract public class AbstractCharacter {
 
     /**
      *  Test whether the parameters point to a valid position
+     *  If the enterred direction together with speed is a
+     *  valid value for the player to move towards this may
+     *  be computed
+     *
      *  @param map the map whose position is being tested
      *  @param x x-coordinate of the new position
      *  @param y y-coordinate of the new position
@@ -241,3 +245,4 @@ abstract public class AbstractCharacter {
     }
 
 }
+
