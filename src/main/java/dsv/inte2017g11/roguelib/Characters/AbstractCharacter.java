@@ -13,9 +13,9 @@ import dsv.inte2017g11.roguelib.Maps.MapPath;
  *
  */
 abstract public class AbstractCharacter {
-	
-	static final int DEFAULT_MAX_HEALTH = 100;
-	static final int DEFAULT_SPEED = 10;
+
+    static final int DEFAULT_MAX_HEALTH = 100;
+    static final int DEFAULT_SPEED = 10;
 
     private final String name;
 
@@ -36,11 +36,11 @@ abstract public class AbstractCharacter {
         this.speed = speed;
         this.stepsLeft = this.speed;
     }
-    
+
     public AbstractCharacter(String name, int health) {
         this(name, health, DEFAULT_SPEED);
     }
-    
+
     public AbstractCharacter(String name) {
         this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED);
     }
@@ -116,6 +116,7 @@ abstract public class AbstractCharacter {
     public boolean setPosition(GameMap map, int x, int y) {
         if (isValidPosition(map, x, y)) {
             this.map = map;
+
             this.posX = x;
             this.posY = y;
             return true;
@@ -231,6 +232,7 @@ abstract public class AbstractCharacter {
      *  @param y y-coordinate of the new position
      *  @return <code>true</code> if and only if the map exists and the
      *  new position is a valid one, <code>false</code> in all other cases
+
      */
     protected boolean isValidPosition(GameMap map, int x, int y) {
         if (map != null) {
@@ -241,3 +243,4 @@ abstract public class AbstractCharacter {
     }
 
 }
+
