@@ -227,6 +227,10 @@ abstract public class AbstractCharacter {
 
     /**
      *  Test whether the parameters point to a valid position
+     *  If the enterred direction together with speed is a
+     *  valid value for the player to move towards this may
+     *  be computed
+     *
      *  @param map the map whose position is being tested
      *  @param x x-coordinate of the new position
      *  @param y y-coordinate of the new position
