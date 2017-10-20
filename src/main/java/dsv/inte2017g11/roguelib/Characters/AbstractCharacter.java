@@ -4,9 +4,9 @@ import dsv.inte2017g11.roguelib.Directions;
 import dsv.inte2017g11.roguelib.GameMap;
 
 abstract public class AbstractCharacter {
-	
-	static final int DEFAULT_MAX_HEALTH = 100;
-	static final int DEFAULT_SPEED = 10;
+
+    static final int DEFAULT_MAX_HEALTH = 100;
+    static final int DEFAULT_SPEED = 10;
 
     private final String name;
 
@@ -27,11 +27,11 @@ abstract public class AbstractCharacter {
         this.speed = speed;
         this.stepsLeft = this.speed;
     }
-    
+
     public AbstractCharacter(String name, int health) {
         this(name, health, DEFAULT_SPEED);
     }
-    
+
     public AbstractCharacter(String name) {
         this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED);
     }
@@ -105,7 +105,7 @@ abstract public class AbstractCharacter {
     }
 
     public boolean setPosition(int x, int y) {
-        if (this.map != null && map.isValidPosition(x, y) && map.isFreePosition(x,y)) {
+        if (this.map != null && map.isValidPosition(x, y) && map.isFreePosition(x, y)) {
             this.posX = x;
             this.posY = y;
             return true;
@@ -184,9 +184,10 @@ abstract public class AbstractCharacter {
 
 
     /**
-     *  If the entered direction together with speed is a
-     *  valid value for the player to move towards this may
-     *  be computed
+     * If the entered direction together with speed is a
+     * valid value for the player to move towards this may
+     * be computed
+     *
      * @param x x-coordinate of the new position
      * @param y y-coordinate of the new position
      * @return <code>true</code> if the new position is a valid one,
@@ -195,4 +196,6 @@ abstract public class AbstractCharacter {
     private boolean validateNewPosition(int x, int y) {
         return (map.getTile(x, y) != null);
     }
+
 }
+
