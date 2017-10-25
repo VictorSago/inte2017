@@ -1,4 +1,4 @@
-package dsv.inte2017g11.roguelib.Characters;
+package dsv.inte2017g11.roguelib.Entities;
 
 import dsv.inte2017g11.roguelib.Items.Effect;
 import dsv.inte2017g11.roguelib.Items.GearItem;
@@ -38,7 +38,7 @@ public class GamePlayerTest {
         assertEquals("Zoe", playerZoe.getName());
         assertEquals(testHealth, playerZoe.getMaxHealth());
         assertTrue(playerZoe.getCurrentHealth() == playerZoe.getMaxHealth());
-        assertEquals(AbstractCharacter.DEFAULT_SPEED, playerZoe.getSpeed());
+        assertEquals(AbstractEntity.DEFAULT_SPEED, playerZoe.getSpeed());
         assertTrue(playerZoe.getStepsRemaining() == playerZoe.getSpeed());
     }
 
@@ -46,9 +46,9 @@ public class GamePlayerTest {
     public void creationWith2DefaultsTest() {
         GamePlayer playerJohn = new GamePlayer("John Doe");
         assertEquals("John Doe", playerJohn.getName());
-        assertEquals(AbstractCharacter.DEFAULT_MAX_HEALTH, playerJohn.getMaxHealth());
+        assertEquals(AbstractEntity.DEFAULT_MAX_HEALTH, playerJohn.getMaxHealth());
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
-        assertEquals(AbstractCharacter.DEFAULT_SPEED, playerJohn.getSpeed());
+        assertEquals(AbstractEntity.DEFAULT_SPEED, playerJohn.getSpeed());
         assertTrue(playerJohn.getStepsRemaining() == playerJohn.getSpeed());
     }
 

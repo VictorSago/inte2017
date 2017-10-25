@@ -1,4 +1,4 @@
-package dsv.inte2017g11.roguelib.Characters;
+package dsv.inte2017g11.roguelib.Entities;
 import dsv.inte2017g11.roguelib.Maps.Tile;
 
 import org.junit.Before;
@@ -21,9 +21,9 @@ public class MonsterTests {
 
     @Before
     public void setUp() {
-        m = new Monster("Unicorn", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20) {};
-        m2 = new Monster("Fluff", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20) {};
-        m3 = new FlyingMonster("Fluff", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20) {};
+        m = new Monster("Unicorn", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20);
+        m2 = new Monster("Fluff", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20);
+        m3 = new FlyingMonster("Fluff", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20);
 
     }
 
@@ -41,7 +41,7 @@ public class MonsterTests {
 
     @Test
     public void attackTest() {
-        ArrayList<AbstractCharacter> characters = new ArrayList<AbstractCharacter>();
+        ArrayList<AbstractEntity> characters = new ArrayList<AbstractEntity>();
         characters.add(m);characters.add(m2);
         Tile t = new Tile(1, characters);
 

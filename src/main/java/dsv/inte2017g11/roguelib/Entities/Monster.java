@@ -1,8 +1,8 @@
-package dsv.inte2017g11.roguelib.Characters;
+package dsv.inte2017g11.roguelib.Entities;
 import dsv.inte2017g11.roguelib.Maps.Tile;
 
 
-public class Monster extends AbstractCharacter{
+public class Monster extends AbstractEntity {
 
     private int type;
     private int attackValue;
@@ -20,9 +20,9 @@ public class Monster extends AbstractCharacter{
 
 
     public void attack(Tile t){
-        for(AbstractCharacter c : t.getCharacters()){
+        for(AbstractEntity c : t.getCharacters()){
             if (!c.equals(this)){
-                c.hurtCharacter(attackValue);
+                c.damage(attackValue);
             }
         }
     }

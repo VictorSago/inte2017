@@ -1,20 +1,20 @@
-package dsv.inte2017g11.roguelib.Characters;
+package dsv.inte2017g11.roguelib.Entities;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class AbstractCharacterTest {
+public class AbstractEntityTest {
 
     private final int DEFAULT_TEST_HEALTH = 200;
     private final int DEFAULT_TEST_SPEED = 20;
 
-    private AbstractCharacter player;
+    private AbstractEntity player;
 
     @Before
     public void setUp() throws Exception {
-        player = new AbstractCharacter("John Doe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
+        player = new AbstractEntity("John Doe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
     }
 
 
@@ -26,24 +26,24 @@ public class AbstractCharacterTest {
 
     @Test
     public void creationWithDefaultSpeed() {
-        AbstractCharacter playerJohn = new AbstractCharacter("John Doe", DEFAULT_TEST_HEALTH) {};
+        AbstractEntity playerJohn = new AbstractEntity("John Doe", DEFAULT_TEST_HEALTH) {};
         assertEquals(DEFAULT_TEST_HEALTH, playerJohn.getMaxHealth());
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
-        assertEquals(AbstractCharacter.DEFAULT_SPEED, playerJohn.getSpeed());
+        assertEquals(AbstractEntity.DEFAULT_SPEED, playerJohn.getSpeed());
     }
 
     @Test
     public void creationWithDefaultParameters() {
-        AbstractCharacter playerJohn = new AbstractCharacter("John Doe") {};
-        assertEquals(AbstractCharacter.DEFAULT_MAX_HEALTH, playerJohn.getMaxHealth());
+        AbstractEntity playerJohn = new AbstractEntity("John Doe") {};
+        assertEquals(AbstractEntity.DEFAULT_MAX_HEALTH, playerJohn.getMaxHealth());
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
-        assertEquals(AbstractCharacter.DEFAULT_SPEED, playerJohn.getSpeed());
+        assertEquals(AbstractEntity.DEFAULT_SPEED, playerJohn.getSpeed());
     }
 
     @Test
     public void nameTest() {
-        AbstractCharacter playerJane = new AbstractCharacter("janedoe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
-        AbstractCharacter playerJohn = new AbstractCharacter("John Doe") {};
+        AbstractEntity playerJane = new AbstractEntity("janedoe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
+        AbstractEntity playerJohn = new AbstractEntity("John Doe") {};
         assertEquals("janedoe", playerJane.getName());
         assertEquals("John Doe", playerJohn.getName());
     }
@@ -58,10 +58,10 @@ public class AbstractCharacterTest {
     public void addHealthTest() {
         int damage = 22;
         int heal = 10;
-        player.hurtCharacter(damage);
+        player.damage(damage);
         assertEquals(DEFAULT_TEST_HEALTH - damage, player.getCurrentHealth());
         assertEquals(DEFAULT_TEST_HEALTH, player.getMaxHealth());
-        player.healCharacter(heal);
+        player.heal(heal);
         assertEquals(DEFAULT_TEST_HEALTH - (damage - heal), player.getCurrentHealth());
         assertEquals(DEFAULT_TEST_HEALTH, player.getMaxHealth());
     }
@@ -69,21 +69,21 @@ public class AbstractCharacterTest {
     @Test
     public void additionalHealthAddedOverMaxTest() {
         int heal = 120;
-        player.healCharacter(heal);
+        player.heal(heal);
         assertEquals(DEFAULT_TEST_HEALTH, player.getCurrentHealth());
     }
 
     @Test
     public void removeHealthTest() {
         int damage = 12;
-        player.hurtCharacter(damage);
+        player.damage(damage);
         assertEquals(DEFAULT_TEST_HEALTH - damage, player.getCurrentHealth());
     }
 
     @Test
     public void characterGameOverTest() {
         int damage = DEFAULT_TEST_HEALTH + 20;
-        player.hurtCharacter(damage);
+        player.damage(damage);
         assertEquals(0, player.getCurrentHealth());
     }
 

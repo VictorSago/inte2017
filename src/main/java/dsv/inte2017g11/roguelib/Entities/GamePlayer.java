@@ -1,4 +1,4 @@
-package dsv.inte2017g11.roguelib.Characters;
+package dsv.inte2017g11.roguelib.Entities;
 
 import dsv.inte2017g11.roguelib.Items.GearItem;
 import dsv.inte2017g11.roguelib.Items.Item;
@@ -6,7 +6,7 @@ import dsv.inte2017g11.roguelib.Items.Item;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class GamePlayer extends AbstractCharacter {
+public class GamePlayer extends AbstractEntity {
 
     private Collection<Item> inventory;
     private int defence;
@@ -56,15 +56,15 @@ public class GamePlayer extends AbstractCharacter {
     }
 
     @Override
-    public void hurtCharacter(int damagePoint) {
-        if(defence > damagePoint){
+    public void damage(int damagePoints) {
+        if(defence > damagePoints){
             //hurt gear
-            defence -= damagePoint;
+            defence -= damagePoints;
         }
-        else if (defence == damagePoint){
+        else if (defence == damagePoints){
             //destroy gear but don't hurt player
         }
-        else if(defence < damagePoint){
+        else if(defence < damagePoints){
             //destroy gear and hur player
         }
 

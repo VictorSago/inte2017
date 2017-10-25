@@ -22,7 +22,7 @@ public class Main {
         +isFreePosition(int, int)
     }
 
-    abstract class AbstractCharacter {
+    abstract class AbstractEntity {
         -String name
         ..
         -int maxHealth
@@ -51,10 +51,10 @@ public class Main {
     Tile <|-- EmptyTile
     Tile <|-- "More Tile-types"
     Tile <|-- OtherTile
-    AbstractCharacter "0..*" - "1" GameMap : is_on >
-    AbstractCharacter <|-- Player
-    AbstractCharacter <|-- Monster
-    AbstractCharacter <|-- NPC
+    AbstractEntity "0..*" - "1" GameMap : is_on >
+    AbstractEntity <|-- Player
+    AbstractEntity <|-- Monster
+    AbstractEntity <|-- NPC
 
     Monster <|.. "Monster hierarchy"
     Item <|.. "Item hierarchy"

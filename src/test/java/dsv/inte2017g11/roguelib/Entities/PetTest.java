@@ -1,4 +1,4 @@
-package dsv.inte2017g11.roguelib.Pets;
+package dsv.inte2017g11.roguelib.Entities;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,13 +14,13 @@ public class PetTest {
 
     @Before
     public void setUp() {
-        pet = new Pet("Mushuu", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
+        pet = new Pet("Mushuu", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED);
     }
 
     @Test
     public void creationTest() {
         assertEquals(DEFAULT_TEST_HEALTH, pet.getCurrentHealth());
-        assertEquals(DEFAULT_TEST_SPEED, pet.getCurrentSpeed());
+        assertEquals(DEFAULT_TEST_SPEED, pet.getSpeed());
     }
 
     @Test
@@ -43,8 +43,8 @@ public class PetTest {
 
     @Test
     public void damageTest(){
-        pet.takeDamage(10);
-        assertEquals(DEFAULT_TEST_HEALTH-10, pet.getCurrentHealth());
+        pet.damage(10);
+        assertEquals(DEFAULT_TEST_HEALTH - 10, pet.getCurrentHealth());
     }
 
     @Test
@@ -54,9 +54,9 @@ public class PetTest {
 
     @Test
     public void healTest(){
-        pet.takeDamage(10);
+        pet.damage(10);
         pet.heal(5);
-        assertEquals(DEFAULT_TEST_HEALTH-5, pet.getCurrentHealth());
+        assertEquals(DEFAULT_TEST_HEALTH - 5, pet.getCurrentHealth());
     }
 
     @Test
@@ -67,45 +67,45 @@ public class PetTest {
 
     @Test
     public void killTest(){
-        pet.takeDamage(DEFAULT_TEST_HEALTH);
+        pet.damage(DEFAULT_TEST_HEALTH);
         assertEquals(0, pet.getCurrentHealth());
-        assertFalse(pet.isAvailable());
+        assertFalse(pet.isAlive());
     }
 
     @Test
     public void overKillTest(){
-        pet.takeDamage(DEFAULT_TEST_HEALTH+10);
-        assertEquals(0,pet.getCurrentHealth());
+        pet.damage(DEFAULT_TEST_HEALTH+10);
+        assertEquals(0, pet.getCurrentHealth());
     }
 
     @Test
     public void healDeadPetTest(){
-        pet.takeDamage(DEFAULT_TEST_HEALTH);
+        pet.damage(DEFAULT_TEST_HEALTH);
         pet.heal(10);
         assertEquals(0, pet.getCurrentHealth());
     }
 
     @Test
     public void reviveDeadPetTest(){
-        pet.takeDamage(DEFAULT_TEST_HEALTH);
+        pet.damage(DEFAULT_TEST_HEALTH);
         pet.revive();
-        assertTrue(pet.isAvailable());
-        assertEquals(10,pet.getCurrentHealth());
+        assertTrue(pet.isAlive());
+        assertEquals(10, pet.getCurrentHealth());
     }
 
     @Test
     public void reviveWithFullHealthTest(){
-        pet.takeDamage(DEFAULT_TEST_HEALTH);
+        pet.damage(DEFAULT_TEST_HEALTH);
         pet.phoenixDown();
-        assertEquals(pet.getMaxHealth(),pet.getCurrentHealth());
-        assertTrue(pet.isAvailable());
+        assertEquals(pet.getMaxHealth(), pet.getCurrentHealth());
+        assertTrue(pet.isAlive());
     }
 
     @Test
     public void levelUpTest(){
         pet.levelUp();
-        assertEquals(DEFAULT_TEST_HEALTH+10,pet.getMaxHealth());
-        assertEquals(2,pet.getLevel());
+        assertEquals(DEFAULT_TEST_HEALTH + 10, pet.getMaxHealth());
+        assertEquals(2, pet.getLevel());
     }
 
 }

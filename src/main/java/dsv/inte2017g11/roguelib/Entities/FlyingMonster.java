@@ -1,4 +1,4 @@
-package dsv.inte2017g11.roguelib.Characters;
+package dsv.inte2017g11.roguelib.Entities;
 
 public class FlyingMonster extends Monster {
 

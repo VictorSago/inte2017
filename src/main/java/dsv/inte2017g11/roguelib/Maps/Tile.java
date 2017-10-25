@@ -1,16 +1,16 @@
 package dsv.inte2017g11.roguelib.Maps;
 
-import dsv.inte2017g11.roguelib.Characters.AbstractCharacter;
+import dsv.inte2017g11.roguelib.Entities.AbstractEntity;
 
 import java.util.ArrayList;
 
 public class Tile {
    
 	private int terrain;
-    private ArrayList<AbstractCharacter> characters = new ArrayList<AbstractCharacter>();
+    private ArrayList<AbstractEntity> characters = new ArrayList<AbstractEntity>();
 
 
-    public Tile(int terrain, ArrayList<AbstractCharacter> characters) {
+    public Tile(int terrain, ArrayList<AbstractEntity> characters) {
     	if(terrain < 0) {
             throw new IllegalArgumentException("Wrong terrain");
         }
@@ -21,7 +21,7 @@ public class Tile {
     	return terrain;
     }
 
-    public ArrayList<AbstractCharacter> getCharacters() {
+    public ArrayList<AbstractEntity> getCharacters() {
         return characters;
     }
 

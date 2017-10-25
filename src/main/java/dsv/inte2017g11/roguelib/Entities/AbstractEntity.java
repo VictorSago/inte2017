@@ -1,4 +1,4 @@
-package dsv.inte2017g11.roguelib.Characters;
+package dsv.inte2017g11.roguelib.Entities;
 
 import dsv.inte2017g11.roguelib.Maps.Directions;
 import dsv.inte2017g11.roguelib.Maps.GameMap;
@@ -8,14 +8,14 @@ import dsv.inte2017g11.roguelib.Maps.MapPath;
  * @author zeron
  *
  */
-abstract public class AbstractCharacter {
+abstract public class AbstractEntity {
 
     static final int DEFAULT_MAX_HEALTH = 100;
     static final int DEFAULT_SPEED = 10;
 
     private final String name;
 
-    private int maxHealth, currentHealth;
+    protected int maxHealth, currentHealth;
 
     private int speed, stepsRemaining;
 
@@ -23,7 +23,7 @@ abstract public class AbstractCharacter {
     private int posX, posY;
 
 
-    public AbstractCharacter(String name, int health, int speed) {
+    public AbstractEntity(String name, int health, int speed) {
         this.name = name;
         this.maxHealth = health;
         this.currentHealth = maxHealth;
@@ -31,11 +31,11 @@ abstract public class AbstractCharacter {
         this.stepsRemaining = this.speed;
     }
 
-    public AbstractCharacter(String name, int health) {
+    public AbstractEntity(String name, int health) {
         this(name, health, DEFAULT_SPEED);
     }
 
-    public AbstractCharacter(String name) {
+    public AbstractEntity(String name) {
         this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED);
     }
 
@@ -51,15 +51,21 @@ abstract public class AbstractCharacter {
         return currentHealth;
     }
 
-    public void healCharacter(int healingPoint) {
-        currentHealth += healingPoint;
-        if (currentHealth > maxHealth) {
-            currentHealth = maxHealth;
+    public boolean isAlive() {
+        return currentHealth > 0;
+    }
+
+    public void heal(int healPoints) {
+        if (isAlive()) {
+            currentHealth += healPoints;
+            if (currentHealth > maxHealth) {
+                currentHealth = maxHealth;
+            }
         }
     }
 
-    public void hurtCharacter(int damagePoint) {
-        currentHealth -= damagePoint;
+    public void damage(int damagePoints) {
+        currentHealth -= damagePoints;
         if (currentHealth < 0) {
             currentHealth = 0;
         }
