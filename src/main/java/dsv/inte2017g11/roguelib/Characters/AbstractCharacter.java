@@ -4,10 +4,6 @@ import dsv.inte2017g11.roguelib.Maps.Directions;
 import dsv.inte2017g11.roguelib.Maps.GameMap;
 import dsv.inte2017g11.roguelib.Maps.MapPath;
 
-
-
-
-
 /**
  * @author zeron
  *
@@ -21,9 +17,7 @@ abstract public class AbstractCharacter {
 
     private int maxHealth, currentHealth;
 
-
     private int speed, stepsRemaining;
-
 
     private GameMap map;
     private int posX, posY;
