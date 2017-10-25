@@ -1,5 +1,7 @@
 package dsv.inte2017g11.roguelib.Items;
 
+import dsv.inte2017g11.roguelib.Characters.*;
+
 /*
 GearItem is a subclass of the item class
 it takes name, weight, gearHP and effect as argument
@@ -39,6 +41,14 @@ public class GearItem extends Item {
     public int getGearHP() {
         return gearHP;
     }
+    
+    @Override
+    public String use(AbstractCharacter ac){
+    	if(ac instanceof GamePlayer){
+    		((GamePlayer)ac).changeDefence(gearHP);
+    	}
+    	return this.getName()+" increases defence for "+ac.getName()+" by "+gearHP;
+    }
 
     @Override
     public Effect getEffect() {
@@ -54,6 +64,10 @@ public class GearItem extends Item {
                     (((GearItem) o).getWeight() == this.getWeight()));
         }
         return false;
+    }
+    @Override
+    public String toString(){
+    	return "Item:"+super.getName()+" Defence:"+gearHP;
     }
 
 }

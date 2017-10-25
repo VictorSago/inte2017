@@ -86,7 +86,7 @@ public class AbstractCharacterTest {
     public void characterGameOverTest() {
         int damage = DEFAULT_TEST_HEALTH + 20;
         player.hurtCharacter(damage);
-        assertEquals(-1, player.getCurrentHealth());
+        assertEquals(0, player.getCurrentHealth());
     }
 
     @Test

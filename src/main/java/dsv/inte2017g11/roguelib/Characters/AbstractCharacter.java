@@ -3,6 +3,7 @@ package dsv.inte2017g11.roguelib.Characters;
 import dsv.inte2017g11.roguelib.Maps.Directions;
 import dsv.inte2017g11.roguelib.Maps.GameMap;
 import dsv.inte2017g11.roguelib.Maps.MapPath;
+import dsv.inte2017g11.roguelib.Maps.Tile;
 
 /**
  * @author zeron
@@ -16,7 +17,7 @@ abstract public class AbstractCharacter {
 
     static final int DEFAULT_MAX_HEALTH = 100;
     static final int DEFAULT_SPEED = 10;
-    static final int DEFAULT_DMG = 10;
+    private int damage;
 
     private final String name;
 
@@ -37,6 +38,7 @@ abstract public class AbstractCharacter {
         this.speed = speed;
         this.stepsLeft = this.speed;
         this.map = map;
+        damage = 10;
     }
 
     public AbstractCharacter(String name, int health,GameMap map) {
@@ -137,6 +139,13 @@ abstract public class AbstractCharacter {
 
     public int getPosY() {
         return posY;
+    }
+    public int getDmg(){
+    	return damage;
+    }
+    
+    public void changeDmg(int dmg){
+    	damage += dmg;
     }
 
     
@@ -265,17 +274,18 @@ abstract public class AbstractCharacter {
     }
     
     public int attack(AbstractCharacter other){
-    	other.hurtCharacter(DEFAULT_DMG);
-    	return DEFAULT_DMG;
+    	other.hurtCharacter(damage);
+    	return damage;
     }
     
     public boolean tic(int i){
     	
+    	return true;
     }
     
     @Override
     public String toString(){
-    	return "Hp: "+currentHealth+" Current Position - x: "+posX+" y: "+posY;
+    	return "Hp: "+currentHealth+" Dmg: "+damage+" Current Position  x: "+posX+" y: "+posY;
     }
 
 }

@@ -20,7 +20,7 @@ public class CharacterMapInteractionTest {
 
     @Before
     public void setUp() throws Exception {
-        player = new AbstractCharacter("Jane Doe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
+        player = new AbstractCharacter("Jane Doe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED,map) {};
         map = new GameMap(SIZE_X, SIZE_Y);
     }
 

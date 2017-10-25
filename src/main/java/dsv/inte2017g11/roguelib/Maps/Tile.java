@@ -14,26 +14,38 @@ public class Tile {
     private Item item;
     private Random rand = new Random();
 
-    public Tile(int terrain, ArrayList<AbstractCharacter> characters,GameMap map) {
+    public Tile(int terrain, ArrayList<AbstractCharacter> characters) {
     	if(terrain < 0) {
             throw new IllegalArgumentException("Wrong terrain");
         }
         this.terrain = terrain;
     	this.characters = characters;
-    	int i = rand.nextInt(10);
+    	/*int i = rand.nextInt(10);
     	if(i<6){
     		item = new WeaponItem("Axe",20,30);
     		character = new Monster("Wolf",50,15,map);
-    	}
+    	*/
+    	
     }
+    /*public Tile(int terrain, ArrayList<AbstractCharacter> characters,AbstractCharacter ac) {
+    	this(terrain, characters);
+    	character = ac;
+    }*/
+    
+    
     public int getTerrain() {
     	return terrain;
     }
     public Item getItem() {
     	return item;
     }
+    
+   
     public AbstractCharacter getCharacter() {
     	return character;
+    }
+    public void addCharacter(AbstractCharacter ac) {
+    	character = ac;
     }
     public void removeItem() {
     	item = null;

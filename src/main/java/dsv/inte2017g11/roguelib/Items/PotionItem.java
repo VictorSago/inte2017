@@ -1,4 +1,5 @@
 package dsv.inte2017g11.roguelib.Items;
+import dsv.inte2017g11.roguelib.Characters.*;
 
 /*
 PotionItem is a subclass of the item class
@@ -35,6 +36,12 @@ public class PotionItem extends Item {
     public int getPower() {
         return power;
     }
+    
+    @Override
+    public String use(AbstractCharacter ac){
+    	ac.healCharacter(power);
+    	return this.getName()+" heals "+ac.getName()+" for "+power;
+    }
 
     @Override
     public Effect getEffect() {
@@ -48,5 +55,9 @@ public class PotionItem extends Item {
                     (((PotionItem) o).power == this.power) &&
                     (((PotionItem) o).effect == this.effect));}
         return false;
+    }
+    @Override
+    public String toString(){
+    	return "Item:"+super.getName()+" Power:"+power;
     }
 }

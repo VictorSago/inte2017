@@ -1,4 +1,5 @@
 package dsv.inte2017g11.roguelib.Items;
+import dsv.inte2017g11.roguelib.Characters.*;
 
 public abstract class Item {
 
@@ -46,12 +47,11 @@ public abstract class Item {
     @Override
     abstract public boolean equals(Object o);
     
-    abstract public boolean use();
+    abstract public String use(AbstractCharacter ac);
     
     @Override
-    public String toString(){
-    	return "Item:"+name+" Weight:"+weight+description;
-    }
+    public abstract String toString();
+  
 
 
     //TODO implement hashCode() method

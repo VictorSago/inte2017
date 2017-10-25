@@ -1,5 +1,6 @@
 package dsv.inte2017g11.roguelib.Items;
 
+import dsv.inte2017g11.roguelib.Characters.*;
 import static dsv.inte2017g11.roguelib.Items.Effect.DAMAGE;
 
 public class WeaponItem extends Item {
@@ -26,6 +27,13 @@ public class WeaponItem extends Item {
     public int getPower() {
         return power;
     }
+    
+    @Override
+    public String use(AbstractCharacter ac){
+    	ac.changeDmg(power);
+    	return this.getName()+" increases dmg for "+ac.getName()+" by "+power;
+    }
+    
 
     @Override
     public Effect getEffect() {
@@ -41,6 +49,10 @@ public class WeaponItem extends Item {
                     ((WeaponItem) o).getDescription().equals(this.getDescription()));
         }
         return false;
+    }
+    @Override
+    public String toString(){
+    	return "Item:"+super.getName()+" Power:"+power;
     }
 
 }

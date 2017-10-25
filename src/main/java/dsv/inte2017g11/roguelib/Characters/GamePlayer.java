@@ -10,7 +10,7 @@ import java.util.Collection;
 
 public class GamePlayer extends AbstractCharacter {
 
-    private Collection<Item> inventory;
+    private ArrayList<Item> inventory;
     private int defence;
 
     public GamePlayer(String name, int health, int speed,GameMap map) {
@@ -36,7 +36,7 @@ public class GamePlayer extends AbstractCharacter {
         return inventory.size();
     }
     
-    public Collection showInventory() {
+    public ArrayList<Item> showInventory() {
     	return inventory;
     }
 
@@ -76,6 +76,9 @@ public class GamePlayer extends AbstractCharacter {
     public int getDefence() {
         return defence;
     }
+    public void changeDefence(int def){
+    	defence += def;
+    }
 
     public void equipItem(String eq) {
         Item eqItem = getFromInventory(eq);
@@ -92,6 +95,7 @@ public class GamePlayer extends AbstractCharacter {
     	System.out.println("Press 5 to show inventory");
     	System.out.println("Press 6 to pick up item");
     	System.out.println("Press 7 to attack");
+    	System.out.println("Press 8 to use item");
     	
     }
     @Override
@@ -142,7 +146,10 @@ public class GamePlayer extends AbstractCharacter {
 				else
 					System.out.println("There are no characters here");
 				break;
-		
+    	case 8:
+    			System.out.println(inventory.get(0).use(this));
+    			inventory.remove(0);
+    			break;
     	case -1: return false;
     
     	}

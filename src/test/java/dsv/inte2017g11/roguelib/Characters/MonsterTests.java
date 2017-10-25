@@ -1,5 +1,6 @@
 package dsv.inte2017g11.roguelib.Characters;
 import dsv.inte2017g11.roguelib.Maps.Tile;
+import dsv.inte2017g11.roguelib.Maps.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ public class MonsterTests {
 
     private final int DEFAULT_TEST_HEALTH = 200;
     private final int DEFAULT_TEST_SPEED = 20;
+    private GameMap map = new GameMap(100,100);
 
     private Monster m;
     private Monster m2;
@@ -21,9 +23,9 @@ public class MonsterTests {
 
     @Before
     public void setUp() {
-        m = new Monster("Unicorn", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20) {};
-        m2 = new Monster("Fluff", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20) {};
-        m3 = new FlyingMonster("Fluff", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20) {};
+        m = new Monster("Unicorn", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20,map) {};
+        m2 = new Monster("Fluff", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20,map) {};
+        m3 = new FlyingMonster("Fluff", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED, 1, 20,map) {};
 
     }
 

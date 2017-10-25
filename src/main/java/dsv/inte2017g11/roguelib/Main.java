@@ -63,7 +63,7 @@ public class Main {
 @enduml
 */
     public static void main(String[] args) {
-        Engine e = new Engine("Anders",100,100);
+        Engine e = new Engine("Henrik",100,100);
         e.run();
     }
 }
