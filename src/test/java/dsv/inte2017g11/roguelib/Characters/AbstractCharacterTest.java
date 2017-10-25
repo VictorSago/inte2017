@@ -2,6 +2,7 @@ package dsv.inte2017g11.roguelib.Characters;
 
 import org.junit.Before;
 import org.junit.Test;
+import dsv.inte2017g11.roguelib.Maps.*;
 
 import static org.junit.Assert.*;
 
@@ -9,12 +10,13 @@ public class AbstractCharacterTest {
 
     private final int DEFAULT_TEST_HEALTH = 200;
     private final int DEFAULT_TEST_SPEED = 20;
+    private final GameMap MAP = new GameMap(100,100);
 
     private AbstractCharacter player;
 
     @Before
     public void setUp() throws Exception {
-        player = new AbstractCharacter("John Doe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
+        player = new AbstractCharacter("John Doe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED,MAP) {};
     }
 
 
@@ -26,7 +28,7 @@ public class AbstractCharacterTest {
 
     @Test
     public void creationWithDefaultSpeed() {
-        AbstractCharacter playerJohn = new AbstractCharacter("John Doe", DEFAULT_TEST_HEALTH) {};
+        AbstractCharacter playerJohn = new AbstractCharacter("John Doe", DEFAULT_TEST_HEALTH,MAP) {};
         assertEquals(DEFAULT_TEST_HEALTH, playerJohn.getMaxHealth());
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
         assertEquals(AbstractCharacter.DEFAULT_SPEED, playerJohn.getSpeed());
@@ -34,7 +36,7 @@ public class AbstractCharacterTest {
 
     @Test
     public void creationWithDefaultParameters() {
-        AbstractCharacter playerJohn = new AbstractCharacter("John Doe") {};
+        AbstractCharacter playerJohn = new AbstractCharacter("John Doe",MAP) {};
         assertEquals(AbstractCharacter.DEFAULT_MAX_HEALTH, playerJohn.getMaxHealth());
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
         assertEquals(AbstractCharacter.DEFAULT_SPEED, playerJohn.getSpeed());
@@ -42,8 +44,8 @@ public class AbstractCharacterTest {
 
     @Test
     public void nameTest() {
-        AbstractCharacter playerJane = new AbstractCharacter("janedoe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
-        AbstractCharacter playerJohn = new AbstractCharacter("John Doe") {};
+        AbstractCharacter playerJane = new AbstractCharacter("janedoe", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED,MAP) {};
+        AbstractCharacter playerJohn = new AbstractCharacter("John Doe",MAP) {};
         assertEquals("janedoe", playerJane.getName());
         assertEquals("John Doe", playerJohn.getName());
     }
@@ -117,7 +119,7 @@ public class AbstractCharacterTest {
     }
 
 
-    @Test
+    /*@Test
     public void getMap() {
         assertNull(player.getMap());
     }
@@ -126,13 +128,33 @@ public class AbstractCharacterTest {
     public void setPosition() {
         assertFalse(player.setPosition(3, 5));
     }
-
+	
 
     @Test
     public void getPosition() throws Exception {
         assertEquals(0, player.getPosX());
         assertEquals(0, player.getPosY());
         assertTrue(player.getPosition() < 0);
+    }
+    */
+    @Test
+    public void reduceStepsLeftTest(){
+    	int old = player.getStepsLeft();
+    	player.reduceStepsLeft();
+    	assertEquals(old-1,player.getStepsLeft());
+    }
+    
+    @Test
+    public void attackTest(){
+    	AbstractCharacter other = new Monster("Dragon",150,1,MAP);
+    	assertEquals(150,other.getCurrentHealth());
+    	player.attack(other);
+    	assertEquals(140,other.getCurrentHealth());
+    }
+    
+    @Test
+    public void isValidPositionTest() {
+    	player.isValidPosition(40,30);
     }
 
 

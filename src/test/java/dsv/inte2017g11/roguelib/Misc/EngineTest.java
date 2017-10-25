@@ -1,8 +1,10 @@
-package dsv.inte2017g11.roguelib.Engine;
+package dsv.inte2017g11.roguelib.Misc;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import dsv.inte2017g11.roguelib.Misc.Engine;
 
 public class EngineTest {
 	
@@ -39,6 +41,29 @@ public class EngineTest {
 	public void runBool() {
 		assertNotNull(e.getRun());
 	}
+	
+	@Test
+	public void scanTest() {
+		assertNotNull(e.getScanner());
+	}
+	
+	@Test
+	public void getScanner2() {
+		assertEquals(e.getScanner(),e.getScanner());
+	}
+	
+	/*@Test
+	public void runTest(){
+		e.run();
+	}*/
+	@Test
+	public void runTest2(){
+		e.setRun(false);
+		e.run();
+	}
+	
+	
+	
 	
 	
 

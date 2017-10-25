@@ -45,6 +45,13 @@ public abstract class Item {
 
     @Override
     abstract public boolean equals(Object o);
+    
+    abstract public boolean use();
+    
+    @Override
+    public String toString(){
+    	return "Item:"+name+" Weight:"+weight+description;
+    }
 
 
     //TODO implement hashCode() method

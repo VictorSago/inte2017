@@ -16,6 +16,7 @@ abstract public class AbstractCharacter {
 
     static final int DEFAULT_MAX_HEALTH = 100;
     static final int DEFAULT_SPEED = 10;
+    static final int DEFAULT_DMG = 10;
 
     private final String name;
 
@@ -29,20 +30,21 @@ abstract public class AbstractCharacter {
     private int posX;
     private int posY;
 
-    public AbstractCharacter(String name, int health, int speed) {
+    public AbstractCharacter(String name, int health, int speed,GameMap map) {
         this.name = name;
         this.maxHealth = health;
         this.currentHealth = maxHealth;
         this.speed = speed;
         this.stepsLeft = this.speed;
+        this.map = map;
     }
 
-    public AbstractCharacter(String name, int health) {
-        this(name, health, DEFAULT_SPEED);
+    public AbstractCharacter(String name, int health,GameMap map) {
+        this(name, health, DEFAULT_SPEED,map);
     }
 
-    public AbstractCharacter(String name) {
-        this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED);
+    public AbstractCharacter(String name,GameMap map) {
+        this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED,map);
     }
 
     public String getName() {
@@ -67,7 +69,7 @@ abstract public class AbstractCharacter {
 
     public void hurtCharacter(int damagepoint) {
         if (currentHealth - damagepoint < 0) {
-            currentHealth = -1;
+            currentHealth = 0;
         } else {
             currentHealth -= damagepoint;
         }
@@ -154,32 +156,44 @@ abstract public class AbstractCharacter {
         }
     }
 
-    protected void moveRight() {
+    protected boolean moveRight() {
         if (isValidPosition(posX + 1, posY)) {
             posX++;
             stepsLeft--;
+            return true;
         }
+        else
+        	return false;
     }
 
-    protected void moveLeft() {
+    protected boolean moveLeft() {
         if (isValidPosition(posX - 1, posY)) {
             posX--;
             stepsLeft--;
+            return true;
         }
+        else
+        	return false;
     }
 
-    protected void moveDown() {
+    protected boolean moveDown() {
         if (isValidPosition(posX, posY + 1)) {
             posY++;
             stepsLeft--;
+            return true;
         }
+        else
+        	return false;
     }
 
-    protected void moveUp() {
+    protected boolean moveUp() {
         if (isValidPosition(posX, posY - 1)) {
             posY--;
             stepsLeft--;
+            return true;
         }
+        else
+        	return false;
     }
 
     protected void moveStep(Directions dir) {
@@ -244,6 +258,24 @@ abstract public class AbstractCharacter {
         } else {
             return false;
         }
+    }
+    
+    public void reduceStepsLeft(){
+    	stepsLeft--;
+    }
+    
+    public int attack(AbstractCharacter other){
+    	other.hurtCharacter(DEFAULT_DMG);
+    	return DEFAULT_DMG;
+    }
+    
+    public boolean tic(int i){
+    	
+    }
+    
+    @Override
+    public String toString(){
+    	return "Hp: "+currentHealth+" Current Position - x: "+posX+" y: "+posY;
     }
 
 }

@@ -1,5 +1,7 @@
 package dsv.inte2017g11.roguelib;
 
+import dsv.inte2017g11.roguelib.Misc.*;
+
 public class Main {
 
 /*
@@ -61,6 +63,7 @@ public class Main {
 @enduml
 */
     public static void main(String[] args) {
-        System.out.println("Rogue!");
+        Engine e = new Engine("Anders",100,100);
+        e.run();
     }
 }

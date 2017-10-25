@@ -1,6 +1,8 @@
 package dsv.inte2017g11.roguelib.Characters;
 
 import dsv.inte2017g11.roguelib.Items.GearItem;
+import dsv.inte2017g11.roguelib.Maps.*;
+import dsv.inte2017g11.roguelib.Misc.Combat;
 import dsv.inte2017g11.roguelib.Items.Item;
 
 import java.util.ArrayList;
@@ -11,18 +13,18 @@ public class GamePlayer extends AbstractCharacter {
     private Collection<Item> inventory;
     private int defence;
 
-    public GamePlayer(String name, int health, int speed) {
-        super(name, health, speed);
+    public GamePlayer(String name, int health, int speed,GameMap map) {
+        super(name, health, speed,map);
         inventory = new ArrayList<>();
     }
 
-    public GamePlayer(String name, int health) {
-        super(name, health);
+    public GamePlayer(String name, int health,GameMap map) {
+        super(name, health,map);
         inventory = new ArrayList<>();
     }
 
-    public GamePlayer(String name) {
-        super(name);
+    public GamePlayer(String name,GameMap map) {
+        super(name,map);
         inventory = new ArrayList<>();
     }
 
@@ -32,6 +34,10 @@ public class GamePlayer extends AbstractCharacter {
 
     public int getAmountOfItems() {
         return inventory.size();
+    }
+    
+    public Collection showInventory() {
+    	return inventory;
     }
 
     /*
@@ -52,7 +58,7 @@ public class GamePlayer extends AbstractCharacter {
         inventory.remove(removeMe);
     }
 
-    @Override
+   /* @Override
     public void hurtCharacter(int damagepoint) {
         if(defence > damagepoint){
             //hurt gear
@@ -65,7 +71,7 @@ public class GamePlayer extends AbstractCharacter {
             //destroy gear and hur player
         }
 
-    }
+    }*/
 
     public int getDefence() {
         return defence;
@@ -77,5 +83,73 @@ public class GamePlayer extends AbstractCharacter {
             defence += ((GearItem) eqItem).getGearHP();
         }
     }
+    
+    public void printDecisions() {
+    	System.out.println("Press 1 to move left");
+    	System.out.println("Press 2 to move up");
+    	System.out.println("Press 3 to move right");
+    	System.out.println("Press 4 to move down");
+    	System.out.println("Press 5 to show inventory");
+    	System.out.println("Press 6 to pick up item");
+    	System.out.println("Press 7 to attack");
+    	
+    }
+    @Override
+    public boolean tic(int t) {
+    	boolean move;
+    	Tile tile = super.getMap().getTile(super.getPosX(), super.getPosY());
+    	switch(t){
+    	case 1: move = moveLeft();
+    			if(!move)
+    				System.out.println("Can't move left here");
+    			break;
+    	case 2: move = moveUp();
+		    	if(!move)
+					System.out.println("Can't move up here");
+				break;
+    	case 3: move = moveRight();
+		    	if(!move)
+					System.out.println("Can't move right here");
+				break;
+    	case 4: move = moveDown();
+		    	if(!move)
+					System.out.println("Can't move down here");
+				break;
+    	case 5: System.out.println(showInventory());
+    			break;
+    	case 6: 
+    			if(tile.getItem() != null){
+    				addToInventory(tile.getItem());
+    				System.out.println("Added "+tile.getItem()+" to your inventory");
+    				tile.removeItem();
+    			}
+    			else
+    				System.out.println("There are no items here");
+    			
+				break;
+    	case 7:	
+				if(tile.getCharacter() != null){
+					boolean success = Combat.fight(this,tile.getCharacter());
+					if(success){
+						tile.removeCharacter();
+						System.out.println(super.getName()+" wins");
+					}
+					else{
+						System.out.println(super.getName()+" dies");
+						return false;
+					}
+				}
+				else
+					System.out.println("There are no characters here");
+				break;
+		
+    	case -1: return false;
+    
+    	}
+    	//reduceStepsLeft();
+    	return true;
+    }
+    
+    
 
 }
