@@ -5,16 +5,16 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class PetsTest {
+public class PetTest {
 
     private final int DEFAULT_TEST_HEALTH = 150;
     private final int DEFAULT_TEST_SPEED = 40;
 
-    private Pets pet;
+    private Pet pet;
 
     @Before
     public void setUp() {
-        pet = new Pets("Mushuu", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
+        pet = new Pet("Mushuu", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) {};
     }
 
     @Test
@@ -36,7 +36,7 @@ public class PetsTest {
 
     @Test
     public void twoPetsTest(){
-        Pets pet2 = new Pets("Kilgarrah", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED);
+        Pet pet2 = new Pet("Kilgarrah", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED);
         assertEquals("Kilgarrah", pet2.getName());
         assertEquals("Mushuu", pet.getName());
     }

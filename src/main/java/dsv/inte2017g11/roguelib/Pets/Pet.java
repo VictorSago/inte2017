@@ -1,20 +1,20 @@
 package dsv.inte2017g11.roguelib.Pets;
 
-public class Pets {
+public class Pet {
     private String name;
-    private int currentHealth;
-    private int currentSpeed;
-    private int maxHealth;
-    private int level;
-    private boolean available;
 
-    public Pets(String name, int health, int speed) {
+    private int maxHealth, currentHealth;
+    private int currentSpeed;
+
+    private int level;
+
+
+    public Pet(String name, int health, int speed) {
         this.name = name;
         this.currentHealth = health;
         this.maxHealth = currentHealth;
         this.currentSpeed = speed;
         this.level = 1;
-        this.available = true;
     }
 
     public int getCurrentHealth() {
@@ -34,18 +34,12 @@ public class Pets {
     }
 
     public void takeDamage(int damage) {
-        currentHealth -=damage;
+        currentHealth -= damage;
         if (currentHealth<0){
             currentHealth = 0;
         }
-        if(currentHealth==0){
-            deadPet();
-        }
     }
 
-    private void deadPet() {
-        available=false;
-    }
 
     public int getMaxHealth() {
         return maxHealth;
@@ -66,22 +60,24 @@ public class Pets {
 
     //TODO kan speed öka? fylla upp currentHealth vid levelup?
     public void levelUp() {
-        level+=1;
-        maxHealth+=10;
+        level += 1;
+        maxHealth += 10;
     }
 
     public boolean isAvailable() {
-        return available;
+        return currentHealth > 0;
     }
 
     public void revive() {
-        available=true;
-        currentHealth=10;
+        if (currentHealth == 0) {
+            currentHealth = 10;
+        }
     }
 
     public void phoenixDown() {
-        available=true;
-        currentHealth=maxHealth;
+        if (currentHealth == 0) {
+            currentHealth = maxHealth;
+        }
     }
 
 }

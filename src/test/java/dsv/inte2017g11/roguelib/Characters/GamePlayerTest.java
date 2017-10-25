@@ -7,6 +7,7 @@ import dsv.inte2017g11.roguelib.Items.PotionItem;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 public class GamePlayerTest {
@@ -27,7 +28,7 @@ public class GamePlayerTest {
         assertEquals(DEFAULT_TEST_HEALTH, player.getMaxHealth());
         assertEquals(DEFAULT_TEST_HEALTH, player.getCurrentHealth());
         assertEquals(DEFAULT_TEST_SPEED, player.getSpeed());
-        assertEquals(DEFAULT_TEST_SPEED, player.getStepsLeft());
+        assertEquals(DEFAULT_TEST_SPEED, player.getStepsRemaining());
     }
 
     @Test
@@ -38,7 +39,7 @@ public class GamePlayerTest {
         assertEquals(testHealth, playerZoe.getMaxHealth());
         assertTrue(playerZoe.getCurrentHealth() == playerZoe.getMaxHealth());
         assertEquals(AbstractCharacter.DEFAULT_SPEED, playerZoe.getSpeed());
-        assertTrue(playerZoe.getStepsLeft() == playerZoe.getSpeed());
+        assertTrue(playerZoe.getStepsRemaining() == playerZoe.getSpeed());
     }
 
     @Test
@@ -48,7 +49,7 @@ public class GamePlayerTest {
         assertEquals(AbstractCharacter.DEFAULT_MAX_HEALTH, playerJohn.getMaxHealth());
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
         assertEquals(AbstractCharacter.DEFAULT_SPEED, playerJohn.getSpeed());
-        assertTrue(playerJohn.getStepsLeft() == playerJohn.getSpeed());
+        assertTrue(playerJohn.getStepsRemaining() == playerJohn.getSpeed());
     }
 
     //@TODO Finish the test
@@ -58,7 +59,7 @@ public class GamePlayerTest {
         Item item2 = new PotionItem("Felix felicis", 15, Effect.HEALTH);
         player.addToInventory(item1);
         player.addToInventory(item2);
-        assertEquals(2, player.getAmountOfItems());
+        assertEquals(2, player.getInventorySize());
     }
 
     @Test
@@ -71,12 +72,20 @@ public class GamePlayerTest {
         assertEquals(item3, player.getFromInventory("felix felicis"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    /*@Test(expected = IllegalArgumentException.class)
     public void getNonExistingItemFromInventory() {
         Item item1 = new GearItem("Plain Helm", 2, 10, Effect.HEALTH);
         Item item2 = new PotionItem("Felix felicis", 15, Effect.HEALTH);
         player.addToInventory(item1);
         assertEquals(item2, player.getFromInventory("felix felicis"));
+    }*/
+
+    @Test
+    public void getNonExistingItemFromInventory() {
+        Item item1 = new GearItem("Plain Helm", 2, 10, Effect.HEALTH);
+        Item item2 = new PotionItem("Felix felicis", 15, Effect.HEALTH);
+        player.addToInventory(item1);
+        assertNull(player.getFromInventory("felix felicis"));
     }
 
     @Test
@@ -85,14 +94,21 @@ public class GamePlayerTest {
         Item item2 = new PotionItem("Felix felicis", 15, Effect.HEALTH);
         player.addToInventory(item1);
         player.addToInventory(item2);
-        player.throwItem("Plain Helm");
-        assertEquals(1, player.getAmountOfItems());
+        player.dropItem("Plain Helm");
+        assertEquals(1, player.getInventorySize());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    /*@Test(expected = IllegalArgumentException.class)
     public void testRemoveItemWhenListIsEmpty(){
-        assertEquals(0, player.getAmountOfItems());
-        player.throwItem("nothing");
+        assertEquals(0, player.getInventorySize());
+        player.dropItem("nothing");
+    }*/
+
+    @Test
+    public void testRemoveItemWhenListIsEmpty(){
+        assertEquals(0, player.getInventorySize());
+        assertFalse(player.dropItem("nothing"));
+        assertThat(player.dropItem("nothing"), is(false));
     }
 
     @Test
