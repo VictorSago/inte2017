@@ -1,7 +1,6 @@
 package dsv.inte2017g11.roguelib.Maps;
 
 import java.util.Random;
-import java.util.ArrayList;
 
 
 public class GameMap {
@@ -14,36 +13,21 @@ public class GameMap {
 
     public GameMap(int width, int height) {
         if (width <= 0 || height <= 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("A map's width and height must be positive.");
         }
         this.width = width;
         this.height = height;
         fillMapField(width,height);
     }
 
-    private void fillMapField(int sX, int sY) {
-        tiles = new Tile[sX][sY];
-        for (int i = 0; i < sX; i++) {
-            for (int j = 0; j < sY; j++) {
-                tiles[i][j] = new Tile(randomTerrain(), new ArrayList<>());
+    private void fillMapField(int sizeX, int sizeY) {
+        tiles = new Tile[sizeX][sizeY];
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                tiles[i][j] = new Tile(rand.nextInt(10));
             }
         }
     }
-    
-    private int randomTerrain(){
-    	return rand.nextInt(10);
-    }
-
-/*
-
-    public Tile getPosition(int x, int y) {
-        if (x < 0 || y < 0 || x > width || y > height) {
-            throw new IndexOutOfBoundsException();
-        } else {
-            return tiles[x][y];
-        }
-    }
-*/
 
     public int getWidth() {
         return width;
@@ -53,6 +37,8 @@ public class GameMap {
         return height;
     }
 
+    // @TODO Implement
+    @SuppressWarnings("unused")
     public boolean isFreePosition(int x, int y) {
         return true;
     }
@@ -67,5 +53,10 @@ public class GameMap {
         } else {
             return tiles[x][y];
         }
+    }
+
+    @Override
+    public String toString() {
+        return "GameMap{" + width + "x" + height +"}";
     }
 }

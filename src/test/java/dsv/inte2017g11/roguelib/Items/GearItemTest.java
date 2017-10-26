@@ -3,7 +3,10 @@ package dsv.inte2017g11.roguelib.Items;
 import org.junit.Test;
 
 import static dsv.inte2017g11.roguelib.Items.Effect.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class GearItemTest {
 
@@ -61,6 +64,7 @@ public class GearItemTest {
         GearItem gi = new GearItem("Helmet", 3, 12, null);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testCreateGearWDescWithoutEffects() {
         GearItem gi = new GearItem("Helmet", 3, 12, null, "bad gear construction");
@@ -111,7 +115,6 @@ public class GearItemTest {
     public void testGearItemInvalidEqualsMethodGearHp(){
         GearItem g = new GearItem("Helmet", 3, 12, MAGIC, "this is described");
         GearItem p = new GearItem("Helmet", 3, 19, MAGIC, "this is described");
-
         assertEquals(false, g.equals(p));
     }
 
@@ -119,7 +122,8 @@ public class GearItemTest {
     public void testGearItemEqualsMethodInvalidClass(){
        GearItem g = new GearItem("Helmet", 3, 15, MAGIC);
         WeaponItem w = new WeaponItem("sword", 3, 15);
-        assertEquals(false, g.equals(w));
+//        assertEquals(false, g.equals(w));
+        assertThat(g, not(equalTo(w)));
     }
 }
 

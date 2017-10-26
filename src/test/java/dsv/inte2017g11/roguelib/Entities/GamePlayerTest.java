@@ -83,7 +83,7 @@ public class GamePlayerTest {
     @Test
     public void getNonExistingItemFromInventory() {
         Item item1 = new GearItem("Plain Helm", 2, 10, Effect.HEALTH);
-        Item item2 = new PotionItem("Felix felicis", 15, Effect.HEALTH);
+//        Item item2 = new PotionItem("Felix felicis", 15, Effect.HEALTH);
         player.addToInventory(item1);
         assertNull(player.getFromInventory("felix felicis"));
     }

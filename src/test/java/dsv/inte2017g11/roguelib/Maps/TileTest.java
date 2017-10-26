@@ -1,41 +1,42 @@
 package dsv.inte2017g11.roguelib.Maps;
 
 import org.junit.Test;
-import java.util.ArrayList;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.*;
 
 public class TileTest {
 
     @Test
     public void tileCreationTest() {
-        Tile p = new Tile(2, new ArrayList<>());
+        Tile p = new Tile(2);
         assertNotNull(p);
     }
     
     @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void invalidTerrainTest() {
-        Tile p = new Tile(-1, new ArrayList<>());
+        Tile p = new Tile(-1);
     }
     
     @Test
     public void getTerrainTest() {
-    	Tile p = new Tile(2, new ArrayList<>());
+    	Tile p = new Tile(2);
     	assertEquals(2, p.getTerrain());
     }
     
     
     @Test
     public void setTerrainTest() {
-    	Tile p = new Tile(2, new ArrayList<>());
+    	Tile p = new Tile(2);
     	p.setTerrain(3);
     	assertEquals(3, p.getTerrain());
     }
     
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void setInvalidTerrainTest() {
-    	Tile p = new Tile(2, new ArrayList<>());
+    	Tile p = new Tile(2);
     	p.setTerrain(-2);
     }
 
@@ -68,37 +69,37 @@ public class TileTest {
 
     @Test
     public void sameHashCodeTest() {
-        Tile p = new Tile(1, new ArrayList<>());
-        Tile q = new Tile(1, new ArrayList<>());
+        Tile p = new Tile(1);
+        Tile q = new Tile(1);
         assertTrue(p.hashCode() == q.hashCode());
     }
 
     @Test
     public void differentHashCodeTest() {
-        Tile p = new Tile(4, new ArrayList<>());
-        Tile q = new Tile(2, new ArrayList<>());
+        Tile p = new Tile(4);
+        Tile q = new Tile(2);
         assertFalse(p.hashCode() == q.hashCode());
     }
 
     @Test
     public void equalTilesTest() {
-        Tile p = new Tile(3, new ArrayList<>());
-        Tile q = new Tile(3, new ArrayList<>());
+        Tile p = new Tile(3);
+        Tile q = new Tile(3);
         assertTrue(p.equals(q));
     }
 
     @Test
     public void nonEqualTilesTest() {
-        Tile p = new Tile(2, new ArrayList<>());
-        Tile q = new Tile(4, new ArrayList<>());
+        Tile p = new Tile(2);
+        Tile q = new Tile(4);
         assertFalse(p.equals(q));
     }
 
     @Test
     public void nonEqualAnotherObjectTest() {
-        Tile p = new Tile(4, new ArrayList<>());
-        String s = "teststring";
-        assertFalse(p.equals(s));
+        Tile p = new Tile(4);
+        String s = "testString";
+        assertThat(p, not(equalTo(s)));
     }
 
 }

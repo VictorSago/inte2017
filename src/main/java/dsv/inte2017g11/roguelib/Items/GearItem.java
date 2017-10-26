@@ -48,12 +48,20 @@ public class GearItem extends Item {
     @Override
     public boolean equals(Object o) {
         if (o instanceof GearItem) {
-            return (((GearItem) o).getName().equals(this.getName()) &&
-                    (((GearItem) o).gearHP == this.gearHP) &&
-                    (((GearItem) o).getEffect() == this.getEffect()) &&
-                    (((GearItem) o).getWeight() == this.getWeight()));
+            GearItem otherGear = (GearItem) o;
+            return (otherGear.getName().equals(this.getName()) &&
+                    otherGear.gearHP == this.gearHP &&
+                    otherGear.getEffect() == this.getEffect() &&
+                    otherGear.getWeight() == this.getWeight());
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getGearHP();
+        result = 31 * result + getEffect().hashCode();
+        return result;
     }
 
 }

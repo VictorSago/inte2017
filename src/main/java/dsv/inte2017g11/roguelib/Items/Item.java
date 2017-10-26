@@ -48,5 +48,5 @@ public abstract class Item {
 
 
     //TODO implement hashCode() method
-    //abstract public int hashCode(){}
+    abstract public int hashCode();
 }

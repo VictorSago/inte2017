@@ -44,9 +44,18 @@ public class PotionItem extends Item {
     @Override
     public boolean equals(Object o) {
         if (o instanceof PotionItem){
-            return (((PotionItem) o).getName().equals(this.getName()) &&
-                    (((PotionItem) o).power == this.power) &&
-                    (((PotionItem) o).effect == this.effect));}
+            PotionItem otherPotion = (PotionItem) o;
+            return (otherPotion.getName().equals(this.getName()) &&
+                    otherPotion.power == this.power &&
+                    otherPotion.effect == this.effect);
+        }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getPower();
+        result = 31 * result + getEffect().hashCode();
+        return result;
     }
 }

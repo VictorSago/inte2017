@@ -20,11 +20,7 @@ public class MapPath {
     }
 
     public boolean appendStep(Directions dir) {
-        if (dir != null) {
-            return pathQueue.offerLast(dir);
-        } else {
-            return false;
-        }
+        return dir != null && pathQueue.offerLast(dir);
     }
 
     public Directions getNextStep() {

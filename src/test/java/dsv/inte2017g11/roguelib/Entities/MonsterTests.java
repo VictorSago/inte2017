@@ -1,10 +1,6 @@
 package dsv.inte2017g11.roguelib.Entities;
-import dsv.inte2017g11.roguelib.Maps.Tile;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -39,15 +35,16 @@ public class MonsterTests {
         assertEquals(1, m.getType());
     }
 
-    @Test
+    /*@Test
     public void attackTest() {
         ArrayList<AbstractEntity> characters = new ArrayList<AbstractEntity>();
-        characters.add(m);characters.add(m2);
+        characters.add(m);
+        characters.add(m2);
         Tile t = new Tile(1, characters);
 
         m.attack(t);
         assertEquals(180, m2.getCurrentHealth());
-    }
+    }*/
 
     @Test
     public void flyTest() {

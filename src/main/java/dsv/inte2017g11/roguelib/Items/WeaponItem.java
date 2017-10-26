@@ -35,12 +35,19 @@ public class WeaponItem extends Item {
     @Override
     public boolean equals(Object o) {
         if (o instanceof WeaponItem) {
-            return (((WeaponItem) o).getName().equals(this.getName()) &&
-                    ((WeaponItem) o).getWeight() == this.getWeight() &&
-                    ((WeaponItem) o).getPower() == this.getPower() &&
-                    ((WeaponItem) o).getDescription().equals(this.getDescription()));
+            WeaponItem otherWeapon = (WeaponItem) o;
+            return (otherWeapon.getName().equals(this.getName()) &&
+                    otherWeapon.getWeight() == this.getWeight() &&
+                    otherWeapon.getPower() == this.getPower() &&
+                    otherWeapon.getDescription().equals(this.getDescription()));
         }
         return false;
     }
 
+    @Override
+    public int hashCode() {
+        int result = getPower();
+        result = 31 * result + getEffect().hashCode();
+        return result;
+    }
 }

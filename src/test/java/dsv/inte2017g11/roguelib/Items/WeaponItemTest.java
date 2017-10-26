@@ -4,7 +4,10 @@ import org.junit.Test;
 
 import static dsv.inte2017g11.roguelib.Items.Effect.DAMAGE;
 import static dsv.inte2017g11.roguelib.Items.Effect.MAGIC;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class WeaponItemTest {
 
@@ -16,11 +19,13 @@ public class WeaponItemTest {
         assertEquals(14, w.getPower());
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testCreateWeaponInvalidPowerValueZero(){
         WeaponItem w = new WeaponItem("Axe",5,0);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testCreateWeaponInvalidPowerValueNegative(){
         WeaponItem w = new WeaponItem("Axe",5,-1);
@@ -33,7 +38,7 @@ public class WeaponItemTest {
     }
 
     @Test
-    public void getWeaponEffect(){
+    public void getWeaponEffectTest(){
         WeaponItem w = new WeaponItem("Axe", 5, 14);
         assertEquals(DAMAGE, w.getEffect());
     }
@@ -61,7 +66,8 @@ public class WeaponItemTest {
     public void testWeaponItemEqualsMethodInvalidClass(){
         WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
         PotionItem p = new PotionItem("Wolfsbane", 33, MAGIC);
-        assertEquals(false, w.equals(p));
+//        assertEquals(false, w.equals(p));
+        assertThat(w, not(equalTo(p)));
     }
 
     @Test

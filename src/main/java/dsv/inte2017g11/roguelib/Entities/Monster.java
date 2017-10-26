@@ -1,7 +1,4 @@
 package dsv.inte2017g11.roguelib.Entities;
-import dsv.inte2017g11.roguelib.Maps.Tile;
-
-
 public class Monster extends AbstractEntity {
 
     private int type;
@@ -19,11 +16,11 @@ public class Monster extends AbstractEntity {
     }
 
 
-    public void attack(Tile t){
+    /*public void attack(Tile t){
         for(AbstractEntity c : t.getCharacters()){
             if (!c.equals(this)){
                 c.damage(attackValue);
             }
         }
-    }
+    }*/
 }

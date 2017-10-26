@@ -2,6 +2,7 @@ package dsv.inte2017g11.roguelib.Entities;
 
 import dsv.inte2017g11.roguelib.Maps.Directions;
 import dsv.inte2017g11.roguelib.Maps.GameMap;
+import dsv.inte2017g11.roguelib.Maps.MapLocation;
 import dsv.inte2017g11.roguelib.Maps.MapPath;
 
 /**
@@ -19,8 +20,10 @@ abstract public class AbstractEntity {
 
     private int speed, stepsRemaining;
 
-    private GameMap map;
-    private int posX, posY;
+//    private GameMap map;
+//    private int posX, posY;
+
+    private MapLocation location;
 
 
     public AbstractEntity(String name, int health, int speed) {
@@ -96,20 +99,42 @@ abstract public class AbstractEntity {
         stepsRemaining = speed;
     }
 
-    public GameMap getMap() {
-        return map;
+    public MapLocation getMapLocation() {
+        return location;
     }
 
-    /*public boolean setPosition(GameMap map, int x, int y) {
-        if (map != null && map.isValidPosition(x, y) && map.isFreePosition(x, y)) {
-            this.map = map;
-            this.posX = x;
-            this.posY = y;
-            return true;
+    public void setMapLocation(GameMap map, int x, int y) {
+        if (location == null) {
+            location = new MapLocation(map, x, y);
         } else {
-            return false;
+            location.setMapXYPos(map, x, y);
         }
-    }*/
+    }
+
+    public void setLocation(int x, int y) {
+        if (location == null) {
+            throw new NullPointerException("Must have a map to set a location.");
+        } else {
+            location.setXYPos(x, y);
+        }
+    }
+
+    public GameMap getMap() {
+        if (location != null) {
+            return location.getMap();
+        } else {
+            return null;
+        }
+    }
+
+    public int getPosX() {
+        return location.getX();
+    }
+
+    public int getPosY() {
+        return location.getY();
+    }
+/*
 
     public boolean setPosition(GameMap map, int x, int y) {
         if (isValidPosition(map, x, y)) {
@@ -125,114 +150,119 @@ abstract public class AbstractEntity {
     public boolean setPosition(int x, int y) {
         return setPosition(this.map, x, y);
     }
+*/
 
-    public int getPosX() {
-        return posX;
-    }
-
-    public int getPosY() {
-        return posY;
-    }
-
-    
-    /**
-     * Return the position as a single number, counting from 
-     * the upper left corner down to the character's position, 
-     * going from left to right and from up to down.
-     * @return The number of steps from the upper left corner 
-     * of the map to the current position on the map. <br>
-     * If there is no map present then <code>-1</code> is returned.
-     */
-    /*public int getPosition() {
-        if (map != null) {
-            return posY * map.getWidth() + posX;
+    /*public boolean setPosition(GameMap map, int x, int y) {
+        if (map != null && map.isValidPosition(x, y) && map.isFreePosition(x, y)) {
+            this.map = map;
+            this.posX = x;
+            this.posY = y;
+            return true;
         } else {
-            return -1;
+            return false;
         }
     }*/
 
-    /*protected void moveRight() {
-        if (isValidPosition(posX + 1, posY)) {
-            posX++;
-            stepsRemaining--;
+    protected boolean moveStep(Directions dir) {
+        if (stepsRemaining > 0) {
+            switch (dir) {
+                case RIGHT:
+                    try {
+                        location.addXY(1, 0);
+                        return true;
+                    } catch (Exception e) {
+                        return false;
+                    }
+                case LEFT:
+                    try {
+                        location.addXY(-1, 0);
+                        return true;
+                    } catch (Exception e) {
+                        return false;
+                    }
+                case DOWN:
+                    try {
+                        location.addXY(0, 1);
+                        return true;
+                    } catch (Exception e) {
+                        return false;
+                    }
+                case UP:
+                    try {
+                        location.addXY(0, -1);
+                        return true;
+                    } catch (Exception e) {
+                        return false;
+                    }
+            }
+            return false;
         }
+        return false;
     }
 
-    protected void moveLeft() {
-        if (isValidPosition(posX - 1, posY)) {
-            posX--;
-            stepsRemaining--;
-        }
-    }
 
-    protected void moveDown() {
-        if (isValidPosition(posX, posY + 1)) {
-            posY++;
-            stepsRemaining--;
-        }
-    }
-
-    protected void moveUp() {
-        if (isValidPosition(posX, posY - 1)) {
-            posY--;
-            stepsRemaining--;
-        }
-    }*/
-
+/*
     protected void moveStep(Directions dir) {
         if (stepsRemaining > 0) {
             switch (dir) {
                 case RIGHT:
                     if (isValidPosition(posX + 1, posY)) {
-                        posX++;
+                        location.displaceOnMap(1, 0);
                         stepsRemaining--;
                     }
                     break;
                 case LEFT:
                     if (isValidPosition(posX - 1, posY)) {
-                        posX--;
+                        location.displaceOnMap(-1, 0);
                         stepsRemaining--;
                     }
                     break;
                 case DOWN:
                     if (isValidPosition(posX, posY + 1)) {
-                        posY++;
+                        location.displaceOnMap(0, 1);
                         stepsRemaining--;
                     }
                     break;
                 case UP:
                     if (isValidPosition(posX, posY - 1)) {
-                        posY--;
+                        location.displaceOnMap(0, -1);
                         stepsRemaining--;
                     }
                     break;
             }
         }
     }
+*/
 
     public void move(Directions... dirs) {
-        if (map == null) {
+        if (location == null) {
             return;
         }
         for (Directions d : dirs) {
-            moveStep(d);
+            if (moveStep(d)) {
+                stepsRemaining--;
+            }
         }
     }
 
     public MapPath move(MapPath path) {
-        if (map == null) {
+        if (location == null) {
             return path;
         }
         while (!path.isEmpty()) {
             Directions nextStep = path.getNextStep();
-            moveStep(nextStep);
+            if (moveStep(nextStep)) {
+                stepsRemaining--;
             }
+        }
         return path;
     }
+/*
 
     protected boolean isValidPosition(int x, int y) {
         return isValidPosition(map, x, y);
     }
+*/
 
     /**
      *  Test whether the parameters point to a valid position
@@ -248,11 +278,7 @@ abstract public class AbstractEntity {
 
      */
     protected boolean isValidPosition(GameMap map, int x, int y) {
-        if (map != null) {
-            return (map.getTile(x, y) != null && map.isValidPosition(x, y) && map.isFreePosition(x, y));
-        } else {
-            return false;
-        }
+        return map != null && (map.getTile(x, y) != null && map.isValidPosition(x, y) && map.isFreePosition(x, y));
     }
 
 }

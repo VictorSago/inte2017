@@ -1,14 +1,18 @@
 package dsv.inte2017g11.roguelib.Entities;
 
 import dsv.inte2017g11.roguelib.Maps.GameMap;
+import dsv.inte2017g11.roguelib.Maps.MapLocation;
 import dsv.inte2017g11.roguelib.Maps.MapPath;
 import org.junit.Before;
 import org.junit.Test;
 
 import static dsv.inte2017g11.roguelib.Maps.Directions.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
-public class CharacterMapInteractionTest {
+public class EntityOnMapTest {
 
     private final int DEFAULT_TEST_HEALTH1 = 100;
     private final int DEFAULT_TEST_SPEED1 = 10;
@@ -31,39 +35,64 @@ public class CharacterMapInteractionTest {
     }
 
     @Test
-    public void setPositionTest() {
+    public void setMapLocationTest() {
         int initialX = 10;
         int initialY = 5;
-        player.setPosition(map, initialX, initialY);
+        player.setMapLocation(map, initialX, initialY);
         assertEquals(initialX, player.getPosX());
         assertEquals(initialY, player.getPosY());
-//        assertEquals(initialY * map.getWidth() + initialX, player.getPosition());
+    }
+
+    @Test
+    public void setLocationWithMapTest() {
+        int initialX = 10;
+        int initialY = 5;
+        int newX = 12;
+        int newY = 9;
+        player.setMapLocation(map, initialX, initialY);
+        player.setLocation(newX, newY);
+        assertThat(player.getPosX(), is(newX));
+        assertThat(player.getPosY(), is(newY));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void setLocationWithoutMapTest() {
+        int initialX = 10;
+        int initialY = 5;
+        player.setLocation(initialX, initialY);
+    }
+
+    @Test
+    public void getMapLocationTest() {
+        int initialX = 10;
+        int initialY = 5;
+        player.setMapLocation(map, initialX, initialY);
+        assertThat(player.getMapLocation(), equalTo(new MapLocation(map, initialX, initialY)));
+        assertEquals(initialX, player.getPosX());
+        assertEquals(initialY, player.getPosY());
     }
 
     @Test
     public void setFirstPositionTest() {
-        kilgarrah.setPosition(map, 0, 0);
+        kilgarrah.setMapLocation(map, 0, 0);
         assertEquals(0, kilgarrah.getPosX());
         assertEquals(0, kilgarrah.getPosY());
-//        assertEquals(0, player.getPosition());
     }
 
     @Test
     public void setLastPositionTest() {
         int initialX = SIZE_X - 1;
         int initialY = SIZE_Y - 1;
-//        int expectedPosition = SIZE_X * SIZE_Y - 1;
-        fluff.setPosition(map, initialX, initialY);
+        fluff.setMapLocation(map, initialX, initialY);
         assertEquals(initialX, fluff.getPosX());
         assertEquals(initialY, fluff.getPosY());
-//        assertEquals(expectedPosition, player.getPosition());
     }
 
     @Test
     public void validMoveRightTest() {
         int initialX = SIZE_X / 2;
         int initialY = SIZE_Y / 3;
-        player.setPosition(map, initialX, initialY);
+        player.setMapLocation(map, initialX, initialY);
         player.move(RIGHT);
         assertEquals(initialX + 1, player.getPosX());
     }
@@ -72,7 +101,7 @@ public class CharacterMapInteractionTest {
     public void validMoveLeftTest() {
         int initialX = SIZE_X / 2;
         int initialY = SIZE_Y / 3;
-        kilgarrah.setPosition(map, initialX, initialY);
+        kilgarrah.setMapLocation(map, initialX, initialY);
         kilgarrah.move(LEFT);
         assertEquals(initialX - 1, kilgarrah.getPosX());
     }
@@ -81,7 +110,7 @@ public class CharacterMapInteractionTest {
     public void validMoveDownTest() {
         int initialX = SIZE_X / 2;
         int initialY = SIZE_Y / 3;
-        fluff.setPosition(map, initialX, initialY);
+        fluff.setMapLocation(map, initialX, initialY);
         fluff.move(DOWN);
         assertEquals(initialY + 1, fluff.getPosY());
     }
@@ -90,7 +119,7 @@ public class CharacterMapInteractionTest {
     public void validMoveUpTest() {
         int initialX = SIZE_X / 2;
         int initialY = SIZE_Y / 3;
-        player.setPosition(map, initialX, initialY);
+        player.setMapLocation(map, initialX, initialY);
         player.move(UP);
         assertEquals(initialY - 1, player.getPosY());
     }
@@ -100,7 +129,7 @@ public class CharacterMapInteractionTest {
         int initialX = SIZE_X / 2;
         int initialY = SIZE_Y / 3;
         int expectedStepsLeft = kilgarrah.getStepsRemaining();
-        kilgarrah.setPosition(map, initialX, initialY);
+        kilgarrah.setMapLocation(map, initialX, initialY);
         assertEquals(DEFAULT_TEST_SPEED2, kilgarrah.getStepsRemaining());
         kilgarrah.move(RIGHT);
         expectedStepsLeft--;
@@ -117,7 +146,7 @@ public class CharacterMapInteractionTest {
         int initialX = SIZE_X / 2;
         int initialY = SIZE_Y / 3;
         int expectedStepsLeft = fluff.getStepsRemaining();
-        fluff.setPosition(map, initialX, initialY);
+        fluff.setMapLocation(map, initialX, initialY);
         assertEquals(2 * DEFAULT_TEST_SPEED1, fluff.getStepsRemaining());
         fluff.move(LEFT);
         fluff.move(UP);
@@ -129,9 +158,9 @@ public class CharacterMapInteractionTest {
     public void invalidMoveRightTest() {
         int initialX = SIZE_X - 1;
         int initialY = SIZE_Y / 3;
-        player.setPosition(map, initialX, initialY);
+        player.setMapLocation(map, initialX, initialY);  // 19, 5
         player.move(RIGHT);
-        assertEquals(map.getWidth() - 1, player.getPosX());
+        assertEquals(map.getWidth() - 1, player.getPosX()); // expected: 19
         assertEquals(DEFAULT_TEST_SPEED1, player.getStepsRemaining());
     }
 
@@ -139,7 +168,7 @@ public class CharacterMapInteractionTest {
     public void invalidMoveLeftTest() {
         int initialX = 0;
         int initialY = SIZE_Y / 3;
-        kilgarrah.setPosition(map, initialX, initialY);
+        kilgarrah.setMapLocation(map, initialX, initialY);
         kilgarrah.move(LEFT);
         assertEquals(0, kilgarrah.getPosX());
         assertEquals(DEFAULT_TEST_SPEED2, kilgarrah.getStepsRemaining());
@@ -149,7 +178,7 @@ public class CharacterMapInteractionTest {
     public void invalidMoveDownTest() {
         int initialX = SIZE_X / 2;
         int initialY = SIZE_Y - 1;
-        fluff.setPosition(map, initialX, initialY);
+        fluff.setMapLocation(map, initialX, initialY);
         fluff.move(DOWN);
         assertEquals(map.getHeight() - 1, fluff.getPosY());
         assertEquals(2 * DEFAULT_TEST_SPEED1, fluff.getStepsRemaining());
@@ -159,7 +188,7 @@ public class CharacterMapInteractionTest {
     public void invalidMoveUpTest() {
         int initialX = SIZE_X / 2;
         int initialY = 0;
-        player.setPosition(map, initialX, initialY);
+        player.setMapLocation(map, initialX, initialY);
         player.move(UP);
         assertEquals(0, player.getPosY());
         assertEquals(DEFAULT_TEST_SPEED1, player.getStepsRemaining());
@@ -169,7 +198,7 @@ public class CharacterMapInteractionTest {
     public void simpleMoveSequenceTest() {
         int initialX = SIZE_X / 2;
         int initialY = SIZE_Y / 3;
-        player.setPosition(map, initialX, initialY);
+        player.setMapLocation(map, initialX, initialY);
         player.move(DOWN, DOWN, RIGHT);
         int expectedX = initialX + 1;
         int expectedY = initialY + 2;
@@ -183,7 +212,7 @@ public class CharacterMapInteractionTest {
     public void moveTest() {
         int initialX = SIZE_X / 2;
         int initialY = SIZE_Y / 3;
-        player.setPosition(map, initialX, initialY);
+        player.setMapLocation(map, initialX, initialY);
         MapPath path = new MapPath();
         path.appendStep(DOWN);
         path.appendStep(RIGHT);
@@ -204,7 +233,7 @@ public class CharacterMapInteractionTest {
     public void moveLongerThanMaxStepsTest() {
         int initialX = SIZE_X / 2;
         int initialY = SIZE_Y / 3;
-        player.setPosition(map, initialX, initialY);
+        player.setMapLocation(map, initialX, initialY);
         player.move(DOWN, DOWN, RIGHT, RIGHT, DOWN, RIGHT, UP, UP, UP, UP, LEFT, LEFT);
         int expectedX = initialX + 3;
         int expectedY = initialY + 3 - 4;
@@ -219,7 +248,7 @@ public class CharacterMapInteractionTest {
     	int initialX = SIZE_X / 2;
         int initialY = SIZE_Y / 3;
         int testSpeed = 5;
-        player.setPosition(map, initialX, initialY);
+        player.setMapLocation(map, initialX, initialY);
         player.move(DOWN, DOWN, RIGHT, RIGHT, DOWN, RIGHT, UP, UP);
         player.setSpeed(testSpeed);
         assertEquals(testSpeed, player.getSpeed());

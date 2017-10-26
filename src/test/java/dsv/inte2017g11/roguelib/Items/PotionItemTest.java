@@ -3,7 +3,10 @@ package dsv.inte2017g11.roguelib.Items;
 import org.junit.Test;
 
 import static dsv.inte2017g11.roguelib.Items.Effect.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class PotionItemTest {
 
@@ -67,6 +70,7 @@ public class PotionItemTest {
         PotionItem p = new PotionItem("poison", 10, null);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidDescribedPotionWithoutEffect() {
         PotionItem p = new PotionItem("poison", 10, null, "bad potion construction");
@@ -104,7 +108,8 @@ public class PotionItemTest {
     public void testPotionItemEqualsMethodInvalidClass(){
         PotionItem p = new PotionItem("felix felicis", 10, MAGIC, "bad potion construction");
         WeaponItem w = new WeaponItem("sword", 3, 15);
-        assertEquals(false, p.equals(w));
+//        assertEquals(false, p.equals(w));
+        assertThat(p, not(equalTo(w)));
     }
 
 }
