@@ -1,6 +1,6 @@
 package dsv.inte2017g11.roguelib.Entities;
 
-import dsv.inte2017g11.roguelib.Maps.Directions;
+import dsv.inte2017g11.roguelib.Maps.Direction;
 import dsv.inte2017g11.roguelib.Maps.GameMap;
 import dsv.inte2017g11.roguelib.Maps.MapLocation;
 import dsv.inte2017g11.roguelib.Maps.MapPath;
@@ -20,11 +20,7 @@ abstract public class AbstractEntity {
 
     private int speed, stepsRemaining;
 
-//    private GameMap map;
-//    private int posX, posY;
-
     private MapLocation location;
-
 
     public AbstractEntity(String name, int health, int speed) {
         this.name = name;
@@ -134,111 +130,26 @@ abstract public class AbstractEntity {
     public int getPosY() {
         return location.getY();
     }
-/*
 
-    public boolean setPosition(GameMap map, int x, int y) {
-        if (isValidPosition(map, x, y)) {
-            this.map = map;
-            this.posX = x;
-            this.posY = y;
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-    public boolean setPosition(int x, int y) {
-        return setPosition(this.map, x, y);
-    }
-*/
-
-    /*public boolean setPosition(GameMap map, int x, int y) {
-        if (map != null && map.isValidPosition(x, y) && map.isFreePosition(x, y)) {
-            this.map = map;
-            this.posX = x;
-            this.posY = y;
-            return true;
-        } else {
-            return false;
-        }
-    }*/
-
-    protected boolean moveStep(Directions dir) {
+    protected boolean moveStep(Direction dir) {
         if (stepsRemaining > 0) {
-            switch (dir) {
-                case RIGHT:
-                    try {
-                        location.addXY(1, 0);
-                        return true;
-                    } catch (Exception e) {
-                        return false;
-                    }
-                case LEFT:
-                    try {
-                        location.addXY(-1, 0);
-                        return true;
-                    } catch (Exception e) {
-                        return false;
-                    }
-                case DOWN:
-                    try {
-                        location.addXY(0, 1);
-                        return true;
-                    } catch (Exception e) {
-                        return false;
-                    }
-                case UP:
-                    try {
-                        location.addXY(0, -1);
-                        return true;
-                    } catch (Exception e) {
-                        return false;
-                    }
+            try {
+                location.addXY(dir.deltaX(), dir.deltaY());
+                return true;
+            } catch (IndexOutOfBoundsException e) {
+                return false;
             }
-            return false;
         }
         return false;
     }
 
 
-/*
-    protected void moveStep(Directions dir) {
-        if (stepsRemaining > 0) {
-            switch (dir) {
-                case RIGHT:
-                    if (isValidPosition(posX + 1, posY)) {
-                        location.displaceOnMap(1, 0);
-                        stepsRemaining--;
-                    }
-                    break;
-                case LEFT:
-                    if (isValidPosition(posX - 1, posY)) {
-                        location.displaceOnMap(-1, 0);
-                        stepsRemaining--;
-                    }
-                    break;
-                case DOWN:
-                    if (isValidPosition(posX, posY + 1)) {
-                        location.displaceOnMap(0, 1);
-                        stepsRemaining--;
-                    }
-                    break;
-                case UP:
-                    if (isValidPosition(posX, posY - 1)) {
-                        location.displaceOnMap(0, -1);
-                        stepsRemaining--;
-                    }
-                    break;
-            }
-        }
-    }
-*/
-
-    public void move(Directions... dirs) {
+    public void move(Direction... dirs) {
         if (location == null) {
             return;
         }
-        for (Directions d : dirs) {
+        for (Direction d : dirs) {
             if (moveStep(d)) {
                 stepsRemaining--;
             }
@@ -250,7 +161,7 @@ abstract public class AbstractEntity {
             return path;
         }
         while (!path.isEmpty()) {
-            Directions nextStep = path.getNextStep();
+            Direction nextStep = path.getNextStep();
             if (moveStep(nextStep)) {
                 stepsRemaining--;
             }

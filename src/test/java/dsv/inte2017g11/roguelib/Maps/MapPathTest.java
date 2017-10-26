@@ -3,7 +3,7 @@ package dsv.inte2017g11.roguelib.Maps;
 import org.junit.Before;
 import org.junit.Test;
 
-import static dsv.inte2017g11.roguelib.Maps.Directions.*;
+import static dsv.inte2017g11.roguelib.Maps.Direction.*;
 
 import static org.junit.Assert.*;
 
@@ -48,10 +48,10 @@ public class MapPathTest {
 
     @Test
     public void getNextStepTest() throws Exception {
-        Directions first = DOWN;
-        Directions second = RIGHT;
-        Directions third = UP;
-        Directions fourth = LEFT;
+        Direction first = DOWN;
+        Direction second = RIGHT;
+        Direction third = UP;
+        Direction fourth = LEFT;
         path.appendStep(first);
         path.appendStep(second);
         path.appendStep(third);
