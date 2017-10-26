@@ -1,9 +1,6 @@
 package dsv.inte2017g11.roguelib.Entities;
 
-import dsv.inte2017g11.roguelib.Maps.Direction;
-import dsv.inte2017g11.roguelib.Maps.GameMap;
-import dsv.inte2017g11.roguelib.Maps.MapLocation;
-import dsv.inte2017g11.roguelib.Maps.MapPath;
+import dsv.inte2017g11.roguelib.Maps.*;
 
 /**
  * @author zeron
@@ -186,7 +183,6 @@ abstract public class AbstractEntity {
      *  @param y y-coordinate of the new position
      *  @return <code>true</code> if and only if the map exists and the
      *  new position is a valid one, <code>false</code> in all other cases
-
      */
     protected boolean isValidPosition(GameMap map, int x, int y) {
         return map != null && (map.getTile(x, y) != null && map.isValidPosition(x, y) && map.isFreePosition(x, y));

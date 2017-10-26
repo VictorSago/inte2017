@@ -1,7 +1,6 @@
 package dsv.inte2017g11.roguelib.Entities;
 
-import dsv.inte2017g11.roguelib.Items.GearItem;
-import dsv.inte2017g11.roguelib.Items.Item;
+import dsv.inte2017g11.roguelib.Items.*;
 
 import java.util.ArrayList;
 import java.util.Collection;

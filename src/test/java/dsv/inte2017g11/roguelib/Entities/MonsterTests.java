@@ -1,4 +1,5 @@
 package dsv.inte2017g11.roguelib.Entities;
+
 import org.junit.Before;
 import org.junit.Test;
 

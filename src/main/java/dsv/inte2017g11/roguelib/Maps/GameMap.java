@@ -2,7 +2,6 @@ package dsv.inte2017g11.roguelib.Maps;
 
 import java.util.Random;
 
-
 public class GameMap {
 
     private final int width;

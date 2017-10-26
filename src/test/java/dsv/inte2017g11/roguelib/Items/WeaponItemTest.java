@@ -2,17 +2,15 @@ package dsv.inte2017g11.roguelib.Items;
 
 import org.junit.Test;
 
-import static dsv.inte2017g11.roguelib.Items.Effect.DAMAGE;
-import static dsv.inte2017g11.roguelib.Items.Effect.MAGIC;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static dsv.inte2017g11.roguelib.Items.Effect.*;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class WeaponItemTest {
 
     @Test
-    public void testCreateWeaponAndCheckAttributes(){
+    public void createWeaponAndCheckAttributesTest(){
         WeaponItem w = new WeaponItem("Axe", 5, 14);
         assertEquals("Axe", w.getName());
         assertEquals(5, w.getWeight());
@@ -21,49 +19,49 @@ public class WeaponItemTest {
 
     @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateWeaponInvalidPowerValueZero(){
+    public void createWeaponInvalidPowerValueZeroTest(){
         WeaponItem w = new WeaponItem("Axe",5,0);
     }
 
     @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateWeaponInvalidPowerValueNegative(){
+    public void createWeaponInvalidPowerValueNegativeTest(){
         WeaponItem w = new WeaponItem("Axe",5,-1);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateWeaponWDescInvalidPowerValue(){
+    public void createWeaponWDescInvalidPowerValueTest() {
         WeaponItem w = new WeaponItem("Sword", 5, -1, "bad weapon construction");
         assertEquals("no description available", w.getDescription());
     }
 
     @Test
-    public void getWeaponEffectTest(){
+    public void getWeaponEffectTest() {
         WeaponItem w = new WeaponItem("Axe", 5, 14);
         assertEquals(DAMAGE, w.getEffect());
     }
 
     @Test
-    public void testCreateWeaponItemWithDescription(){
+    public void createWeaponItemWithDescriptionTest() {
         WeaponItem w = new WeaponItem("Sword", 5, 25, "Magic silver sword");
         assertEquals("Magic silver sword", w.getDescription());
     }
 
     @Test
-    public void testCreateWeaponItemWithoutDescription(){
+    public void createWeaponItemWithoutDescriptionTest() {
         WeaponItem w = new WeaponItem("Sword", 5, 25, null);
         assertEquals("no description available", w.getDescription());
     }
 
     @Test
-    public void testWeaponItemEqualsMethodValid(){
+    public void weaponItemEqualsMethodValidTest() {
         WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
         WeaponItem v = w;
         assertEquals(true, w.equals(v));
     }
 
     @Test
-    public void testWeaponItemEqualsMethodInvalidClass(){
+    public void weaponItemEqualsMethodInvalidClassTest() {
         WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
         PotionItem p = new PotionItem("Wolfsbane", 33, MAGIC);
 //        assertEquals(false, w.equals(p));
@@ -71,7 +69,7 @@ public class WeaponItemTest {
     }
 
     @Test
-    public void testWeaponItemEqualsMethodInvalidName(){
+    public void weaponItemEqualsMethodInvalidNameTest() {
         WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
         WeaponItem v = new WeaponItem("SilverSword", 5, 25, "shiny!");
         assertEquals(false, w.equals(v));
@@ -79,14 +77,14 @@ public class WeaponItemTest {
 
 
     @Test
-    public void testWeaponItemEqualsMethodInvalidWeigth(){
+    public void weaponItemEqualsMethodInvalidWeightTest() {
         WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
         WeaponItem v = new WeaponItem("Sword", 4, 25, "shiny!");
         assertEquals(false, w.equals(v));
     }
 
     @Test
-    public void testWeaponItemEqualsMethodInvalidPower(){
+    public void weaponItemEqualsMethodInvalidPowerTest() {
         WeaponItem w = new WeaponItem("Sword", 5, 25, "shiny!");
         WeaponItem v = new WeaponItem("Sword", 5, 15, "shiny!");
         assertEquals(false, w.equals(v));

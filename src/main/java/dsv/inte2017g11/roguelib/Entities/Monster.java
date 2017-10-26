@@ -1,4 +1,5 @@
 package dsv.inte2017g11.roguelib.Entities;
+
 public class Monster extends AbstractEntity {
 
     private int type;

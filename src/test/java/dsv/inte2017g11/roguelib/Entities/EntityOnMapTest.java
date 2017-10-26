@@ -1,16 +1,14 @@
 package dsv.inte2017g11.roguelib.Entities;
 
-import dsv.inte2017g11.roguelib.Maps.GameMap;
-import dsv.inte2017g11.roguelib.Maps.MapLocation;
-import dsv.inte2017g11.roguelib.Maps.MapPath;
+import dsv.inte2017g11.roguelib.Maps.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import static dsv.inte2017g11.roguelib.Maps.Direction.*;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class EntityOnMapTest {
 

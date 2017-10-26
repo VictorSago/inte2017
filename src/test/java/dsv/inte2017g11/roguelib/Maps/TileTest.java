@@ -2,8 +2,7 @@ package dsv.inte2017g11.roguelib.Maps;
 
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 public class TileTest {
