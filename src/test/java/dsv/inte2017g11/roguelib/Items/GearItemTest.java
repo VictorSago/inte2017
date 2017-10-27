@@ -66,17 +66,6 @@ public class GearItemTest {
         GearItem gi = new GearItem("Helmet", 3, 12, null, "bad gear construction");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateGearWithoutName() {
-        GearItem gi = new GearItem("", 3, 12, HEALTH);
-    }
-
-    @Test
-    public void testCreateGearWithoutWeight() {
-        GearItem gi = new GearItem("Helmet", -3, 12, HEALTH);
-        assertEquals(0,gi.getWeight());
-    }
-
 
     @Test
     public void testCreateWithoutDescription() {
