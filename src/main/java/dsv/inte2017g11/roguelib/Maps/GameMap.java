@@ -31,7 +31,7 @@ public class GameMap {
         tiles = new Tile[sX][sY];
         for (int i = 0; i < sX; i++) {
             for (int j = 0; j < sY; j++) {
-                tiles[i][j] = new Tile(randomTerrain(), new ArrayList<>());
+                tiles[i][j] = new Tile(new ArrayList<>());
             }
         }
         
@@ -60,9 +60,9 @@ public class GameMap {
         
     }
     
-    private int randomTerrain(){
+    /*private int randomTerrain(){
     	return rand.nextInt(10);
-    }
+    }*/
 
 /*
 

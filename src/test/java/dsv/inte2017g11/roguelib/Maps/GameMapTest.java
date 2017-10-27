@@ -52,7 +52,7 @@ public class GameMapTest {
        assertNotNull(m.getTile(SIZE_X-1, SIZE_Y-1));
    }
    
-   @Test
+  /* @Test
    public void terrainDiversityTest(){
 	   int x = 100;
 	   int y = 100;
@@ -71,7 +71,7 @@ public class GameMapTest {
                fail();
            }
        }
-   }
+   }*/
 
     /*@Test(expected = IndexOutOfBoundsException.class)
     public void getPositionOverXIndexTest(){
@@ -103,4 +103,35 @@ public class GameMapTest {
         GameMap m = new GameMap(SIZE_X, SIZE_Y);
         assertNull(m.getTile(SIZE_X/2,-1));
     }
+    @Test
+    public void isValidPositionTest(){
+    	GameMap gm = new GameMap(SIZE_X,SIZE_Y);
+    	assertTrue(gm.isValidPosition(12, 11));
+    }
+    @Test
+    public void isValidPositionTest2(){
+    	GameMap gm = new GameMap(SIZE_X,SIZE_Y);
+    	assertFalse(gm.isValidPosition(22, 11));
+    }
+    @Test
+    public void isValidPositionTest3(){
+    	GameMap gm = new GameMap(SIZE_X,SIZE_Y);
+    	assertFalse(gm.isValidPosition(11, 22));
+    }
+    @Test
+    public void isValidPositionTest4(){
+    	GameMap gm = new GameMap(SIZE_X,SIZE_Y);
+    	assertFalse(gm.isValidPosition(11, -2));
+    }
+    @Test
+    public void isValidPositionTest5(){
+    	GameMap gm = new GameMap(SIZE_X,SIZE_Y);
+    	assertFalse(gm.isValidPosition(-1, 4));
+    }
+    @Test
+    public void isFreePositionTest(){
+    	GameMap gm = new GameMap(SIZE_X,SIZE_Y);
+    	gm.isFreePosition(10, 15);
+    }
+    
 }

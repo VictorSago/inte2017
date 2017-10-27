@@ -133,7 +133,7 @@ public class GamePlayer extends AbstractCharacter {
 				break;
     	case 7:	
 				if(tile.getCharacter() != null){
-					boolean success = Combat.fight(this,tile.getCharacter());
+					boolean success = Combat.fight(this,tile.getCharacter(),1000);
 					if(success){
 						tile.removeCharacter();
 						System.out.println(super.getName()+" wins");

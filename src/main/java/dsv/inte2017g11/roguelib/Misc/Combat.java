@@ -4,7 +4,7 @@ import dsv.inte2017g11.roguelib.Characters.*;
 
 public class Combat {
 	
-	public static boolean fight(AbstractCharacter a1,AbstractCharacter a2){
+	public static boolean fight(AbstractCharacter a1,AbstractCharacter a2,int sleep){
 		AbstractCharacter first;
 		AbstractCharacter second;
 		if(a1.getSpeed() >= a2.getSpeed()){
@@ -27,7 +27,7 @@ public class Combat {
 				System.out.println(second.getName()+ " hits "+first.getName()+" for "+dmg+" damage");
 			}turn = !turn;
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(sleep);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
