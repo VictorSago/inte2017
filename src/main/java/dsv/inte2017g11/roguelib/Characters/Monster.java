@@ -13,12 +13,13 @@ public class Monster extends AbstractCharacter{
 
     }
 
-    public void attack(Tile t){
-        for(AbstractCharacter c : t.getCharacters()){
-            if (!c.equals(this)){
+    public void attack(Tile t) {
+        for (AbstractCharacter c : t.getCharacters()) {
+            if (!c.equals(this)) {
                 c.hurtCharacter(attackValue);
             }
         }
+    }
     public void attack(Monster m){
         m.hurtCharacter(attackValue);
     }

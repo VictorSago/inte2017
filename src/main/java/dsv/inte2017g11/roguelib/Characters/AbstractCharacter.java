@@ -263,9 +263,5 @@ abstract public class AbstractCharacter implements CombatSystem{
     public void setMaxHealth(int newHealth){
         this.maxHealth = newHealth;
     }
-
-    public void setAttackValue(int newAttack){
-        this.attackValue = newAttack;
-    }
 }
 

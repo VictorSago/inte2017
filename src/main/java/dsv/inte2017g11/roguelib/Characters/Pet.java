@@ -18,7 +18,6 @@ public class Pet extends AbstractCharacter implements CombatSystem{
     public void levelUp() {
         level+=1;
         setMaxHealth(getMaxHealth()+10);
-        setAttackValue(getAttackValue()+5);
     }
 
     public boolean isAvailable() {
