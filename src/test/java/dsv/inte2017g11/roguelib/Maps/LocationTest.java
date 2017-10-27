@@ -31,7 +31,7 @@ public class LocationTest {
     public void addXYTest() {
         int newX = 25;
         int newY = 108;
-        location.addXY(newX, newY);
+        location.displace(newX, newY);
         assertThat(location.getX(), is(POS_X + newX));
         assertThat(location.getY(), is(POS_Y + newY));
     }
@@ -40,7 +40,7 @@ public class LocationTest {
     public void displaceTest() {
         int deltaX = 10;
         int deltaY = 12;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -49,7 +49,7 @@ public class LocationTest {
     public void displaceNegativeXTest() {
         int deltaX = -10;
         int deltaY = 12;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -58,7 +58,7 @@ public class LocationTest {
     public void displaceNegativeYTest() {
         int deltaX = 10;
         int deltaY = -12;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -67,7 +67,7 @@ public class LocationTest {
     public void displaceNegativeXYTest() {
         int deltaX = -10;
         int deltaY = -12;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -76,7 +76,7 @@ public class LocationTest {
     public void displaceZeroXTest() {
         int deltaX = 0;
         int deltaY = 12;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -85,7 +85,7 @@ public class LocationTest {
     public void displaceZeroYTest() {
         int deltaX = 10;
         int deltaY = 0;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(POS_Y));
     }
@@ -94,7 +94,7 @@ public class LocationTest {
     public void displaceZeroTest() {
         int deltaX = 0;
         int deltaY = 0;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X));
         assertThat(newLoc.getY(), is(POS_Y));
     }

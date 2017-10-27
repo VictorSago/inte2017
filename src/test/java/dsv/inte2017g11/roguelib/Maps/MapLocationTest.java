@@ -126,7 +126,7 @@ public class MapLocationTest {
     public void addXYTest() {
         int x = 25;
         int y = 12;
-        location.addXY(x, y);
+        location.displace(x, y);
         assertThat(location.getX(), is(POS_X + x));
         assertThat(location.getY(), is(POS_Y + y));
     }
@@ -135,7 +135,7 @@ public class MapLocationTest {
     public void addNegativeXTest() {
         int x = -25;
         int y = 12;
-        location.addXY(x, y);
+        location.displace(x, y);
         assertThat(location.getX(), is(POS_X + x));
         assertThat(location.getY(), is(POS_Y + y));
     }
@@ -144,7 +144,7 @@ public class MapLocationTest {
     public void addNegativeYTest() {
         int x = 25;
         int y = -12;
-        location.addXY(x, y);
+        location.displace(x, y);
         assertThat(location.getX(), is(POS_X + x));
         assertThat(location.getY(), is(POS_Y + y));
     }
@@ -153,7 +153,7 @@ public class MapLocationTest {
     public void addNegativeXYTest() {
         int x = -25;
         int y = -12;
-        location.addXY(x, y);
+        location.displace(x, y);
         assertThat(location.getX(), is(POS_X + x));
         assertThat(location.getY(), is(POS_Y + y));
     }
@@ -162,7 +162,7 @@ public class MapLocationTest {
     public void addZeroXTest() {
         int x = 0;
         int y = 12;
-        location.addXY(x, y);
+        location.displace(x, y);
         assertThat(location.getX(), is(POS_X + x));
         assertThat(location.getY(), is(POS_Y + y));
     }
@@ -171,7 +171,7 @@ public class MapLocationTest {
     public void addZeroYTest() {
         int x = 25;
         int y = 0;
-        location.addXY(x, y);
+        location.displace(x, y);
         assertThat(location.getX(), is(POS_X + x));
         assertThat(location.getY(), is(POS_Y + y));
     }
@@ -180,7 +180,7 @@ public class MapLocationTest {
     public void addZeroXYTest() {
         int x = 0;
         int y = 0;
-        location.addXY(x, y);
+        location.displace(x, y);
         assertThat(location.getX(), is(POS_X));
         assertThat(location.getY(), is(POS_Y));
     }
@@ -189,7 +189,7 @@ public class MapLocationTest {
     public void addXTooBigTest() {
         int x = SIZE_X - POS_X;
         int y = 12;
-        location.addXY(x, y);
+        location.displace(x, y);
 //        assertThat(location.getX(), is(SIZE_X - 1));
 //        assertThat(location.getY(), is(POS_Y + y));
     }
@@ -198,7 +198,7 @@ public class MapLocationTest {
     public void addXTooSmallTest() {
         int x = -2 * POS_X;
         int y = 12;
-        location.addXY(x, y);
+        location.displace(x, y);
 //        assertThat(location.getX(), is(0));
 //        assertThat(location.getY(), is(POS_Y + y));
     }
@@ -207,7 +207,7 @@ public class MapLocationTest {
     public void addYTooBigTest() {
         int x = 25;
         int y = SIZE_Y + POS_Y;
-        location.addXY(x, y);
+        location.displace(x, y);
 //        assertThat(location.getX(), is(POS_X + x));
 //        assertThat(location.getY(), is(SIZE_Y - 1));
     }
@@ -216,7 +216,7 @@ public class MapLocationTest {
     public void addYTooSmallTest() {
         int x = 25;
         int y = -2 * POS_Y;
-        location.addXY(x, y);
+        location.displace(x, y);
 //        assertThat(location.getX(), is(POS_X + x));
 //        assertThat(location.getY(), is(0));
     }
@@ -225,7 +225,7 @@ public class MapLocationTest {
     public void displaceTest() {
         int deltaX = 11;
         int deltaY = -2;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -234,7 +234,7 @@ public class MapLocationTest {
     public void displaceBigXTest() {
         int deltaX = SIZE_X;
         int deltaY = 12;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -243,7 +243,7 @@ public class MapLocationTest {
     public void displaceBigNegativeXTest() {
         int deltaX = -SIZE_X;
         int deltaY = 12;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -252,7 +252,7 @@ public class MapLocationTest {
     public void displaceBigYTest() {
         int deltaX = 12;
         int deltaY = SIZE_Y;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -261,7 +261,7 @@ public class MapLocationTest {
     public void displaceBigNegativeYTest() {
         int deltaX = 12;
         int deltaY = -SIZE_Y;
-        Location newLoc = location.displace(deltaX, deltaY);
+        Location newLoc = location.addXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -270,7 +270,7 @@ public class MapLocationTest {
     public void displaceOnMapTest() {
         int deltaX = 10;
         int deltaY = 12;
-        MapLocation newLoc = location.displaceOnMap(deltaX, deltaY);
+        MapLocation newLoc = location.addMapXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -279,7 +279,7 @@ public class MapLocationTest {
     public void displaceToOutsideRightMapBoundaryTest() {
         int deltaX = SIZE_X - POS_X;
         int deltaY = 12;
-        MapLocation newLoc = location.displaceOnMap(deltaX, deltaY);
+        MapLocation newLoc = location.addMapXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(SIZE_X - 1));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -288,7 +288,7 @@ public class MapLocationTest {
     public void displaceToOutsideLeftMapBoundaryTest() {
         int deltaX = -SIZE_X;
         int deltaY = 12;
-        MapLocation newLoc = location.displaceOnMap(deltaX, deltaY);
+        MapLocation newLoc = location.addMapXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(0));
         assertThat(newLoc.getY(), is(POS_Y + deltaY));
     }
@@ -297,7 +297,7 @@ public class MapLocationTest {
     public void displaceToOutsideBottomMapBoundaryTest() {
         int deltaX = 10;
         int deltaY = SIZE_Y - POS_Y;
-        MapLocation newLoc = location.displaceOnMap(deltaX, deltaY);
+        MapLocation newLoc = location.addMapXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
 //        assertThat(newLoc.getY(), is(SIZE_Y - 1));
     }
@@ -306,7 +306,7 @@ public class MapLocationTest {
     public void displaceToOutsideTopMapBoundaryTest() {
         int deltaX = 10;
         int deltaY = -SIZE_Y;
-        MapLocation newLoc = location.displaceOnMap(deltaX, deltaY);
+        MapLocation newLoc = location.addMapXY(deltaX, deltaY);
         assertThat(newLoc.getX(), is(POS_X + deltaX));
         assertThat(newLoc.getY(), is(0));
     }

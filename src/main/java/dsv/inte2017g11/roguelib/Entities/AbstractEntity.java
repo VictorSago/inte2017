@@ -104,6 +104,10 @@ abstract public class AbstractEntity {
         }
     }
 
+    public void setMapLocation(MapLocation loc) {
+        location = loc;
+    }
+
     public void setLocation(int x, int y) {
         if (location == null) {
             throw new NullPointerException("Must have a map to set a location.");
@@ -128,14 +132,28 @@ abstract public class AbstractEntity {
         return location.getY();
     }
 
-
+    /**
+     * Move a step in the <code>dir</code> direction.<br>
+     * The operation of this method is as follows:
+     * <ol>
+     * <li> Check if there are any steps left </li>
+     * <li> If there are, then construct a new location from the current one and the direction <code>dir</code></li>
+     * <li> Check if the newly constructed location is valid and free on the current map</li>
+     * <li> If it is, then set the current location on the map to new coordinates</li>
+     * <li> and return <code>success</code></li>
+     * <li> In all other cases - if any of the checks fail - return <code>failure</code></li>
+     * </ol>
+     * 
+     * @param dir - direction of movement
+     * @return <code>true</code> if the step was possible, 
+     * <code>false</code> otherwise
+     */
     protected boolean moveStep(Direction dir) {
         if (stepsRemaining > 0) {
-            try {
-                location.addXY(dir.deltaX(), dir.deltaY());
+            Location newLocation = location.addXY(dir.deltaX(), dir.deltaY());
+            if (location.getMap().isValidPosition(newLocation) && location.getMap().isFreePosition(newLocation)) {
+                location.setXYPos(newLocation);
                 return true;
-            } catch (IndexOutOfBoundsException e) {
-                return false;
             }
         }
         return false;
@@ -149,6 +167,8 @@ abstract public class AbstractEntity {
         for (Direction d : dirs) {
             if (moveStep(d)) {
                 stepsRemaining--;
+            } else {
+                return;
             }
         }
     }
@@ -162,12 +182,14 @@ abstract public class AbstractEntity {
             if (moveStep(nextStep)) {
                 path.removeNextStep();
                 stepsRemaining--;
+            } else {
+                break;
             }
         }
         return path;
     }
-/*
 
+/*
     protected boolean isValidPosition(int x, int y) {
         return isValidPosition(map, x, y);
     }

@@ -22,13 +22,32 @@ public class Location {
         posY = y;
     }
 
-    public Location addXY(int x, int y) {
-        posX += x;
-        posY += y;
+    public void setXYPos(Location loc) {
+        setXYPos(loc.getX(), loc.getY());
+    }
+
+    /**
+     * Displaces current location by <code>deltaX</code> steps 
+     * horizontally and <code>deltaY</code> steps vertically.
+     * @param deltaX - horizontal displacement
+     * @param deltaY - vertical displacement
+     * @return This object with the new coordinates.
+     */
+    public Location displace(int deltaX, int deltaY) {
+        posX += deltaX;
+        posY += deltaY;
         return this;
     }
 
-    public Location displace(int deltaX, int deltaY) {
+    /**
+     * Creates a new <code>Location</code> object by adding 
+     * supplied parameters to this object's coordinates. 
+     * Leaves the original object unchanged.
+     * @param deltaX horizontal displacement
+     * @param deltaY vertical displacement
+     * @return New <code>Location</code> object with new coordinates.
+     */
+    public Location addXY(int deltaX, int deltaY) {
         return new Location(posX + deltaX, posY + deltaY);
     }
 

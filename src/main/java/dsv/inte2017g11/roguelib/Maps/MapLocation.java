@@ -27,6 +27,10 @@ public class MapLocation extends Location {
         return map;
     }
 
+    public boolean isFree() {
+        return map.isFreePosition(posX, posY);
+    }
+
     @Override
     public void setXYPos(int x, int y) {
         if (map.isValidPosition(x, y)) {
@@ -35,6 +39,11 @@ public class MapLocation extends Location {
         } else {
             throw new IndexOutOfBoundsException("Cannot set position outside map boundaries.");
         }
+    }
+
+    @Override
+    public void setXYPos(Location loc) {
+        setXYPos(loc.getX(), loc.getY());
     }
 
 /**
@@ -77,10 +86,19 @@ public class MapLocation extends Location {
     }
 */
 
+    /**
+     * Displaces current location by <code>deltaX</code> steps 
+     * horizontally and <code>deltaY</code> steps vertically, 
+     * if the new location is valid on the current map.
+     * @return This object with the new coordinates, if the new coordinates 
+     * are valid on the current map
+     * @throws IndexOutOfBoundsException if the new coordinates are outside the current map
+     * @see dsv.inte2017g11.roguelib.Maps.Location#displace(int, int)
+     */
     @Override
-    public Location addXY(int x, int y) {
-        int newX = posX + x;
-        int newY = posY + y;
+    public Location displace(int deltaX, int deltaY) throws IndexOutOfBoundsException {
+        int newX = posX + deltaX;
+        int newY = posY + deltaY;
         if (map.isValidPosition(newX, newY)) {
             posX = newX;
             posY = newY;
@@ -92,7 +110,7 @@ public class MapLocation extends Location {
 
 /**
     //@Override
-    public Location addXY(int x, int y) {
+    public Location displace(int x, int y) {
         int newX = posX + x;
         int newY = posY + y;
         if ((newX >= 0 && newX < map.getWidth()) && (newY >= 0 && newY < map.getHeight())) {
@@ -107,7 +125,7 @@ public class MapLocation extends Location {
 
 /**
     //@Override
-    public Location addXY(int x, int y) {
+    public Location displace(int x, int y) {
         posX += x;
         posY += y;
         if (posX < 0) {
@@ -124,7 +142,7 @@ public class MapLocation extends Location {
     }
 */
 
-    public MapLocation displaceOnMap(int deltaX, int deltaY) {
+    public MapLocation addMapXY(int deltaX, int deltaY) {
         return new MapLocation(map, posX + deltaX, posY + deltaY);
     }
 
