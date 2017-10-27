@@ -48,9 +48,13 @@ public class EntityOnMapTest {
         int newX = 12;
         int newY = 9;
         player.setMapLocation(map, initialX, initialY);
+        assertThat(player.getPosX(), is(initialX));
+        assertThat(player.getPosY(), is(initialY));
+        assertThat(player.getMap(), sameInstance(map));
         player.setLocation(newX, newY);
         assertThat(player.getPosX(), is(newX));
         assertThat(player.getPosY(), is(newY));
+        assertThat(player.getMap(), sameInstance(map));
     }
 
     @Test(expected = NullPointerException.class)

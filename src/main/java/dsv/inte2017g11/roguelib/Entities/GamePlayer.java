@@ -7,8 +7,11 @@ import java.util.Collection;
 
 public class GamePlayer extends AbstractEntity {
 
-    private Collection<Item> inventory;
+    private int attack;
     private int defence;
+
+    private Collection<Item> inventory;
+    private Collection<Item> equipment;
 
     public GamePlayer(String name, int health, int speed) {
         super(name, health, speed);
@@ -21,6 +24,37 @@ public class GamePlayer extends AbstractEntity {
 
     public GamePlayer(String name) {
         super(name);
+    }
+
+    @Override
+    public void damage(int damagePoints) {
+        if(defence > damagePoints){
+            //hurt gear
+            defence -= damagePoints;
+        }
+        else if (defence == damagePoints){
+            //destroy gear but don't hurt player
+        }
+        else if(defence < damagePoints){
+            //destroy gear and hur player
+        }
+
+    }
+
+    public int getDefence() {
+        return defence;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setDefence(int defence) {
+        this.defence = defence;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
     }
 
     public void addToInventory(Item item) {
@@ -54,24 +88,7 @@ public class GamePlayer extends AbstractEntity {
         }
     }
 
-    @Override
-    public void damage(int damagePoints) {
-        if(defence > damagePoints){
-            //hurt gear
-            defence -= damagePoints;
-        }
-        else if (defence == damagePoints){
-            //destroy gear but don't hurt player
-        }
-        else if(defence < damagePoints){
-            //destroy gear and hur player
-        }
 
-    }
-
-    public int getDefence() {
-        return defence;
-    }
 
     public void equipItem(String eq) {
         Item eqItem = getFromInventory(eq);

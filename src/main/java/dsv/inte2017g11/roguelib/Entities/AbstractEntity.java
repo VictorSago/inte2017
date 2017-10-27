@@ -15,7 +15,7 @@ abstract public class AbstractEntity {
 
     protected int maxHealth, currentHealth;
 
-    private int speed, stepsRemaining;
+    protected int speed, stepsRemaining;
 
     private MapLocation location;
 
@@ -160,6 +160,7 @@ abstract public class AbstractEntity {
         while (!path.isEmpty()) {
             Direction nextStep = path.getNextStep();
             if (moveStep(nextStep)) {
+                path.removeNextStep();
                 stepsRemaining--;
             }
         }
@@ -174,7 +175,7 @@ abstract public class AbstractEntity {
 
     /**
      *  Test whether the parameters point to a valid position
-     *  If the enterred direction together with speed is a
+     *  If the entered direction together with speed is a
      *  valid value for the player to move towards this may
      *  be computed
      *

@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static dsv.inte2017g11.roguelib.Maps.Direction.*;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
 public class MapPathTest {
@@ -47,7 +48,7 @@ public class MapPathTest {
     }
 
     @Test
-    public void getNextStepTest() throws Exception {
+    public void getNextStep() {
         Direction first = DOWN;
         Direction second = RIGHT;
         Direction third = UP;
@@ -56,14 +57,30 @@ public class MapPathTest {
         path.appendStep(second);
         path.appendStep(third);
         path.appendStep(fourth);
-        assertEquals(first, path.getNextStep());
+        assertThat(path.getNextStep(), equalTo(first));
+        assertEquals(4, path.getPathLength());
+        assertThat(path.getNextStep(), equalTo(first));
+        assertEquals(4, path.getPathLength());
+    }
+
+    @Test
+    public void getNextStepAndRemoveTest() throws Exception {
+        Direction first = DOWN;
+        Direction second = RIGHT;
+        Direction third = UP;
+        Direction fourth = LEFT;
+        path.appendStep(first);
+        path.appendStep(second);
+        path.appendStep(third);
+        path.appendStep(fourth);
+        assertEquals(first, path.removeNextStep());
         assertEquals(3, path.getPathLength());
-        assertEquals(second, path.getNextStep());
-        assertEquals(third, path.getNextStep());
+        assertEquals(second, path.removeNextStep());
+        assertEquals(third, path.removeNextStep());
         assertEquals(1, path.getPathLength());
-        assertEquals(fourth, path.getNextStep());
+        assertEquals(fourth, path.removeNextStep());
         assertEquals(0, path.getPathLength());
-        assertNull(path.getNextStep());
+        assertNull(path.removeNextStep());
         assertEquals(0, path.getPathLength());
     }
 

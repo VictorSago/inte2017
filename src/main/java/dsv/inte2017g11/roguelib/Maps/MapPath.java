@@ -24,6 +24,10 @@ public class MapPath {
     }
 
     public Direction getNextStep() {
+        return pathQueue.peekFirst();
+    }
+
+    public Direction removeNextStep() {
         return pathQueue.pollFirst();
     }
 }

@@ -29,7 +29,7 @@ public class MapLocation extends Location {
 
     @Override
     public void setXYPos(int x, int y) {
-        if ((x >= 0 && x < map.getWidth()) && (y >= 0 && y < map.getHeight())) {
+        if (map.isValidPosition(x, y)) {
             posX = x;
             posY = y;
         } else {
@@ -37,6 +37,32 @@ public class MapLocation extends Location {
         }
     }
 
+/**
+    //@Override
+    public void setXYPos(int x, int y) {
+        if ((x >= 0 && x < map.getWidth()) && (y >= 0 && y < map.getHeight())) {
+            posX = x;
+            posY = y;
+        } else {
+            throw new IndexOutOfBoundsException("Cannot set position outside map boundaries.");
+        }
+    }
+*/
+
+    public void setMapXYPos(GameMap m, int x, int y) {
+        if (m == null) {
+            throw new NullPointerException("Cannot set a location on a NULL map.");
+        }
+        if (m.isValidPosition(x, y)) {
+            map = m;
+            posX = x;
+            posY = y;
+        } else {
+            throw new IndexOutOfBoundsException("Cannot set position outside map boundaries.");
+        }
+    }
+
+/**
     public void setMapXYPos(GameMap m, int x, int y) {
         if (m == null) {
             throw new NullPointerException("Cannot set a location on a NULL map.");
@@ -49,8 +75,23 @@ public class MapLocation extends Location {
             throw new IndexOutOfBoundsException("Cannot set position outside map boundaries.");
         }
     }
+*/
 
     @Override
+    public Location addXY(int x, int y) {
+        int newX = posX + x;
+        int newY = posY + y;
+        if (map.isValidPosition(newX, newY)) {
+            posX = newX;
+            posY = newY;
+            return this;
+        } else {
+            throw new IndexOutOfBoundsException("Result is outside map boundary.");
+        }
+    }
+
+/**
+    //@Override
     public Location addXY(int x, int y) {
         int newX = posX + x;
         int newY = posY + y;
@@ -62,9 +103,10 @@ public class MapLocation extends Location {
             throw new IndexOutOfBoundsException("Result is outside map boundary.");
         }
     }
+*/
 
-/*
-    @Override
+/**
+    //@Override
     public Location addXY(int x, int y) {
         posX += x;
         posY += y;
@@ -102,7 +144,11 @@ public class MapLocation extends Location {
     }
 
     @Override
-    public int hashCode() {return 0;}
+    public int hashCode() {
+        int hash1 = super.hashCode();
+        int hash2 = map.hashCode();
+        return hash1 >= hash2 ? hash1 * hash1 + hash1 + hash2 : hash1 + hash2 * hash2;
+    }
 
     @Override
     public String toString() {

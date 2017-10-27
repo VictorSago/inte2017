@@ -342,6 +342,18 @@ public class MapLocationTest {
     }
 
     @Test
+    public void notEqualsSuperclassTest() {
+        Location otherLoc = new Location(POS_X, POS_Y);
+        assertThat(location, not(equalTo(otherLoc)));
+    }
+
+    @Test
+    public void notEqualsSuperclassReverseTest() {
+        Location otherLoc = new Location(POS_X, POS_Y);
+        assertThat(otherLoc, not(equalTo(location)));
+    }
+
+    @Test
     public void notEqualsToOtherObjectTest() {
         assertThat(location, not(equalTo("some String")));
     }
