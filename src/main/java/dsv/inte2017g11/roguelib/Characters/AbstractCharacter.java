@@ -12,41 +12,33 @@ abstract public class AbstractCharacter implements CombatSystem{
 
     static final int DEFAULT_MAX_HEALTH = 100;
     static final int DEFAULT_SPEED = 10;
-    static final int DEFAULT_ATTACK = 20;
 
     private String name;
 
-    private int maxHealth;
-    private int currentHealth;
+    private int maxHealth, currentHealth;
 
-    private int attackValue;
 
-    private int speed;
-    private int stepsLeft;
+    private int speed, stepsRemaining;
+
 
     private GameMap map;
-    private int posX;
-    private int posY;
+    private int posX, posY;
 
-    public AbstractCharacter(String name, int health, int speed, int attackValue) {
+
+    public AbstractCharacter(String name, int health, int speed) {
         this.name = name;
         this.maxHealth = health;
         this.currentHealth = maxHealth;
         this.speed = speed;
-        this.stepsLeft = this.speed;
-        this.attackValue = attackValue;
-    }
-
-    public AbstractCharacter(String name, int health, int attackValue) {
-        this(name, health, DEFAULT_SPEED, attackValue);
+        this.stepsRemaining = this.speed;
     }
 
     public AbstractCharacter(String name, int health) {
-        this(name, health, DEFAULT_SPEED, DEFAULT_ATTACK);
+        this(name, health, DEFAULT_SPEED);
     }
 
     public AbstractCharacter(String name) {
-        this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED, DEFAULT_ATTACK);
+        this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED);
     }
 
     public String getName() {
@@ -67,18 +59,16 @@ abstract public class AbstractCharacter implements CombatSystem{
     }
 
     public void healCharacter(int healingPoint) {
-        if (currentHealth + healingPoint > maxHealth) {
+        currentHealth += healingPoint;
+        if (currentHealth > maxHealth) {
             currentHealth = maxHealth;
-        } else {
-            currentHealth += healingPoint;
         }
     }
 
     public void hurtCharacter(int damagePoint) {
-        if (currentHealth - damagePoint <= 0) {
+        currentHealth -= damagePoint;
+        if (currentHealth < 0) {
             currentHealth = 0;
-        } else {
-            currentHealth -= damagePoint;
         }
     }
 
@@ -87,28 +77,24 @@ abstract public class AbstractCharacter implements CombatSystem{
     }
 
     public void setSpeed(int s) {
-        int oldSpeed = this.speed;
+        int oldSpeed = speed;
         if (s < 0) {
-            this.speed = 0;
+            speed = 0;
         } else {
-            this.speed = s;
+            speed = s;
         }
-        this.stepsLeft += this.speed - oldSpeed;
-        if (this.stepsLeft < 0) {
-            this.stepsLeft = 0;
+        stepsRemaining += speed - oldSpeed;
+        if (stepsRemaining < 0) {
+            stepsRemaining = 0;
         }
     }
 
-    public int getAttackValue() {
-        return attackValue;
-    }
-
-    public int getStepsLeft() {
-        return stepsLeft;
+    public int getStepsRemaining() {
+        return stepsRemaining;
     }
 
     public void resetSteps() {
-        stepsLeft = speed;
+        stepsRemaining = speed;
     }
 
     public GameMap getMap() {
@@ -129,7 +115,6 @@ abstract public class AbstractCharacter implements CombatSystem{
     public boolean setPosition(GameMap map, int x, int y) {
         if (isValidPosition(map, x, y)) {
             this.map = map;
-
             this.posX = x;
             this.posY = y;
             return true;
@@ -139,7 +124,7 @@ abstract public class AbstractCharacter implements CombatSystem{
     }
 
     public boolean setPosition(int x, int y) {
-        return this.setPosition(this.map, x, y);
+        return setPosition(this.map, x, y);
     }
 
     public int getPosX() {
@@ -159,56 +144,68 @@ abstract public class AbstractCharacter implements CombatSystem{
      * of the map to the current position on the map. <br>
      * If there is no map present then <code>-1</code> is returned.
      */
-    public int getPosition() {
+    /*public int getPosition() {
         if (map != null) {
             return posY * map.getWidth() + posX;
         } else {
             return -1;
         }
-    }
+    }*/
 
-    protected void moveRight() {
+    /*protected void moveRight() {
         if (isValidPosition(posX + 1, posY)) {
             posX++;
-            stepsLeft--;
+            stepsRemaining--;
         }
     }
 
     protected void moveLeft() {
         if (isValidPosition(posX - 1, posY)) {
             posX--;
-            stepsLeft--;
+            stepsRemaining--;
         }
     }
 
     protected void moveDown() {
         if (isValidPosition(posX, posY + 1)) {
             posY++;
-            stepsLeft--;
+            stepsRemaining--;
         }
     }
 
     protected void moveUp() {
         if (isValidPosition(posX, posY - 1)) {
             posY--;
-            stepsLeft--;
+            stepsRemaining--;
         }
-    }
+    }*/
 
     protected void moveStep(Directions dir) {
-        if (stepsLeft > 0) {
+        if (stepsRemaining > 0) {
             switch (dir) {
                 case RIGHT:
-                    moveRight();
+                    if (isValidPosition(posX + 1, posY)) {
+                        posX++;
+                        stepsRemaining--;
+                    }
                     break;
                 case LEFT:
-                    moveLeft();
+                    if (isValidPosition(posX - 1, posY)) {
+                        posX--;
+                        stepsRemaining--;
+                    }
                     break;
                 case DOWN:
-                    moveDown();
+                    if (isValidPosition(posX, posY + 1)) {
+                        posY++;
+                        stepsRemaining--;
+                    }
                     break;
                 case UP:
-                    moveUp();
+                    if (isValidPosition(posX, posY - 1)) {
+                        posY--;
+                        stepsRemaining--;
+                    }
                     break;
             }
         }
@@ -235,7 +232,7 @@ abstract public class AbstractCharacter implements CombatSystem{
     }
 
     protected boolean isValidPosition(int x, int y) {
-        return isValidPosition(this.map, x, y);
+        return isValidPosition(map, x, y);
     }
 
     /**

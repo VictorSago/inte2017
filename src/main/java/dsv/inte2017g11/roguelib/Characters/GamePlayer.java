@@ -18,19 +18,17 @@ public class GamePlayer extends AbstractCharacter {
 
     public GamePlayer(String name, int health) {
         super(name, health);
-        inventory = new ArrayList<>();
     }
 
     public GamePlayer(String name) {
         super(name);
-        inventory = new ArrayList<>();
     }
 
     public void addToInventory(Item item) {
         inventory.add(item);
     }
 
-    public int getAmountOfItems() {
+    public int getInventorySize() {
         return inventory.size();
     }
 
@@ -44,24 +42,29 @@ public class GamePlayer extends AbstractCharacter {
             if (i.getName().equalsIgnoreCase(itemName))
                 return i;
         }
-        throw new IllegalArgumentException();
+        return null;
     }
 
-    public void throwItem(String item) {
+    public boolean dropItem(String item) {
         Item removeMe = getFromInventory(item);
-        inventory.remove(removeMe);
+        if (removeMe != null) {
+            inventory.remove(removeMe);
+            return true;
+        } else {
+            return false;
+        }
     }
  /*
     @Override
-    public void hurtCharacter(int damagepoint) {
-        if(defence > damagepoint){
+    public void hurtCharacter(int damagePoint) {
+        if(defence > damagePoint){
             //hurt gear
-            defence -= damagepoint;
+            defence -= damagePoint;
         }
-        else if (defence == damagepoint){
+        else if (defence == damagePoint){
             //destroy gear but don't hurt player
         }
-        else if(defence < damagepoint){
+        else if(defence < damagePoint){
             //destroy gear and hur player
         }
 
