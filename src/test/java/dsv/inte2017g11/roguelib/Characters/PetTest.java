@@ -48,7 +48,7 @@ public class PetTest {
 
     @Test
     public void damageTest(){
-        CombatSystem.takeElementalDamage(10, DEFAULT_TEST_ELEMENT, pet);
+        CombatSystem.takeDamage(10, DEFAULT_TEST_ELEMENT, pet);
         assertEquals(DEFAULT_TEST_HEALTH-10, pet.getCurrentHealth());
     }
 
@@ -104,7 +104,7 @@ public class PetTest {
 
     @Test
     public void healTest(){
-        CombatSystem.takeElementalDamage(10,DEFAULT_TEST_ELEMENT, pet);
+        CombatSystem.takeDamage(10,DEFAULT_TEST_ELEMENT, pet);
         CombatSystem.heal(5, pet);
         assertEquals(DEFAULT_TEST_HEALTH-5, pet.getCurrentHealth());
     }
@@ -116,28 +116,35 @@ public class PetTest {
     }
 
     @Test
+    public void damageNoElementTest(){
+        AbstractCharacter gp = new GamePlayer("Jane Doe", DEFAULT_TEST_HEALTH);
+        CombatSystem.takeDamage(10, DEFAULT_TEST_ELEMENT, gp);
+        assertEquals(DEFAULT_TEST_HEALTH-10, gp.getCurrentHealth());
+    }
+
+    @Test
     public void killTest(){
-        CombatSystem.takeElementalDamage(DEFAULT_TEST_HEALTH, DEFAULT_TEST_ELEMENT, pet);
+        CombatSystem.takeDamage(DEFAULT_TEST_HEALTH, DEFAULT_TEST_ELEMENT, pet);
         assertEquals(0, pet.getCurrentHealth());
         assertFalse(pet.isAvailable());
     }
 
     @Test
     public void overKillTest(){
-        CombatSystem.takeElementalDamage(DEFAULT_TEST_HEALTH+10, DEFAULT_TEST_ELEMENT, pet);
+        CombatSystem.takeDamage(DEFAULT_TEST_HEALTH+10, DEFAULT_TEST_ELEMENT, pet);
         assertEquals(0,pet.getCurrentHealth());
     }
 
     @Test
     public void healDeadPetTest(){
-        CombatSystem.takeElementalDamage(DEFAULT_TEST_HEALTH, DEFAULT_TEST_ELEMENT, pet);
+        CombatSystem.takeDamage(DEFAULT_TEST_HEALTH, DEFAULT_TEST_ELEMENT, pet);
         CombatSystem.heal(10, pet);
         assertEquals(0, pet.getCurrentHealth());
     }
 
     @Test
     public void reviveDeadPetTest(){
-        CombatSystem.takeElementalDamage(DEFAULT_TEST_HEALTH, DEFAULT_TEST_ELEMENT, pet);
+        CombatSystem.takeDamage(DEFAULT_TEST_HEALTH, DEFAULT_TEST_ELEMENT, pet);
         CombatSystem.revive(pet);
         assertTrue(pet.isAvailable());
         assertEquals(10,pet.getCurrentHealth());
@@ -145,7 +152,7 @@ public class PetTest {
 
     @Test
     public void reviveWithFullHealthTest(){
-        CombatSystem.takeElementalDamage(DEFAULT_TEST_HEALTH, DEFAULT_TEST_ELEMENT, pet);
+        CombatSystem.takeDamage(DEFAULT_TEST_HEALTH, DEFAULT_TEST_ELEMENT, pet);
         CombatSystem.phoenixDown(pet);
         assertEquals(pet.getMaxHealth(),pet.getCurrentHealth());
         assertTrue(pet.isAvailable());

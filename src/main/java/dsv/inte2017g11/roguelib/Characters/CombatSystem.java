@@ -2,7 +2,7 @@ package dsv.inte2017g11.roguelib.Characters;
 
 public interface CombatSystem {
 
-    public static void heal(int healItem, AbstractCharacter thisChar) {
+    static void heal(int healItem, AbstractCharacter thisChar) {
         int tempHealth = thisChar.getCurrentHealth();
         if(tempHealth!=0) {
             tempHealth += healItem;
@@ -14,7 +14,7 @@ public interface CombatSystem {
     }
 
 
-    public static void takeElementalDamage(int enemyAttackValue, String enemyElement, AbstractCharacter thisChar) {
+    static void takeDamage(int enemyAttackValue, String enemyElement, AbstractCharacter thisChar) {
         int tempHealth = thisChar.getCurrentHealth();
 
         if(thisChar instanceof Pet){
@@ -30,24 +30,24 @@ public interface CombatSystem {
     }
 
 
-    public static double calculateElementDamage(String enemyElement, String thisElement) {
+    static double calculateElementDamage(String enemyElement, String thisElement) {
         double damagePercent = 1;
         if (enemyElement.compareTo(thisElement) == 0) {
             return 1;
-        } else if (enemyElement == "Fire") {
-            if (thisElement == "Earth") {
+        } else if (enemyElement.equalsIgnoreCase("Fire")) {
+            if (thisElement.equalsIgnoreCase("Earth")) {
                 damagePercent = 0.75;
-            } else if (thisElement == "Wind") {
+            } else if (thisElement.equalsIgnoreCase("Wind")) {
                 damagePercent = 1.25;
             }
-        } else if (enemyElement == "Earth") {
-            if (thisElement == "Fire") {
+        } else if (enemyElement.equalsIgnoreCase("Earth")) {
+            if (thisElement.equalsIgnoreCase("Fire")) {
                 damagePercent = 1.25;
-            } else if (thisElement == "Wind") {
+            } else if (thisElement.equalsIgnoreCase("Wind")) {
                 damagePercent = 0.75;
             }
-        } else if (enemyElement =="Wind"){
-            if(thisElement=="Earth"){
+        } else if (enemyElement.equalsIgnoreCase("Wind")){
+            if(thisElement.equalsIgnoreCase("Earth")){
                 damagePercent = 1.25;
             } else {
                 damagePercent = 0.75;
@@ -56,13 +56,13 @@ public interface CombatSystem {
         return damagePercent;
     }
 
-    public static void revive(AbstractCharacter thisChar) {
+    static void revive(AbstractCharacter thisChar) {
         if(thisChar.getCurrentHealth()==0){
             thisChar.setCurrentHealth(10);
         }
     }
 
-    public static void phoenixDown(AbstractCharacter thisChar) {
+    static void phoenixDown(AbstractCharacter thisChar) {
             thisChar.setCurrentHealth(thisChar.getMaxHealth());
     }
 

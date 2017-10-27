@@ -5,6 +5,6 @@ import org.junit.runners.Suite;
 
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({AbstractCharacterTest.class, CharacterMapInteractionTest.class, GamePlayerTest.class})
+@Suite.SuiteClasses({AbstractCharacterTest.class, CharacterMapInteractionTest.class, GamePlayerTest.class, MonsterTests.class, PetTest.class})
 public class CharacterTestSuite {
 }

@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class AbstractCharacterTest {
 
     private final int DEFAULT_TEST_HEALTH = 200;
-    private final int DEFAULT_TEST_SPEED = 20;
+    private final int DEFAULT_TEST_SPEED = 10;
 
     private AbstractCharacter player;
 
@@ -75,7 +75,7 @@ public class AbstractCharacterTest {
 
     @Test
     public void removeHealthTest() {
-        int damage = 12;
+        int damage = DEFAULT_TEST_HEALTH-10;
         player.hurtCharacter(damage);
         assertEquals(DEFAULT_TEST_HEALTH - damage, player.getCurrentHealth());
     }
@@ -84,7 +84,7 @@ public class AbstractCharacterTest {
     public void characterGameOverTest() {
         int damage = DEFAULT_TEST_HEALTH + 20;
         player.hurtCharacter(damage);
-        assertEquals(-1, player.getCurrentHealth());
+        assertEquals(0, player.getCurrentHealth());
     }
 
     @Test

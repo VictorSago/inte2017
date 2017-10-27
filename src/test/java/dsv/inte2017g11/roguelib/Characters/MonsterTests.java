@@ -8,13 +8,11 @@ import static org.junit.Assert.assertEquals;
 public class MonsterTests {
 
     private final int DEFAULT_TEST_HEALTH = 200;
-    private final int DEFAULT_TEST_SPEED = 20;
+    private final int DEFAULT_TEST_SPEED = 10;
 
     private Monster m;
     private Monster m2;
     private FlyingMonster m3;
-
-
 
     @Before
     public void setUp() {
@@ -29,11 +27,6 @@ public class MonsterTests {
         assertEquals("Unicorn", m.getName());
         assertEquals(DEFAULT_TEST_HEALTH, m.getCurrentHealth());
         assertEquals(DEFAULT_TEST_SPEED, m.getSpeed());
-    }
-
-    @Test
-    public void typeTest() {
-        assertEquals(1, m.getType());
     }
 
     @Test

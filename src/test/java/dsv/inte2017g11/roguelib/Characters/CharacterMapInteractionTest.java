@@ -63,6 +63,15 @@ public class CharacterMapInteractionTest {
     }
 
     @Test
+    public void nonvalidMoveRightTest() {
+        int initialX = SIZE_X / 2;
+        int initialY = SIZE_Y / 3;
+        map=null;
+        player.setPosition(map, initialX, initialY);
+        player.move(RIGHT);
+    }
+
+    @Test
     public void validMoveLeftTest() {
         int initialX = SIZE_X / 2;
         int initialY = SIZE_Y / 3;
@@ -192,6 +201,16 @@ public class CharacterMapInteractionTest {
         assertEquals(expectedY, player.getPosY());
         assertEquals(expectedStepsLeft, player.getStepsLeft());
         assertEquals(0, path.getPathLength());
+    }
+
+    @Test
+    public void moveNoMapTest(){
+        int initialX = SIZE_X / 2;
+        int initialY = SIZE_Y / 3;
+        map=null;
+        player.setPosition(map, initialX, initialY);
+        MapPath path = new MapPath();
+        assertEquals(path,player.move(path));
     }
 
     @Test

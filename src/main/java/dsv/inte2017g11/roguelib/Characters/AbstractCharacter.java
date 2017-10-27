@@ -8,10 +8,6 @@ import dsv.inte2017g11.roguelib.Maps.MapPath;
  * @author zeron
  *
  */
-/**
- * @author zeron
- *
- */
 abstract public class AbstractCharacter implements CombatSystem{
 
     static final int DEFAULT_MAX_HEALTH = 100;
@@ -70,19 +66,19 @@ abstract public class AbstractCharacter implements CombatSystem{
         return currentHealth;
     }
 
-    public void healCharacter(int healingpoint) {
-        if (currentHealth + healingpoint > maxHealth) {
+    public void healCharacter(int healingPoint) {
+        if (currentHealth + healingPoint > maxHealth) {
             currentHealth = maxHealth;
         } else {
-            currentHealth += healingpoint;
+            currentHealth += healingPoint;
         }
     }
 
-    public void hurtCharacter(int damagepoint) {
-        if (currentHealth - damagepoint < 0) {
-            currentHealth = -1;
+    public void hurtCharacter(int damagePoint) {
+        if (currentHealth - damagePoint <= 0) {
+            currentHealth = 0;
         } else {
-            currentHealth -= damagepoint;
+            currentHealth -= damagePoint;
         }
     }
 

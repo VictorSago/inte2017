@@ -51,7 +51,7 @@ public class GamePlayer extends AbstractCharacter {
         Item removeMe = getFromInventory(item);
         inventory.remove(removeMe);
     }
-
+ /*
     @Override
     public void hurtCharacter(int damagepoint) {
         if(defence > damagepoint){
@@ -66,6 +66,7 @@ public class GamePlayer extends AbstractCharacter {
         }
 
     }
+    */
 
     public int getDefence() {
         return defence;

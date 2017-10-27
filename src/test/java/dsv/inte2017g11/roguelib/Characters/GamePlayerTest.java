@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class GamePlayerTest {
 
     private final int DEFAULT_TEST_HEALTH = 200;
-    private final int DEFAULT_TEST_SPEED = 20;
+    private final int DEFAULT_TEST_SPEED = 10;
 
     private GamePlayer player;
 
@@ -67,8 +67,7 @@ public class GamePlayerTest {
         Item item2 = new PotionItem("Felix felicis", 15, Effect.HEALTH);
         player.addToInventory(item1);
         player.addToInventory(item2);
-        Item item3= item2;
-        assertEquals(item3, player.getFromInventory("felix felicis"));
+        assertEquals(item2, player.getFromInventory("felix felicis"));
     }
 
     @Test(expected = IllegalArgumentException.class)

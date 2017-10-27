@@ -99,7 +99,7 @@ public class GearItemTest {
 
     @Test
     public void testGearItemEqualsMethod(){
-        GearItem g = new GearItem("Helmet", 3, 12, MAGIC, "a sparkeling rainbow-feather covered helmet with amazing defence powers");
+        GearItem g = new GearItem("Helmet", 3, 12, MAGIC, "a sparkling rainbow-feather covered helmet with amazing defence powers");
         GearItem p = g;
         assertEquals(true, g.equals(p));
     }
