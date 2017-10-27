@@ -4,49 +4,58 @@ import dsv.inte2017g11.roguelib.Maps.Directions;
 import dsv.inte2017g11.roguelib.Maps.GameMap;
 import dsv.inte2017g11.roguelib.Maps.MapPath;
 
-
-
-
-
 /**
  * @author zeron
  *
  */
-abstract public class AbstractCharacter {
+abstract public class AbstractCharacter implements CombatSystem{
 
     static final int DEFAULT_MAX_HEALTH = 100;
     static final int DEFAULT_SPEED = 10;
+    static final int DEFAULT_ATTACK = 20;
 
-    private final String name;
+    private String name;
 
     private int maxHealth, currentHealth;
 
-
     private int speed, stepsRemaining;
 
+    private int attackValue;
+    
+ // private int stepsLeft;
 
     private GameMap map;
     private int posX, posY;
 
-
-    public AbstractCharacter(String name, int health, int speed) {
+    public AbstractCharacter(String name, int health, int speed, int attackValue) {
         this.name = name;
         this.maxHealth = health;
         this.currentHealth = maxHealth;
         this.speed = speed;
         this.stepsRemaining = this.speed;
+//        this.stepsLeft = this.speed;
+        this.attackValue = attackValue;
+    }
+
+    public AbstractCharacter(String name, int health, int attackValue) {
+        this(name, health, DEFAULT_SPEED, attackValue);
     }
 
     public AbstractCharacter(String name, int health) {
-        this(name, health, DEFAULT_SPEED);
+        this(name, health, DEFAULT_SPEED, DEFAULT_ATTACK);
     }
 
     public AbstractCharacter(String name) {
-        this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED);
+        this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED, DEFAULT_ATTACK);
     }
 
     public String getName() {
         return name;
+    }
+
+
+    public void newName(String newName) {
+        name = newName;
     }
 
     public int getMaxHealth() {
@@ -86,6 +95,10 @@ abstract public class AbstractCharacter {
         if (stepsRemaining < 0) {
             stepsRemaining = 0;
         }
+    }
+
+    public int getAttackValue() {
+        return attackValue;
     }
 
     public int getStepsRemaining() {
@@ -255,5 +268,16 @@ abstract public class AbstractCharacter {
         }
     }
 
+    public void setCurrentHealth(int newHealth) {
+        this.currentHealth = newHealth;
+    }
+
+    public void setMaxHealth(int newHealth){
+        this.maxHealth = newHealth;
+    }
+
+    public void setAttackValue(int newAttack){
+        this.attackValue = newAttack;
+    }
 }
 
