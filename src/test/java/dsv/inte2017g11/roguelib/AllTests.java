@@ -6,6 +6,7 @@ import dsv.inte2017g11.roguelib.Items.ItemTestSuite;
 import dsv.inte2017g11.roguelib.Maps.MapTestSuite;
 
 import dsv.inte2017g11.roguelib.Characters.PetTest;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

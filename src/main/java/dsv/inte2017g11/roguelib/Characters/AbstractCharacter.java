@@ -8,10 +8,6 @@ import dsv.inte2017g11.roguelib.Maps.MapPath;
  * @author zeron
  *
  */
-/**
- * @author zeron
- *
- */
 abstract public class AbstractCharacter implements CombatSystem{
 
     static final int DEFAULT_MAX_HEALTH = 100;
@@ -20,24 +16,24 @@ abstract public class AbstractCharacter implements CombatSystem{
 
     private String name;
 
-    private int maxHealth;
-    private int currentHealth;
+    private int maxHealth, currentHealth;
+
+    private int speed, stepsRemaining;
 
     private int attackValue;
-
-    private int speed;
-    private int stepsLeft;
+    
+ // private int stepsLeft;
 
     private GameMap map;
-    private int posX;
-    private int posY;
+    private int posX, posY;
 
     public AbstractCharacter(String name, int health, int speed, int attackValue) {
         this.name = name;
         this.maxHealth = health;
         this.currentHealth = maxHealth;
         this.speed = speed;
-        this.stepsLeft = this.speed;
+        this.stepsRemaining = this.speed;
+//        this.stepsLeft = this.speed;
         this.attackValue = attackValue;
     }
 
@@ -70,19 +66,17 @@ abstract public class AbstractCharacter implements CombatSystem{
         return currentHealth;
     }
 
-    public void healCharacter(int healingpoint) {
-        if (currentHealth + healingpoint > maxHealth) {
+    public void healCharacter(int healingPoint) {
+        currentHealth += healingPoint;
+        if (currentHealth > maxHealth) {
             currentHealth = maxHealth;
-        } else {
-            currentHealth += healingpoint;
         }
     }
 
-    public void hurtCharacter(int damagepoint) {
-        if (currentHealth - damagepoint < 0) {
-            currentHealth = -1;
-        } else {
-            currentHealth -= damagepoint;
+    public void hurtCharacter(int damagePoint) {
+        currentHealth -= damagePoint;
+        if (currentHealth < 0) {
+            currentHealth = 0;
         }
     }
 
@@ -91,15 +85,15 @@ abstract public class AbstractCharacter implements CombatSystem{
     }
 
     public void setSpeed(int s) {
-        int oldSpeed = this.speed;
+        int oldSpeed = speed;
         if (s < 0) {
-            this.speed = 0;
+            speed = 0;
         } else {
-            this.speed = s;
+            speed = s;
         }
-        this.stepsLeft += this.speed - oldSpeed;
-        if (this.stepsLeft < 0) {
-            this.stepsLeft = 0;
+        stepsRemaining += speed - oldSpeed;
+        if (stepsRemaining < 0) {
+            stepsRemaining = 0;
         }
     }
 
@@ -107,12 +101,12 @@ abstract public class AbstractCharacter implements CombatSystem{
         return attackValue;
     }
 
-    public int getStepsLeft() {
-        return stepsLeft;
+    public int getStepsRemaining() {
+        return stepsRemaining;
     }
 
     public void resetSteps() {
-        stepsLeft = speed;
+        stepsRemaining = speed;
     }
 
     public GameMap getMap() {
@@ -133,7 +127,6 @@ abstract public class AbstractCharacter implements CombatSystem{
     public boolean setPosition(GameMap map, int x, int y) {
         if (isValidPosition(map, x, y)) {
             this.map = map;
-
             this.posX = x;
             this.posY = y;
             return true;
@@ -143,7 +136,7 @@ abstract public class AbstractCharacter implements CombatSystem{
     }
 
     public boolean setPosition(int x, int y) {
-        return this.setPosition(this.map, x, y);
+        return setPosition(this.map, x, y);
     }
 
     public int getPosX() {
@@ -163,56 +156,68 @@ abstract public class AbstractCharacter implements CombatSystem{
      * of the map to the current position on the map. <br>
      * If there is no map present then <code>-1</code> is returned.
      */
-    public int getPosition() {
+    /*public int getPosition() {
         if (map != null) {
             return posY * map.getWidth() + posX;
         } else {
             return -1;
         }
-    }
+    }*/
 
-    protected void moveRight() {
+    /*protected void moveRight() {
         if (isValidPosition(posX + 1, posY)) {
             posX++;
-            stepsLeft--;
+            stepsRemaining--;
         }
     }
 
     protected void moveLeft() {
         if (isValidPosition(posX - 1, posY)) {
             posX--;
-            stepsLeft--;
+            stepsRemaining--;
         }
     }
 
     protected void moveDown() {
         if (isValidPosition(posX, posY + 1)) {
             posY++;
-            stepsLeft--;
+            stepsRemaining--;
         }
     }
 
     protected void moveUp() {
         if (isValidPosition(posX, posY - 1)) {
             posY--;
-            stepsLeft--;
+            stepsRemaining--;
         }
-    }
+    }*/
 
     protected void moveStep(Directions dir) {
-        if (stepsLeft > 0) {
+        if (stepsRemaining > 0) {
             switch (dir) {
                 case RIGHT:
-                    moveRight();
+                    if (isValidPosition(posX + 1, posY)) {
+                        posX++;
+                        stepsRemaining--;
+                    }
                     break;
                 case LEFT:
-                    moveLeft();
+                    if (isValidPosition(posX - 1, posY)) {
+                        posX--;
+                        stepsRemaining--;
+                    }
                     break;
                 case DOWN:
-                    moveDown();
+                    if (isValidPosition(posX, posY + 1)) {
+                        posY++;
+                        stepsRemaining--;
+                    }
                     break;
                 case UP:
-                    moveUp();
+                    if (isValidPosition(posX, posY - 1)) {
+                        posY--;
+                        stepsRemaining--;
+                    }
                     break;
             }
         }
@@ -239,7 +244,7 @@ abstract public class AbstractCharacter implements CombatSystem{
     }
 
     protected boolean isValidPosition(int x, int y) {
-        return isValidPosition(this.map, x, y);
+        return isValidPosition(map, x, y);
     }
 
     /**
