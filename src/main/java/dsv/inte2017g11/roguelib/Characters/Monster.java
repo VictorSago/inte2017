@@ -4,7 +4,6 @@ import dsv.inte2017g11.roguelib.Maps.Tile;
 
 public class Monster extends AbstractCharacter{
 
-    private int type;
     private int attackValue;
 
     public Monster(String name, int health, int speed, int type, int attackValue) {
@@ -19,8 +18,5 @@ public class Monster extends AbstractCharacter{
                 c.hurtCharacter(attackValue);
             }
         }
-    }
-    public void attack(Monster m){
-        m.hurtCharacter(attackValue);
     }
 }
