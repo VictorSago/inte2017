@@ -21,7 +21,7 @@ public class AbstractEntityTest {
     @Test
     public void creationTest() {
         assertEquals(DEFAULT_TEST_HEALTH, player.getCurrentHealth());
-        assertEquals(DEFAULT_TEST_SPEED, player.getSpeed());
+        assertEquals(DEFAULT_TEST_SPEED, player.getMaxSpeed());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class AbstractEntityTest {
         AbstractEntity playerJohn = new AbstractEntity("John Doe", DEFAULT_TEST_HEALTH) {};
         assertEquals(DEFAULT_TEST_HEALTH, playerJohn.getMaxHealth());
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
-        assertEquals(AbstractEntity.DEFAULT_SPEED, playerJohn.getSpeed());
+        assertEquals(AbstractEntity.DEFAULT_SPEED, playerJohn.getMaxSpeed());
     }
 
     @Test
@@ -37,7 +37,31 @@ public class AbstractEntityTest {
         AbstractEntity playerJohn = new AbstractEntity("John Doe") {};
         assertEquals(AbstractEntity.DEFAULT_MAX_HEALTH, playerJohn.getMaxHealth());
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
-        assertEquals(AbstractEntity.DEFAULT_SPEED, playerJohn.getSpeed());
+        assertEquals(AbstractEntity.DEFAULT_SPEED, playerJohn.getMaxSpeed());
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = IllegalArgumentException.class)
+    public void creationWithNullStringTest() {
+        AbstractEntity entity = new AbstractEntity(null, DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) { };
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = IllegalArgumentException.class)
+    public void creationWithEmptyStringTest() {
+        AbstractEntity entity = new AbstractEntity("", DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) { };
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = IllegalArgumentException.class)
+    public void creationWithZeroHealthTest() {
+        AbstractEntity entity = new AbstractEntity("Some Name", 0, DEFAULT_TEST_SPEED) { };
+    }
+
+    @SuppressWarnings("unused")
+    @Test(expected = IllegalArgumentException.class)
+    public void creationWithNegativeHealthTest() {
+        AbstractEntity entity = new AbstractEntity("Some Name", -DEFAULT_TEST_HEALTH, DEFAULT_TEST_SPEED) { };
     }
 
     @Test
@@ -89,30 +113,30 @@ public class AbstractEntityTest {
 
     @Test
     public void speedTest() {
-        assertEquals(DEFAULT_TEST_SPEED, player.getSpeed());
+        assertEquals(DEFAULT_TEST_SPEED, player.getMaxSpeed());
         assertEquals(DEFAULT_TEST_SPEED, player.getStepsRemaining());
     }
 
     @Test
     public void setNewSpeedTest() {
         int testSpeed = 5;
-        player.setSpeed(testSpeed);
-        assertEquals(testSpeed, player.getSpeed());
+        player.setMaxSpeed(testSpeed);
+        assertEquals(testSpeed, player.getMaxSpeed());
         assertEquals(testSpeed, player.getStepsRemaining());
     }
 
     @Test
     public void setZeroSpeedTest() {
-        player.setSpeed(0);
-        assertEquals(0, player.getSpeed());
+        player.setMaxSpeed(0);
+        assertEquals(0, player.getMaxSpeed());
         assertEquals(0, player.getStepsRemaining());
     }
 
     @Test
     public void setNegativeSpeedTest() {
         int negativeSpeed = -5;
-        player.setSpeed(negativeSpeed);
-        assertEquals(0, player.getSpeed());
+        player.setMaxSpeed(negativeSpeed);
+        assertEquals(0, player.getMaxSpeed());
         assertEquals(0, player.getStepsRemaining());
     }
 

@@ -20,7 +20,7 @@ public class PetTest {
     @Test
     public void creationTest() {
         assertEquals(DEFAULT_TEST_HEALTH, pet.getCurrentHealth());
-        assertEquals(DEFAULT_TEST_SPEED, pet.getSpeed());
+        assertEquals(DEFAULT_TEST_SPEED, pet.getMaxSpeed());
     }
 
     @Test

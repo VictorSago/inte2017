@@ -13,8 +13,8 @@ import static org.junit.Assert.*;
 public class EntityOnMapTest {
 
     private final int DEFAULT_TEST_HEALTH1 = 100;
-    private final int DEFAULT_TEST_SPEED1 = 10;
     private final int DEFAULT_TEST_HEALTH2 = 60;
+    private final int DEFAULT_TEST_SPEED1 = 10;
     private final int DEFAULT_TEST_SPEED2 = 15;
     private final int SIZE_X = 20;
     private final int SIZE_Y = 15;
@@ -39,6 +39,16 @@ public class EntityOnMapTest {
         player.setMapLocation(map, initialX, initialY);
         assertEquals(initialX, player.getPosX());
         assertEquals(initialY, player.getPosY());
+    }
+
+    @Test
+    public void setMapLocationTest2() {
+        int initialX = 10;
+        int initialY = 5;
+        MapLocation loc = new MapLocation(map, initialX, initialY);
+        player.setMapLocation(loc);
+        assertThat(player.getMapLocation(), equalTo(loc));
+        assertThat(player.getMap(), sameInstance(map));
     }
 
     @Test
@@ -160,9 +170,9 @@ public class EntityOnMapTest {
     public void invalidMoveRightTest() {
         int initialX = SIZE_X - 1;
         int initialY = SIZE_Y / 3;
-        player.setMapLocation(map, initialX, initialY);  // 19, 5
+        player.setMapLocation(map, initialX, initialY);
         player.move(RIGHT);
-        assertEquals(map.getWidth() - 1, player.getPosX()); // expected: 19
+        assertEquals(map.getWidth() - 1, player.getPosX());
         assertEquals(DEFAULT_TEST_SPEED1, player.getStepsRemaining());
     }
 
@@ -252,8 +262,8 @@ public class EntityOnMapTest {
         int testSpeed = 5;
         player.setMapLocation(map, initialX, initialY);
         player.move(DOWN, DOWN, RIGHT, RIGHT, DOWN, RIGHT, UP, UP);
-        player.setSpeed(testSpeed);
-        assertEquals(testSpeed, player.getSpeed());
+        player.setMaxSpeed(testSpeed);
+        assertEquals(testSpeed, player.getMaxSpeed());
         assertEquals(0, player.getStepsRemaining());
     }
 }

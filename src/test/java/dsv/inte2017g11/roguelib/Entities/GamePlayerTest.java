@@ -24,7 +24,7 @@ public class GamePlayerTest {
         assertEquals("Jane Doe", player.getName());
         assertEquals(DEFAULT_TEST_HEALTH, player.getMaxHealth());
         assertEquals(DEFAULT_TEST_HEALTH, player.getCurrentHealth());
-        assertEquals(DEFAULT_TEST_SPEED, player.getSpeed());
+        assertEquals(DEFAULT_TEST_SPEED, player.getMaxSpeed());
         assertEquals(DEFAULT_TEST_SPEED, player.getStepsRemaining());
     }
 
@@ -35,8 +35,8 @@ public class GamePlayerTest {
         assertEquals("Zoe", playerZoe.getName());
         assertEquals(testHealth, playerZoe.getMaxHealth());
         assertTrue(playerZoe.getCurrentHealth() == playerZoe.getMaxHealth());
-        assertEquals(AbstractEntity.DEFAULT_SPEED, playerZoe.getSpeed());
-        assertTrue(playerZoe.getStepsRemaining() == playerZoe.getSpeed());
+        assertEquals(AbstractEntity.DEFAULT_SPEED, playerZoe.getMaxSpeed());
+        assertTrue(playerZoe.getStepsRemaining() == playerZoe.getMaxSpeed());
     }
 
     @Test
@@ -45,8 +45,8 @@ public class GamePlayerTest {
         assertEquals("John Doe", playerJohn.getName());
         assertEquals(AbstractEntity.DEFAULT_MAX_HEALTH, playerJohn.getMaxHealth());
         assertTrue(playerJohn.getCurrentHealth() == playerJohn.getMaxHealth());
-        assertEquals(AbstractEntity.DEFAULT_SPEED, playerJohn.getSpeed());
-        assertTrue(playerJohn.getStepsRemaining() == playerJohn.getSpeed());
+        assertEquals(AbstractEntity.DEFAULT_SPEED, playerJohn.getMaxSpeed());
+        assertTrue(playerJohn.getStepsRemaining() == playerJohn.getMaxSpeed());
     }
 
     //@TODO Finish the test

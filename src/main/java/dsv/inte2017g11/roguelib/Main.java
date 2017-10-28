@@ -28,7 +28,7 @@ public class Main {
         -int maxHealth
         -int currentHealth;
         ..
-        -int speed;
+        -int maxSpeed;
         -int stepsLeft;
         ..
         -int posX;

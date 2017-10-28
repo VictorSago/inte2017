@@ -25,7 +25,7 @@ public class Pet extends AbstractEntity {
         return level;
     }
 
-    //TODO kan speed öka? fylla upp currentHealth vid levelup?
+    //TODO kan maxSpeed öka? fylla upp currentHealth vid levelup?
     public void levelUp() {
         level += 1;
         maxHealth += 10;

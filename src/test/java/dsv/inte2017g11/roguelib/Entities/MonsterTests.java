@@ -28,7 +28,7 @@ public class MonsterTests {
     public void creationTest() {
         assertEquals("Unicorn", m.getName());
         assertEquals(DEFAULT_TEST_HEALTH, m.getCurrentHealth());
-        assertEquals(DEFAULT_TEST_SPEED, m.getSpeed());
+        assertEquals(DEFAULT_TEST_SPEED, m.getMaxSpeed());
     }
 
     @Test

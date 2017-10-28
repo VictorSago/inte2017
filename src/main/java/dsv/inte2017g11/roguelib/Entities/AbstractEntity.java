@@ -15,16 +15,24 @@ abstract public class AbstractEntity {
 
     protected int maxHealth, currentHealth;
 
-    protected int speed, stepsRemaining;
+    protected int maxSpeed, stepsRemaining;
 
     private MapLocation location;
 
     public AbstractEntity(String name, int health, int speed) {
+        if (name == null) {
+            throw new IllegalArgumentException("Names can't be NULL!");
+        } else if (name.isEmpty()) {
+            throw new IllegalArgumentException("Names can't be EMPTY!");
+        }
         this.name = name;
+        if (health <= 0) {
+            throw new IllegalArgumentException("Health must be a positive number!");
+        }
         this.maxHealth = health;
         this.currentHealth = maxHealth;
-        this.speed = speed;
-        this.stepsRemaining = this.speed;
+        this.maxSpeed = speed;
+        this.stepsRemaining = maxSpeed;
     }
 
     public AbstractEntity(String name, int health) {
@@ -67,18 +75,18 @@ abstract public class AbstractEntity {
         }
     }
 
-    public int getSpeed() {
-        return speed;
+    public int getMaxSpeed() {
+        return maxSpeed;
     }
 
-    public void setSpeed(int s) {
-        int oldSpeed = speed;
+    public void setMaxSpeed(int s) {
+        int oldSpeed = maxSpeed;
         if (s < 0) {
-            speed = 0;
+            maxSpeed = 0;
         } else {
-            speed = s;
+            maxSpeed = s;
         }
-        stepsRemaining += speed - oldSpeed;
+        stepsRemaining += maxSpeed - oldSpeed;
         if (stepsRemaining < 0) {
             stepsRemaining = 0;
         }
@@ -89,23 +97,65 @@ abstract public class AbstractEntity {
     }
 
     public void resetSteps() {
-        stepsRemaining = speed;
+        stepsRemaining = maxSpeed;
     }
 
     public MapLocation getMapLocation() {
         return location;
     }
 
+    /**
+     * Sets Location for this entity to map <code>map</code> and
+     * coordinates <code>x</code> and <code>y</code>, if they are valid.<br>
+     * <p>The operation of this method is as follows:
+     * <ul>
+     *     <li>If this entity doesn't yet have a location, then </li>
+     *     <ol>
+     *         <li>set this entity's location to the new <code>MapLocation</code> object</li>
+     *         <li>add this entity and location to <code>map.entities</code> table</li>
+     *     </ol>
+     *     <li>If this entity already has a location and it is on the same map, then </li>
+     *     <ol><li>change the location's coordinates to those supplied with the arguments</li></ol>
+     *     <li>Otherwise, if this entity has a location on a different map, then </li>
+     *     <ol>
+     *         <li>remove this entity from the old map,</li>
+     *         <li>set the location's coordinates and map to those supplied with the arguments, and </li>
+     *         <li>add this entity and location to <code>map.entities</code> table</li>
+     *     </ol>
+     * </ul></p>
+     * @param map - The map to which the location refers
+     * @param x - x-coordinate of the new location
+     * @param y - y-coordinate of the new location
+     */
     public void setMapLocation(GameMap map, int x, int y) {
         if (location == null) {
             location = new MapLocation(map, x, y);
+            map.addEntity(this, location);
         } else {
-            location.setMapXYPos(map, x, y);
+            if (location.getMap().equals(map)) {
+                location.setMapXYPos(map, x, y);
+            } else {
+                location.getMap().removeEntity(this);
+                location.setMapXYPos(map, x, y);
+                map.addEntity(this, location);
+            }
         }
     }
 
     public void setMapLocation(MapLocation loc) {
-        location = loc;
+        if (location == null) {
+            location = loc;
+            location.getMap().addEntity(this, location);
+        } else {
+            if (location.getMap().equals(loc.getMap())) {
+                location = loc;
+            } else {
+                location.getMap().removeEntity(this);
+                location = loc;
+                location.getMap().addEntity(this, location);
+            }
+        }
+        // put or replace the value in map.entities with loc
     }
 
     public void setLocation(int x, int y) {
@@ -187,28 +237,6 @@ abstract public class AbstractEntity {
             }
         }
         return path;
-    }
-
-/*
-    protected boolean isValidPosition(int x, int y) {
-        return isValidPosition(map, x, y);
-    }
-*/
-
-    /**
-     *  Test whether the parameters point to a valid position
-     *  If the entered direction together with speed is a
-     *  valid value for the player to move towards this may
-     *  be computed
-     *
-     *  @param map the map whose position is being tested
-     *  @param x x-coordinate of the new position
-     *  @param y y-coordinate of the new position
-     *  @return <code>true</code> if and only if the map exists and the
-     *  new position is a valid one, <code>false</code> in all other cases
-     */
-    protected boolean isValidPosition(GameMap map, int x, int y) {
-        return map != null && (map.getTile(x, y) != null && map.isValidPosition(x, y) && map.isFreePosition(x, y));
     }
 
 }

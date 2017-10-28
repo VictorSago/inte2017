@@ -8,7 +8,7 @@ public class GameMapTest {
 
     private final int SIZE_X = 20;
     private final int SIZE_Y = 15;
-	
+
     @Test
     public void mapCreationTest() {
         GameMap m = new GameMap(SIZE_X, SIZE_Y);
@@ -40,20 +40,46 @@ public class GameMapTest {
         GameMap m = new GameMap(SIZE_X, 0);
     }
 
-   @Test
+    @Test
     public void gameMapBasicTilePositionTest() {
         GameMap m = new GameMap(SIZE_X, SIZE_Y);
         assertNotNull(m.getTile(2, 2));
     }
-   
-   @Test
-   public void gameMapEndTilePositionTest(){
-       GameMap m = new GameMap(SIZE_X, SIZE_Y);
-       assertNotNull(m.getTile(SIZE_X-1, SIZE_Y-1));
-   }
-   
-   @Test
-   public void terrainDiversityTest(){
+
+    @Test
+    public void gameMapEndTilePositionTest() {
+        GameMap m = new GameMap(SIZE_X, SIZE_Y);
+        assertNotNull(m.getTile(SIZE_X - 1, SIZE_Y - 1));
+    }
+
+    @Test
+    public void getPositionOverXIndexTest() {
+        GameMap m = new GameMap(SIZE_X, SIZE_Y);
+        assertNull(m.getTile(SIZE_X * 2, SIZE_Y / 2));
+    }
+
+    @Test
+    public void getPositionOverYIndexTest() {
+        GameMap m = new GameMap(SIZE_X, SIZE_Y);
+        assertNull(m.getTile(SIZE_X - 1, SIZE_Y * 2));
+    }
+
+
+    @Test
+    public void getPositionUnderXIndexTest() {
+        GameMap m = new GameMap(SIZE_X, SIZE_Y);
+        assertNull(m.getTile(-1, SIZE_Y - 1));
+    }
+
+    @Test
+    public void getPositionUnderYIndexTest() {
+        GameMap m = new GameMap(SIZE_X, SIZE_Y);
+        assertNull(m.getTile(SIZE_X / 2, -1));
+    }
+
+/*
+   //@Test
+   public void terrainDiversityTest() {
 	   int x = 100;
 	   int y = 100;
 	   GameMap m = new GameMap(x,y);
@@ -72,35 +98,15 @@ public class GameMapTest {
            }
        }
    }
+*/
 
-    /*@Test(expected = IndexOutOfBoundsException.class)
+/*
+    //@Test(expected = IndexOutOfBoundsException.class)
     public void getPositionOverXIndexTest(){
         GameMap m = new GameMap(SIZE_X, SIZE_Y);
         m.getPosition(SIZE_X*2, SIZE_Y/2);
-    }*/
-
-    @Test
-    public void getPositionOverXIndexTest(){
-        GameMap m = new GameMap(SIZE_X, SIZE_Y);
-        assertNull(m.getTile(SIZE_X*2, SIZE_Y/2));
     }
-    
-    @Test
-    public void getPositionOverYIndexTest(){
-        GameMap m = new GameMap(SIZE_X, SIZE_Y);
-        assertNull(m.getTile(SIZE_X-1, SIZE_Y*2));
-    }
+*/
 
 
-    @Test
-    public void getPositionUnderXIndexTest(){
-        GameMap m = new GameMap(SIZE_X, SIZE_Y);
-        assertNull(m.getTile(-1,SIZE_Y-1));
-    }
-    
-    @Test
-    public void getPositionUnderYIndexTest(){
-        GameMap m = new GameMap(SIZE_X, SIZE_Y);
-        assertNull(m.getTile(SIZE_X/2,-1));
-    }
 }

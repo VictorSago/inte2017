@@ -73,6 +73,18 @@ public class GameMap {
         }
     }
 
+    public Location addEntity(AbstractEntity entity, Location location) {
+        return entities.put(entity, location);
+    }
+
+    public Location removeEntity(AbstractEntity entity) {
+        return entities.remove(entity);
+    }
+
+    public Location getEntityLocation(AbstractEntity entity) {
+        return entities.get(entity);
+    }
+
     @Override
     public String toString() {
         return "GameMap{" + width + "x" + height +"}";
