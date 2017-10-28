@@ -9,7 +9,7 @@ public class MapLocation extends Location {
         if (m != null) {
             map = m;
         } else {
-            throw new NullPointerException("Cannot create a location on a NULL map.");
+            throw new IllegalArgumentException("Cannot create a location on a NULL map.");
         }
         if (x < 0) {
             posX = 0;
@@ -60,7 +60,7 @@ public class MapLocation extends Location {
 
     public void setMapXYPos(GameMap m, int x, int y) {
         if (m == null) {
-            throw new NullPointerException("Cannot set a location on a NULL map.");
+            throw new IllegalArgumentException("Cannot set a location on a NULL map.");
         }
         if (m.isValidPosition(x, y)) {
             map = m;
@@ -74,7 +74,7 @@ public class MapLocation extends Location {
 /**
     public void setMapXYPos(GameMap m, int x, int y) {
         if (m == null) {
-            throw new NullPointerException("Cannot set a location on a NULL map.");
+            throw new IllegalArgumentException("Cannot set a location on a NULL map.");
         }
         if ((x >= 0 && x < m.getWidth()) && (y >= 0 && y < m.getHeight())) {
             map = m;

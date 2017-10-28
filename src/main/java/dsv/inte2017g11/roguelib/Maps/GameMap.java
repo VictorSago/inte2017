@@ -81,8 +81,17 @@ public class GameMap {
         return entities.remove(entity);
     }
 
-    public Location getEntityLocation(AbstractEntity entity) {
+    public Location findEntity(AbstractEntity entity) {
         return entities.get(entity);
+    }
+
+    public Location findEntityByName(String name) {
+        for (AbstractEntity e : entities.keySet()) {
+            if (e.getName().equals(name)) {
+                return entities.get(e);
+            }
+        }
+        return null;
     }
 
     @Override
