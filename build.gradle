@@ -25,12 +25,12 @@ task integrationTests(type: Test, description: 'Runs integration tests', group: 
     include '**/*Interaction*.*'
 }
 
-task combatSystemTests(type: Test, description: 'Runs testsfor CombatSystem', group: 'Verification') {
+task combatSystemTests(type: Test, description: 'Runs tests for CombatSystem', group: 'Verification') {
     include '**/PetTest.*'
     include '**/MonsterTests.*'
 }
 
-task unitTests(type: Test, description: 'Runs testsfor CombatSystem', group: 'Verification') {
+task unitTests(type: Test, description: 'Runs only unit tests', group: 'Verification') {
     exclude '**/AllTests.*'
     exclude '**/*Suite.*'
 }
