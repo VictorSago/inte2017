@@ -71,21 +71,6 @@ public class MapLocation extends Location {
         }
     }
 
-/**
-    public void setMapXYPos(GameMap m, int x, int y) {
-        if (m == null) {
-            throw new IllegalArgumentException("Cannot set a location on a NULL map.");
-        }
-        if ((x >= 0 && x < m.getWidth()) && (y >= 0 && y < m.getHeight())) {
-            map = m;
-            posX = x;
-            posY = y;
-        } else {
-            throw new IndexOutOfBoundsException("Cannot set position outside map boundaries.");
-        }
-    }
-*/
-
     /**
      * Displaces current location by <code>deltaX</code> steps 
      * horizontally and <code>deltaY</code> steps vertically, 
@@ -107,40 +92,6 @@ public class MapLocation extends Location {
             throw new IndexOutOfBoundsException("Result is outside map boundary.");
         }
     }
-
-/**
-    //@Override
-    public Location displace(int x, int y) {
-        int newX = posX + x;
-        int newY = posY + y;
-        if ((newX >= 0 && newX < map.getWidth()) && (newY >= 0 && newY < map.getHeight())) {
-            posX = newX;
-            posY = newY;
-            return this;
-        } else {
-            throw new IndexOutOfBoundsException("Result is outside map boundary.");
-        }
-    }
-*/
-
-/**
-    //@Override
-    public Location displace(int x, int y) {
-        posX += x;
-        posY += y;
-        if (posX < 0) {
-            posX = 0;
-        } else if (posX >= map.getWidth()) {
-            posX = map.getWidth() - 1;
-        }
-        if (posY < 0) {
-            posY = 0;
-        } else if (posY >= map.getHeight()) {
-            posY = map.getHeight() - 1;
-        }
-        return this;
-    }
-*/
 
     public MapLocation addMapXY(int deltaX, int deltaY) {
         return new MapLocation(map, posX + deltaX, posY + deltaY);
