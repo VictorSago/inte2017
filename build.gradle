@@ -6,11 +6,32 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 
 repositories {
-    //mavenCentral()
     jcenter()
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.+'
+}
+
+task testAll(type: Test, description: 'Runs test suites from the file AllTests', group: 'Verification') {
+    include '**/AllTests.*'
+}
+
+task testSuites(type: Test, description: 'Runs test suites only', group: 'Verification') {
+    include '**/*Suite.*'
+}
+
+task integrationTests(type: Test, description: 'Runs integration tests', group: 'Verification') {
+    include '**/*Interaction*.*'
+}
+
+task combatSystemTests(type: Test, description: 'Runs tests for CombatSystem', group: 'Verification') {
+    include '**/PetTest.*'
+    include '**/MonsterTests.*'
+}
+
+task unitTests(type: Test, description: 'Runs only unit tests', group: 'Verification') {
+    exclude '**/AllTests.*'
+    exclude '**/*Suite.*'
 }
