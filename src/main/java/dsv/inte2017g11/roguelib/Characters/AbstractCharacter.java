@@ -1,6 +1,6 @@
 package dsv.inte2017g11.roguelib.Characters;
 
-import dsv.inte2017g11.roguelib.Maps.Directions;
+import dsv.inte2017g11.roguelib.Maps.Direction;
 import dsv.inte2017g11.roguelib.Maps.GameMap;
 import dsv.inte2017g11.roguelib.Maps.MapPath;
 
@@ -180,7 +180,7 @@ abstract public class AbstractCharacter implements CombatSystem{
         }
     }*/
 
-    protected void moveStep(Directions dir) {
+    protected void moveStep(Direction dir) {
         if (stepsRemaining > 0) {
             switch (dir) {
                 case RIGHT:
@@ -211,11 +211,11 @@ abstract public class AbstractCharacter implements CombatSystem{
         }
     }
 
-    public void move(Directions... dirs) {
+    public void move(Direction... dirs) {
         if (map == null) {
             return;
         }
-        for (Directions d : dirs) {
+        for (Direction d : dirs) {
             moveStep(d);
         }
     }
@@ -225,7 +225,7 @@ abstract public class AbstractCharacter implements CombatSystem{
             return path;
         }
         while (!path.isEmpty()) {
-            Directions nextStep = path.getNextStep();
+            Direction nextStep = path.getNextStep();
             moveStep(nextStep);
             }
         return path;

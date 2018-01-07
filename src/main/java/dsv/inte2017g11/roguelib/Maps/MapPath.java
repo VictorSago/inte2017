@@ -9,7 +9,7 @@ import java.util.Deque;
  */
 public class MapPath {
 
-    private Deque<Directions> pathQueue = new ArrayDeque<>();
+    private Deque<Direction> pathQueue = new ArrayDeque<>();
 
     public boolean isEmpty() {
         return pathQueue.isEmpty();
@@ -19,7 +19,7 @@ public class MapPath {
         return pathQueue.size();
     }
 
-    public boolean appendStep(Directions dir) {
+    public boolean appendStep(Direction dir) {
         if (dir != null) {
             return pathQueue.offerLast(dir);
         } else {
@@ -27,7 +27,7 @@ public class MapPath {
         }
     }
 
-    public Directions getNextStep() {
+    public Direction getNextStep() {
         return pathQueue.pollFirst();
     }
 }
