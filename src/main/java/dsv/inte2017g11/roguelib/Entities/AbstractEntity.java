@@ -1,6 +1,7 @@
 package dsv.inte2017g11.roguelib.Entities;
 
 import dsv.inte2017g11.roguelib.Maps.*;
+import org.jetbrains.annotations.Contract;
 
 /**
  * @author zeron
@@ -19,6 +20,7 @@ abstract public class AbstractEntity {
 
     private MapLocation location;
 
+    @Contract("null, _, _ -> fail")
     public AbstractEntity(String name, int health, int speed) {
         if (name == null) {
             throw new IllegalArgumentException("Names can't be NULL!");
@@ -35,10 +37,12 @@ abstract public class AbstractEntity {
         this.stepsRemaining = maxSpeed;
     }
 
+    @Contract("null, _ -> fail")
     public AbstractEntity(String name, int health) {
         this(name, health, DEFAULT_SPEED);
     }
 
+    @Contract("null -> fail")
     public AbstractEntity(String name) {
         this(name, DEFAULT_MAX_HEALTH, DEFAULT_SPEED);
     }

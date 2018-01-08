@@ -1,6 +1,7 @@
 package dsv.inte2017g11.roguelib.Entities;
 
 import dsv.inte2017g11.roguelib.Items.*;
+import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,10 +19,12 @@ public class GamePlayer extends AbstractEntity {
         inventory = new ArrayList<>();
     }
 
+    @Contract("null, _ -> fail")
     public GamePlayer(String name, int health) {
         super(name, health);
     }
 
+    @Contract("null -> fail")
     public GamePlayer(String name) {
         super(name);
     }

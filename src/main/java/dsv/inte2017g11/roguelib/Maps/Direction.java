@@ -1,5 +1,7 @@
 package dsv.inte2017g11.roguelib.Maps;
 
+import org.jetbrains.annotations.Contract;
+
 public enum Direction {
     RIGHT   (1, 0),
     LEFT    (-1, 0),
@@ -13,10 +15,12 @@ public enum Direction {
         this.deltaY = dY;
     }
 
+    @Contract(pure = true)
     public int deltaX() {
         return deltaX;
     }
 
+    @Contract(pure = true)
     public int deltaY() {
         return deltaY;
     }
